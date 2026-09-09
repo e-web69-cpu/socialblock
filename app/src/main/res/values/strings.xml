@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SocialBlock</string>
+
+    <string name="setup_permissions_title">1. Jogosultságok beállítása</string>
+    <string name="grant_accessibility">Kisegítő lehetőség engedélyezése</string>
+    <string name="grant_usage_access">Használati hozzáférés engedélyezése</string>
+    <string name="grant_overlay">Más appok fölé rajzolás engedélyezése</string>
+    <string name="enable_device_admin">Eltávolítás elleni védelem bekapcsolása</string>
+    <string name="device_admin_explanation">Ez megnehezíti az app gyors eltávolítását vagy a szolgáltatás kikapcsolását.</string>
+    <string name="device_admin_disable_warning">Biztos, hogy kikapcsolod a védelmet? Ezzel megkerülöd a saját magad által beállított korlátozást.</string>
+
+    <string name="schedule_title">2. Tiltási idősáv</string>
+    <string name="start_hour">Kezdő óra</string>
+    <string name="start_minute">Kezdő perc</string>
+    <string name="end_hour">Záró óra</string>
+    <string name="end_minute">Záró perc</string>
+    <string name="require_external_approval">Külső jóváhagyó szükséges a feloldáshoz</string>
+    <string name="save_schedule">Idősáv mentése</string>
+    <string name="schedule_saved">Elmentve.</string>
+
+    <string name="select_apps_title">3. Blokkolandó appok kiválasztása</string>
+
+    <string name="blocked_message">%1$s jelenleg tiltva van a beállított idősávban.</string>
+    <string name="unlocks_remaining">Ezen a héten még %1$d feloldási kérésed van hátra.</string>
+    <string name="request_unlock">Feloldás kérése</string>
+    <string name="go_home">Vissza a kezdőképernyőre</string>
+
+    <string name="justification_prompt">Miért van szükséged most a feloldásra? (Írd le részletesen és őszintén — ez bekerül a naplóba.)</string>
+    <string name="min_justification_length">Minimum %1$d karakter szükséges.</string>
+    <string name="justification_too_short">Még %1$d karakter hiányzik.</string>
+    <string name="weekly_limit_reached">Elérted a heti feloldási limitet. Próbáld újra jövő héten.</string>
+    <string name="submit_justification">Indoklás beküldése</string>
+
+    <string name="waiting_title">Kötelező várakozási idő</string>
+    <string name="time_remaining_format">%1$d:%2$02d</string>
+    <string name="ready_to_unlock">A várakozás letelt. Utolsó lépés következik.</string>
+
+    <string name="typing_challenge_prompt">Gépeld be pontosan, hiba nélkül az alábbi mondatot:</string>
+    <string name="final_unlock">Feloldás most (15 percre)</string>
+</resources>

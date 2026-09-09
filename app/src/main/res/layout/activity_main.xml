@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:text="@string/setup_permissions_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button android:id="@+id/buttonGrantAccessibility"
+            android:text="@string/grant_accessibility"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <Button android:id="@+id/buttonGrantUsageAccess"
+            android:text="@string/grant_usage_access"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <Button android:id="@+id/buttonGrantOverlay"
+            android:text="@string/grant_overlay"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <Button android:id="@+id/buttonEnableDeviceAdmin"
+            android:text="@string/enable_device_admin"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#DDDDDD" android:layout_marginVertical="16dp" />
+
+        <TextView
+            android:text="@string/schedule_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+            <EditText android:id="@+id/inputStartHour" android:hint="@string/start_hour"
+                android:inputType="number" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <EditText android:id="@+id/inputStartMinute" android:hint="@string/start_minute"
+                android:inputType="number" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+            <EditText android:id="@+id/inputEndHour" android:hint="@string/end_hour"
+                android:inputType="number" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <EditText android:id="@+id/inputEndMinute" android:hint="@string/end_minute"
+                android:inputType="number" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView android:text="@string/require_external_approval"
+                android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <Switch android:id="@+id/switchRequireExternalApproval"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button android:id="@+id/buttonSaveSchedule"
+            android:text="@string/save_schedule"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <TextView android:id="@+id/textSaveConfirmation"
+            android:text="@string/schedule_saved"
+            android:visibility="gone"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#DDDDDD" android:layout_marginVertical="16dp" />
+
+        <TextView
+            android:text="@string/select_apps_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerApps"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

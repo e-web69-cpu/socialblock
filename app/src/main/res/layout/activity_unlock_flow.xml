@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 1. lépés: indoklás -->
+        <LinearLayout android:id="@+id/layoutJustification"
+            android:orientation="vertical"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView android:text="@string/justification_prompt"
+                android:textStyle="bold" android:textSize="18sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+            <EditText android:id="@+id/editJustification"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:gravity="top"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/textMinLength"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+            <Button android:id="@+id/buttonSubmitJustification"
+                android:text="@string/submit_justification"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 2. és 3. lépés: várakozás + gépelési próba -->
+        <LinearLayout android:id="@+id/layoutWaiting"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView android:text="@string/waiting_title"
+                android:textStyle="bold" android:textSize="18sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/textCountdown"
+                android:textSize="28sp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+            <LinearLayout android:id="@+id/layoutTypingChallenge"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                <TextView android:text="@string/typing_challenge_prompt"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+                <TextView android:id="@+id/textChallengeSentence"
+                    android:textStyle="italic"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+                <EditText android:id="@+id/editChallengeInput"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button android:id="@+id/buttonFinalUnlock"
+                android:text="@string/final_unlock"
+                android:enabled="false"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
