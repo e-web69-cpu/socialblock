@@ -191,4 +191,21 @@ object ScheduleManager {
     fun setRequiresExternalApproval(ctx: Context, value: Boolean) {
         prefs(ctx).edit().putBoolean(KEY_REQUIRE_EXTERNAL_APPROVAL, value).apply()
     }
+
+        private const val KEY_SIMPLE_ENABLED = "simple_enabled"
+        private const val KEY_SIMPLE_PACKAGE = "simple_blocked_package"
+
+        fun isSimpleBlockingEnabled(ctx: Context): Boolean =
+            prefs(ctx).getBoolean(KEY_SIMPLE_ENABLED, false)
+
+                fun setSimpleBlockingEnabled(ctx: Context, value: Boolean) {
+                            prefs(ctx).edit().putBoolean(KEY_SIMPLE_ENABLED, value).apply()
+                }
+
+                    fun getSimpleBlockedPackage(ctx: Context): String? =
+            prefs(ctx).getString(KEY_SIMPLE_PACKAGE, null)
+
+                fun setSimpleBlockedPackage(ctx: Context, pkg: String?) {
+                            prefs(ctx).edit().putString(KEY_SIMPLE_PACKAGE, pkg).apply()
+                }
 }
