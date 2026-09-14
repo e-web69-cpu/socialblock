@@ -39,11 +39,21 @@ object ScheduleManager {
     private fun prefs(ctx: Context): SharedPreferences =
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-    fun getBlockedPackages(ctx: Context): Set<String> {
-        val raw = prefs(ctx).getString(KEY_BLOCKED_PACKAGES, "[]") ?: "[]"
-        val arr = JSONArray(raw)
-        return (0 until arr.length()).map { arr.getString(it) }.toSet()
-    }
+            fun getBlockedPackages(ctx: Context): Set<String> {
+                            val p = prefs(ctx)
+                                        if (!p.contains(KEY_BLOCKED_PACKAGES)) {
+                                                            val defaults = setOf(
+                                                                                    "com.facebook.orca",
+                                                                                    "com.zhiliaoapp.musically",
+                                                                                    "com.instagram.android"
+                                                                                )
+                                                                            setBlockedPackages(ctx, defaults)
+                                                                                            return defaults
+                                        }
+                                                    val raw = p.getString(KEY_BLOCKED_PACKAGES, "[]") ?: "[]"
+                            val arr = JSONArray(raw)
+                                        return (0 until arr.length()).map { arr.getString(it) }.toSet()
+            }
 
     fun setBlockedPackages(ctx: Context, packages: Set<String>) {
         val arr = JSONArray()
