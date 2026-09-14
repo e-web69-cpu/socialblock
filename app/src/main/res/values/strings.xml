@@ -5,6 +5,8 @@
         <string name="app_subtitle">Tudatos ido a kepernyon</string>
         <string name="permission_granted">Engedelyezve</string>
         <string name="search_apps_hint">Alkalmazas keresese</string>
+        <string name="blocking_enabled_label">Tiltas bekapcsolva</string>
+        <string name="select_single_app_title">Valaszd ki a tiltando appot</string>
 
     <string name="setup_permissions_title">1. Jogosultságok beállítása</string>
     <string name="grant_accessibility">Kisegítő lehetőség engedélyezése</string>
