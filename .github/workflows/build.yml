@@ -20,6 +20,9 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Decode debug keystore
+        run: base64 -d debug-keystore.b64 > app/debug.keystore
+
       - name: Build debug APK
         run: gradle assembleDebug --no-daemon
 
