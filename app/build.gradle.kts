@@ -11,11 +11,23 @@ android {
         applicationId = "com.example.socialblock"
         minSdk = 26
         targetSdk = 34
-                                versionCode = 4
-                                versionName = "0.4"
+        versionCode = 4
+        versionName = "0.4"
+    }
+
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = false
         }
