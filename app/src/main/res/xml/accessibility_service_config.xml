@@ -5,5 +5,4 @@
     android:accessibilityFlags="flagDefault"
     android:canRetrieveWindowContent="false"
     android:description="@string/app_name"
-    android:notificationTimeout="100"
-    android:packageNames="" />
+    android:notificationTimeout="100" />
