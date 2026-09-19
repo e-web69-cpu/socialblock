@@ -208,4 +208,19 @@ object ScheduleManager {
                 fun setSimpleBlockedPackage(ctx: Context, pkg: String?) {
                             prefs(ctx).edit().putString(KEY_SIMPLE_PACKAGE, pkg).apply()
                 }
+
+                    fun isNowWithinSchedule(ctx: Context): Boolean {
+                                val windows = getWindows(ctx)
+                                        if (windows.isEmpty()) return true
+                                val now = Calendar.getInstance()
+                                        val dayOfWeek = now.get(Calendar.DAY_OF_WEEK)
+                                                val nowMinutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
+                                                        return windows.any { w ->
+                                                                        if (dayOfWeek !in w.daysOfWeek) return@any false
+                                                                        val start = w.startHour * 60 + w.startMinute
+                                                                        val end = w.endHour * 60 + w.endMinute
+                                                                        if (start <= end) nowMinutes in start until end
+                                                                        else nowMinutes >= start || nowMinutes < end
+                                                        }
+                    }
 }
