@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SocialBlock</string>
-                                        <string name="app_title">SocialBlock v0.6</string>
+                                                <string name="app_title">SocialBlock v0.7</string>
         <string name="app_subtitle">Tudatos ido a kepernyon</string>
         <string name="permission_granted">Engedelyezve</string>
         <string name="search_apps_hint">Alkalmazas keresese</string>
