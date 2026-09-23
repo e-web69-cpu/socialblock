@@ -226,4 +226,60 @@ object ScheduleManager {
                                                                         else nowMinutes >= start || nowMinutes < end
                                                         }
                     }
+
+                        private const val KEY_APPROVAL_METHODS = "approval_methods"
+        private const val KEY_HELPER_PHONE = "helper_phone"
+        private const val KEY_MANUAL_PIN1 = "manual_pin1"
+        private const val KEY_PIN2_VALUE = "pin2_value"
+        private const val KEY_PIN2_GENERATED_AT = "pin2_generated_at"
+        private const val KEY_SMS_REQUESTED_AT = "sms_requested_at"
+        private const val KEY_CALLBACK_REQUESTED_AT = "callback_requested_at"
+
+        fun getApprovalMethods(ctx: Context): Set<String> {
+                    val raw = prefs(ctx).getString(KEY_APPROVAL_METHODS, "") ?: ""
+                    return raw.split(",").filter { it.isNotBlank() }.toSet()
+        }
+
+            fun setApprovalMethods(ctx: Context, methods: Set<String>) {
+                        prefs(ctx).edit().putString(KEY_APPROVAL_METHODS, methods.joinToString(",")).apply()
+            }
+
+                fun getHelperPhone(ctx: Context): String? = prefs(ctx).getString(KEY_HELPER_PHONE, null)
+
+                    fun setHelperPhone(ctx: Context, phone: String) {
+                                prefs(ctx).edit().putString(KEY_HELPER_PHONE, phone).apply()
+                    }
+
+                        fun getManualPin1(ctx: Context): String? = prefs(ctx).getString(KEY_MANUAL_PIN1, null)
+
+                            fun setManualPin1(ctx: Context, pin: String) {
+                                        prefs(ctx).edit().putString(KEY_MANUAL_PIN1, pin).apply()
+                            }
+
+                                fun generatePin2(ctx: Context): String {
+                                            val pin = (100000..999999).random().toString()
+                                                    prefs(ctx).edit()
+                                                                .putString(KEY_PIN2_VALUE, pin)
+                                                                            .putLong(KEY_PIN2_GENERATED_AT, System.currentTimeMillis())
+                                                                                        .apply()
+                                                                                                return pin
+                                }
+
+                                    fun getPin2(ctx: Context): String? = prefs(ctx).getString(KEY_PIN2_VALUE, null)
+
+                                        fun clearPin2(ctx: Context) {
+                                                    prefs(ctx).edit().remove(KEY_PIN2_VALUE).remove(KEY_PIN2_GENERATED_AT).apply()
+                                        }
+
+                                            fun markSmsApprovalRequested(ctx: Context) {
+                                                        prefs(ctx).edit().putLong(KEY_SMS_REQUESTED_AT, System.currentTimeMillis()).apply()
+                                            }
+
+                                                fun getSmsRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_SMS_REQUESTED_AT, 0L)
+
+                                                    fun markCallbackRequested(ctx: Context) {
+                                                                prefs(ctx).edit().putLong(KEY_CALLBACK_REQUESTED_AT, System.currentTimeMillis()).apply()
+                                                    }
+
+                                                        fun getCallbackRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_CALLBACK_REQUESTED_AT, 0L)
 }
