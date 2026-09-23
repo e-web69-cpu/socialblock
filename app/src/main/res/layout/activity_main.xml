@@ -171,6 +171,81 @@
                                                                                         android:layout_width="wrap_content" android:layout_height="wrap_content" />
                                     </LinearLayout>
 
+                                  <LinearLayout
+                                                        android:orientation="vertical"
+                                                        android:background="@drawable/bg_card"
+                                                        android:padding="18dp"
+                                                        android:layout_marginTop="16dp"
+                                                        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                                                        <LinearLayout
+                                                                                  android:orientation="horizontal"
+                                                                                  android:gravity="center_vertical"
+                                                                                  android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                                                                                  <TextView
+                                                                                                                android:text="@string/require_external_approval_full"
+                                                                                                                android:textColor="@color/text_primary"
+                                                                                                                android:textStyle="bold"
+                                                                                                                android:textSize="16sp"
+                                                                                                                android:layout_width="0dp" android:layout_weight="1"
+                                                                                                                android:layout_height="wrap_content" />
+
+                                                                                  <Switch android:id="@+id/switchExternalApproval"
+                                                                                                                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                                                        </LinearLayout>
+
+                                                        <CheckBox android:id="@+id/checkboxSmsApproval"
+                                                                                  android:text="@string/approval_method_sms"
+                                                                                  android:textColor="@color/text_primary"
+                                                                                  android:layout_marginTop="12dp"
+                                                                                  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+                                                        <CheckBox android:id="@+id/checkboxCallbackApproval"
+                                                                                  android:text="@string/approval_method_callback"
+                                                                                  android:textColor="@color/text_primary"
+                                                                                  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+                                                        <CheckBox android:id="@+id/checkboxPinApproval"
+                                                                                  android:text="@string/approval_method_pin"
+                                                                                  android:textColor="@color/text_primary"
+                                                                                  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+                                                        <EditText android:id="@+id/inputHelperPhone"
+                                                                                  android:hint="@string/helper_phone_hint"
+                                                                                  android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                                                                                  android:background="@drawable/bg_search"
+                                                                                  android:paddingStart="16dp" android:paddingEnd="16dp"
+                                                                                  android:paddingTop="10dp" android:paddingBottom="10dp"
+                                                                                  android:inputType="phone"
+                                                                                  android:layout_marginTop="12dp"
+                                                                                  android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+                                                        <EditText android:id="@+id/inputManualPin1"
+                                                                                  android:hint="@string/manual_pin1_hint"
+                                                                                  android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                                                                                  android:background="@drawable/bg_search"
+                                                                                  android:paddingStart="16dp" android:paddingEnd="16dp"
+                                                                                  android:paddingTop="10dp" android:paddingBottom="10dp"
+                                                                                  android:inputType="text"
+                                                                                  android:layout_marginTop="8dp"
+                                                                                  android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+                                                        <Button android:id="@+id/buttonSaveApproval"
+                                                                                  android:text="@string/save_approval_settings"
+                                                                                  android:background="@drawable/bg_button_primary"
+                                                                                  android:textColor="@color/text_primary"
+                                                                                  android:layout_marginTop="14dp"
+                                                                                  android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+                                                        <TextView android:id="@+id/textApprovalSaved"
+                                                                                  android:text="@string/approval_settings_saved"
+                                                                                  android:textColor="@color/success"
+                                                                                  android:visibility="gone"
+                                                                                  android:layout_marginTop="8dp"
+                                                                                  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                                  </LinearLayout>
+
                                     <LinearLayout
                                                             android:orientation="vertical"
                                                             android:background="@drawable/bg_card"
