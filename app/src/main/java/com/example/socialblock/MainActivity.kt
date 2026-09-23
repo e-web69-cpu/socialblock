@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
                                                                                 binding.buttonEnableDeviceAdmin.setOnClickListener {
                                                                                                val adminComponent = ComponentName(this, BlockDeviceAdminReceiver::class.java)
-                                                                                                          ival intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
+                                                                                                                                val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
                                                                                                                             putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent)
                                                                                                                                             putExtra(
                                                                                                                                                                    DevicePolicyManager.EXTRA_ADD_EXPLANATION,
