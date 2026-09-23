@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SocialBlock</string>
-                                                <string name="app_title">SocialBlock v0.7</string>
+                                                        <string name="app_title">SocialBlock v0.8</string>
         <string name="app_subtitle">Tudatos ido a kepernyon</string>
         <string name="permission_granted">Engedelyezve</string>
         <string name="search_apps_hint">Alkalmazas keresese</string>
@@ -41,6 +41,8 @@
     <string name="waiting_title">Kötelező várakozási idő</string>
     <string name="time_remaining_format">%1$d:%2$02d</string>
     <string name="ready_to_unlock">A várakozás letelt. Utolsó lépés következik.</string>
+        <string name="confirm_not_intoxicated">IGEN, biztosan NEM vagyok reszeg vagy betepve.</string>
+        <string name="confirm_no_regret">IGEN, biztosan NEM fogom ezt megbanni holnap.</string>
 
     <string name="typing_challenge_prompt">Gépeld be pontosan, hiba nélkül az alábbi mondatot:</string>
     <string name="final_unlock">Feloldás most (15 percre)</string>
