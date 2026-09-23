@@ -6,38 +6,38 @@ import android.view.accessibility.AccessibilityEvent
 
 class BlockAccessibilityService : AccessibilityService() {
 
-            private var lastBlockedPackage: String? = null
+                private var lastBlockedPackage: String? = null
 
-            override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-                            val pkg = event?.packageName?.toString() ?: return
-                            if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
+                override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+                                    val pkg = event?.packageName?.toString() ?: return
+                                    if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
 
-                            if (!ScheduleManager.isSimpleBlockingEnabled(this)) {
-                                                lastBlockedPackage = null
-                                                return
-                            }
+                                    if (!ScheduleManager.isSimpleBlockingEnabled(this)) {
+                                                            lastBlockedPackage = null
+                                                            return
+                                    }
 
-                                    val target = ScheduleManager.getSimpleBlockedPackage(this)
-                                            if (target == null || pkg != target) {
-                                                                lastBlockedPackage = null
-                                                                return
-                                            }
-
-                                                    if (!ScheduleManager.isNowWithinSchedule(this)) {
-                                                                        lastBlockedPackage = null
-                                                                        return
+                                            val targets = ScheduleManager.getBlockedPackages(this)
+                                                    if (pkg !in targets) {
+                                                                            lastBlockedPackage = null
+                                                                            return
                                                     }
 
-                                                            if (lastBlockedPackage == pkg) return
-                            lastBlockedPackage = pkg
+                                                            if (!ScheduleManager.isNowWithinSchedule(this)) {
+                                                                                    lastBlockedPackage = null
+                                                                                    return
+                                                            }
 
-                            val intent = Intent(this, BlockOverlayActivity::class.java).apply {
-                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                                            putExtra(BlockOverlayActivity.EXTRA_BLOCKED_PACKAGE, pkg)
-                            }
-                                    startActivity(intent)
-            }
+                                                                    if (lastBlockedPackage == pkg) return
+                                    lastBlockedPackage = pkg
 
-                override fun onInterrupt() {
+                                    val intent = Intent(this, BlockOverlayActivity::class.java).apply {
+                                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                                                        putExtra(BlockOverlayActivity.EXTRA_BLOCKED_PACKAGE, pkg)
+                                    }
+                                            startActivity(intent)
                 }
+
+                    override fun onInterrupt() {
+                    }
 }
