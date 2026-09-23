@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                                                                                                         binding.buttonSaveSchedule.setOnClickListener { saveSchedule() }
                                                                                                                 loadExistingSchedule()
                                                                                                                 
+                                                                                                                            binding.switchExternalApproval.isChecked = ScheduleManager.requiresExternalApproval(this)
+                                                                                                                                        loadApprovalSettings()
+                                                                                                                                                    binding.buttonSaveApproval.setOnClickListener { saveApprovalSettings() }
+                                                                                                                
                                                                                                                         binding.inputSearchApps.addTextChangedListener(object : TextWatcher {
                                                                                                                                       override fun afterTextChanged(s: Editable?) {
                                                                                                                                                         appListAdapter.filter(s?.toString().orEmpty())
@@ -170,4 +174,36 @@ class MainActivity : AppCompatActivity() {
                                                                                                     )
                                                                                       binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
                                                             }
+
+                                                                private fun loadApprovalSettings() {
+                                                                              val methods = ScheduleManager.getApprovalMethods(this)
+                                                                                      binding.checkboxSmsApproval.isChecked = "sms" in methods
+                                                                              binding.checkboxCallbackApproval.isChecked = "callback" in methods
+                                                                              binding.checkboxPinApproval.isChecked = "pin" in methods
+                                                                              binding.inputHelperPhone.setText(ScheduleManager.getHelperPhone(this) ?: "")
+                                                                                      binding.inputManualPin1.setText(ScheduleManager.getManualPin1(this) ?: "")
+                                                                }
+
+                                                                    private fun saveApprovalSettings() {
+                                                                                  val enabled = binding.switchExternalApproval.isChecked
+                                                                                  ScheduleManager.setRequiresExternalApproval(this, enabled)
+
+                                                                                          val methods = mutableSetOf<String>()
+                                                                                                  if (binding.checkboxSmsApproval.isChecked) methods.add("sms")
+                                                                                                          if (binding.checkboxCallbackApproval.isChecked) methods.add("callback")
+                                                                                                                  if (binding.checkboxPinApproval.isChecked) methods.add("pin")
+                                                                                                                  
+                                                                                                                          if (enabled && methods.isEmpty()) {
+                                                                                                                                            binding.textApprovalSaved.text = getString(R.string.approval_min_one_required)
+                                                                                                                                                        binding.textApprovalSaved.visibility = android.view.View.VISIBLE
+                                                                                                                                            return
+                                                                                                                          }
+                                                                                                                          
+                                                                                                                                  ScheduleManager.setApprovalMethods(this, methods)
+                                                                                                                                          ScheduleManager.setHelperPhone(this, binding.inputHelperPhone.text.toString().trim())
+                                                                                                                                                  ScheduleManager.setManualPin1(this, binding.inputManualPin1.text.toString().trim())
+                                                                                                                                                  
+                                                                                                                                                          binding.textApprovalSaved.text = getString(R.string.approval_settings_saved)
+                                                                                                                                                                  binding.textApprovalSaved.visibility = android.view.View.VISIBLE
+                                                                    }
 }
