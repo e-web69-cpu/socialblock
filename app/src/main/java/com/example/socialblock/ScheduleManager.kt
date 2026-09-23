@@ -43,9 +43,12 @@ object ScheduleManager {
                             val p = prefs(ctx)
                                         if (!p.contains(KEY_BLOCKED_PACKAGES)) {
                                                             val defaults = setOf(
-                                                                                    "com.facebook.orca",
-                                                                                    "com.zhiliaoapp.musically",
-                                                                                    "com.instagram.android"
+                                                                                                "com.facebook.katana",
+                                                                            "com.instagram.android",
+                                                                            "com.facebook.orca",
+                                                                            "com.twitter.android",
+                                                                            "com.zhiliaoapp.musically",
+                                                                            "com.ss.android.ugc.trill"
                                                                                 )
                                                                             setBlockedPackages(ctx, defaults)
                                                                                             return defaults
