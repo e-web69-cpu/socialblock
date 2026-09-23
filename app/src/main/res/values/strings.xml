@@ -46,4 +46,32 @@
 
     <string name="typing_challenge_prompt">Gépeld be pontosan, hiba nélkül az alábbi mondatot:</string>
     <string name="final_unlock">Feloldás most (15 percre)</string>
+
+        <string name="require_external_approval_full">Kulso jovahagyas szukseges</string>
+        <string name="approval_method_sms">SMS-valasz a segitotol</string>
+        <string name="approval_method_callback">Visszahivas a segitotol</string>
+        <string name="approval_method_pin">Nehezitett PIN-csere</string>
+        <string name="helper_phone_hint">Segito telefonszama</string>
+        <string name="manual_pin1_hint">1. PIN (amit a segito ad meg)</string>
+        <string name="save_approval_settings">Mentes</string>
+        <string name="approval_settings_saved">Elmentve.</string>
+        <string name="approval_min_one_required">Legalabb egy modszert valassz.</string>
+
+        <string name="approval_step_title">Kulso jovahagyas szukseges</string>
+        <string name="send_sms_button">SMS kuldese a segitonek</string>
+        <string name="sms_message_template">Engedelyezed, hogy most feloldjam a tiltast? Ha igen, valaszolj: IGEN</string>
+        <string name="sms_waiting">Varakozas a valaszra...</string>
+        <string name="sms_approved">Jovahagyva SMS-ben.</string>
+        <string name="check_approval_button">Ellenorzes</string>
+        <string name="request_callback_button">Visszahivast kerek</string>
+        <string name="callback_waiting">Varakozas a visszahivasra...</string>
+        <string name="callback_approved">Jovahagyva visszahivassal.</string>
+        <string name="pin1_hint">Ird be az 1. PIN-t</string>
+        <string name="pin1_wrong">Helytelen PIN.</string>
+        <string name="pin1_confirmed_waiting">1. PIN elfogadva. Kotelezo varakozas: 15 perc.</string>
+        <string name="pin2_ready">A 2. PIN elkeszult, keresd meg az appban.</string>
+        <string name="pin2_hint">Ird be a 2. PIN-t</string>
+        <string name="pin2_wrong">Helytelen PIN.</string>
+        <string name="pin2_confirmed">Nehezitett PIN teljesitve.</string>
+        <string name="hidden_pin2_label">Ideiglenes kod:</string>
 </resources>
