@@ -55,11 +55,11 @@ class MainActivity : AppCompatActivity() {
                                                                         }
 
                                                                                 binding.buttonEnableDeviceAdmin.setOnClickListener {
-                                                                                              val adminComponent = ComponentName(this, BlockDeviceAdminReceiver::class.java)
-                                                                                                          val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
+                                                                                               val adminComponent = ComponentName(this, BlockDeviceAdminReceiver::class.java)
+                                                                                                          ival intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
                                                                                                                             putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent)
                                                                                                                                             putExtra(
-                                                                                                                                                                  DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                                                                                                                                                                   DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                                                                                                                                                                   getString(R.string.device_admin_explanation)
                                                                                                                                                                                   )
                                                                                                           }
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                                                                                                                                                   override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                                                                                                                                                               override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                                                                                                                         })
-      }
+       }
 
           override fun onResume() {
                     super.onResume()
@@ -101,8 +101,8 @@ class MainActivity : AppCompatActivity() {
                                               check: android.widget.TextView,
                                               granted: Boolean
                                           ) {
-                                              button.visibility = if (granted) android.view.View.GONE else android.view.View.VISIBLE
-                                              check.visibility = if (granted) android.view.View.VISIBLE else android.view.View.GONE
+                                            button.visibility = if (granted) android.view.View.GONE else android.view.View.VISIBLE
+                                            check.visibility = if (granted) android.view.View.VISIBLE else android.view.View.GONE
                                     }
 
                                         private fun isAccessibilityServiceEnabled(): Boolean {
@@ -171,4 +171,3 @@ class MainActivity : AppCompatActivity() {
                                                                                       binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
                                                             }
 }
-      
