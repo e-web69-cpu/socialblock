@@ -22,13 +22,13 @@ android {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
-    }
-        getByName("release") {
+        create("release") {
             storeFile = file("release.keystore")
             storePassword = "SocialBlock2026!"
             keyAlias = "socialblock"
             keyPassword = "SocialBlock2026!"
         }
+    }
 
     buildTypes {
         debug {
