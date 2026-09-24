@@ -48,7 +48,11 @@ object ScheduleManager {
                                                                             "com.facebook.orca",
                                                                             "com.twitter.android",
                                                                             "com.zhiliaoapp.musically",
-                                                                            "com.ss.android.ugc.trill"
+                                                                            "com.ss.android.ugc.trill",
+                                                                                                "com.google.android.gm",
+                                                                                                "com.microsoft.office.outlook",
+                                                                                                "com.yahoo.mobile.client.android.mail",
+                                                                                                "com.samsung.android.email.provider"
                                                                                 )
                                                                             setBlockedPackages(ctx, defaults)
                                                                                             return defaults
