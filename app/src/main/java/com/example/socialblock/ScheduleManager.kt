@@ -7,8 +7,8 @@ import org.json.JSONObject
 import java.util.Calendar
 
 /**
- * Egyetlen tiltási idősáv: napok + kezdő/záró óra:perc.
- */
+* Egyetlen tiltási idősáv: napok + kezdő/záró óra:perc.
+*/
 data class TimeWindow(
     val daysOfWeek: Set<Int>, // Calendar.SUNDAY..Calendar.SATURDAY
     val startHour: Int, val startMinute: Int,
@@ -37,30 +37,30 @@ object ScheduleManager {
     const val MIN_JUSTIFICATION_LENGTH = 150
 
     private fun prefs(ctx: Context): SharedPreferences =
-        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+    ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-            fun getBlockedPackages(ctx: Context): Set<String> {
-                            val p = prefs(ctx)
-                                        if (!p.contains(KEY_BLOCKED_PACKAGES)) {
-                                                            val defaults = setOf(
-                                                                                                "com.facebook.katana",
-                                                                            "com.instagram.android",
-                                                                            "com.facebook.orca",
-                                                                            "com.twitter.android",
-                                                                            "com.zhiliaoapp.musically",
-                                                                            "com.ss.android.ugc.trill",
-                                                                                                "com.google.android.gm",
-                                                                                                "com.microsoft.office.outlook",
-                                                                                                "com.yahoo.mobile.client.android.mail",
-                                                                                                "com.samsung.android.email.provider"
-                                                                                )
-                                                                            setBlockedPackages(ctx, defaults)
-                                                                                            return defaults
-                                        }
-                                                    val raw = p.getString(KEY_BLOCKED_PACKAGES, "[]") ?: "[]"
-                            val arr = JSONArray(raw)
-                                        return (0 until arr.length()).map { arr.getString(it) }.toSet()
-            }
+    fun getBlockedPackages(ctx: Context): Set<String> {
+        val p = prefs(ctx)
+        if (!p.contains(KEY_BLOCKED_PACKAGES)) {
+            val defaults = setOf(
+                "com.facebook.katana",
+                "com.instagram.android",
+                "com.facebook.orca",
+                "com.twitter.android",
+                "com.zhiliaoapp.musically",
+                "com.ss.android.ugc.trill",
+                "com.google.android.gm",
+                "com.microsoft.office.outlook",
+                "com.yahoo.mobile.client.android.mail",
+                "com.samsung.android.email.provider"
+            )
+            setBlockedPackages(ctx, defaults)
+            return defaults
+        }
+        val raw = p.getString(KEY_BLOCKED_PACKAGES, "[]") ?: "[]"
+        val arr = JSONArray(raw)
+        return (0 until arr.length()).map { arr.getString(it) }.toSet()
+    }
 
     fun setBlockedPackages(ctx: Context, packages: Set<String>) {
         val arr = JSONArray()
@@ -166,7 +166,7 @@ object ScheduleManager {
     }
 
     fun canRequestUnlock(ctx: Context): Boolean =
-        unlocksUsedThisWeek(ctx) < MAX_UNLOCKS_PER_WEEK
+    unlocksUsedThisWeek(ctx) < MAX_UNLOCKS_PER_WEEK
 
     fun recordUnlockRequest(ctx: Context, justification: String): Long {
         val history = getHistory(ctx)
@@ -178,7 +178,7 @@ object ScheduleManager {
 
     /** A legutóbbi kérés, ha még nincs feldolgozva (nincs approvedAt). */
     fun getPendingRequest(ctx: Context): UnlockRequest? =
-        getHistory(ctx).lastOrNull { it.approvedAt == null }
+    getHistory(ctx).lastOrNull { it.approvedAt == null }
 
     fun markLatestApproved(ctx: Context) {
         val history = getHistory(ctx)
@@ -193,97 +193,116 @@ object ScheduleManager {
     }
 
     fun requiresExternalApproval(ctx: Context): Boolean =
-        prefs(ctx).getBoolean(KEY_REQUIRE_EXTERNAL_APPROVAL, false)
+    prefs(ctx).getBoolean(KEY_REQUIRE_EXTERNAL_APPROVAL, false)
 
     fun setRequiresExternalApproval(ctx: Context, value: Boolean) {
         prefs(ctx).edit().putBoolean(KEY_REQUIRE_EXTERNAL_APPROVAL, value).apply()
     }
 
-        private const val KEY_SIMPLE_ENABLED = "simple_enabled"
-        private const val KEY_SIMPLE_PACKAGE = "simple_blocked_package"
+    private const val KEY_SIMPLE_ENABLED = "simple_enabled"
+    private const val KEY_SIMPLE_PACKAGE = "simple_blocked_package"
 
-        fun isSimpleBlockingEnabled(ctx: Context): Boolean =
-            prefs(ctx).getBoolean(KEY_SIMPLE_ENABLED, false)
+    fun isSimpleBlockingEnabled(ctx: Context): Boolean =
+    prefs(ctx).getBoolean(KEY_SIMPLE_ENABLED, false)
 
-                fun setSimpleBlockingEnabled(ctx: Context, value: Boolean) {
-                            prefs(ctx).edit().putBoolean(KEY_SIMPLE_ENABLED, value).apply()
-                }
+    fun setSimpleBlockingEnabled(ctx: Context, value: Boolean) {
+        prefs(ctx).edit().putBoolean(KEY_SIMPLE_ENABLED, value).apply()
+    }
 
-                    fun getSimpleBlockedPackage(ctx: Context): String? =
-            prefs(ctx).getString(KEY_SIMPLE_PACKAGE, null)
+    fun getSimpleBlockedPackage(ctx: Context): String? =
+    prefs(ctx).getString(KEY_SIMPLE_PACKAGE, null)
 
-                fun setSimpleBlockedPackage(ctx: Context, pkg: String?) {
-                            prefs(ctx).edit().putString(KEY_SIMPLE_PACKAGE, pkg).apply()
-                }
+    fun setSimpleBlockedPackage(ctx: Context, pkg: String?) {
+        prefs(ctx).edit().putString(KEY_SIMPLE_PACKAGE, pkg).apply()
+    }
 
-                    fun isNowWithinSchedule(ctx: Context): Boolean {
-                                val windows = getWindows(ctx)
-                                        if (windows.isEmpty()) return true
-                                val now = Calendar.getInstance()
-                                        val dayOfWeek = now.get(Calendar.DAY_OF_WEEK)
-                                                val nowMinutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
-                                                        return windows.any { w ->
-                                                                        if (dayOfWeek !in w.daysOfWeek) return@any false
-                                                                        val start = w.startHour * 60 + w.startMinute
-                                                                        val end = w.endHour * 60 + w.endMinute
-                                                                        if (start <= end) nowMinutes in start until end
-                                                                        else nowMinutes >= start || nowMinutes < end
-                                                        }
-                    }
-
-                        private const val KEY_APPROVAL_METHODS = "approval_methods"
-        private const val KEY_HELPER_PHONE = "helper_phone"
-        private const val KEY_MANUAL_PIN1 = "manual_pin1"
-        private const val KEY_PIN2_VALUE = "pin2_value"
-        private const val KEY_PIN2_GENERATED_AT = "pin2_generated_at"
-        private const val KEY_SMS_REQUESTED_AT = "sms_requested_at"
-        private const val KEY_CALLBACK_REQUESTED_AT = "callback_requested_at"
-
-        fun getApprovalMethods(ctx: Context): Set<String> {
-                    val raw = prefs(ctx).getString(KEY_APPROVAL_METHODS, "") ?: ""
-                    return raw.split(",").filter { it.isNotBlank() }.toSet()
+    fun isNowWithinSchedule(ctx: Context): Boolean {
+        val windows = getWindows(ctx)
+        if (windows.isEmpty()) return true
+        val now = Calendar.getInstance()
+        val dayOfWeek = now.get(Calendar.DAY_OF_WEEK)
+        val nowMinutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
+        return windows.any { w ->
+            if (dayOfWeek !in w.daysOfWeek) return@any false
+            val start = w.startHour * 60 + w.startMinute
+            val end = w.endHour * 60 + w.endMinute
+            if (start <= end) nowMinutes in start until end
+            else nowMinutes >= start || nowMinutes < end
         }
+    }
 
-            fun setApprovalMethods(ctx: Context, methods: Set<String>) {
-                        prefs(ctx).edit().putString(KEY_APPROVAL_METHODS, methods.joinToString(",")).apply()
-            }
+    private const val KEY_APPROVAL_METHODS = "approval_methods"
+    private const val KEY_HELPER_PHONE = "helper_phone"
+    private const val KEY_MANUAL_PIN1 = "manual_pin1"
+    private const val KEY_PIN2_VALUE = "pin2_value"
+    private const val KEY_PIN2_GENERATED_AT = "pin2_generated_at"
+    private const val KEY_SMS_REQUESTED_AT = "sms_requested_at"
+    private const val KEY_CALLBACK_REQUESTED_AT = "callback_requested_at"
 
-                fun getHelperPhone(ctx: Context): String? = prefs(ctx).getString(KEY_HELPER_PHONE, null)
+    fun getApprovalMethods(ctx: Context): Set<String> {
+        val raw = prefs(ctx).getString(KEY_APPROVAL_METHODS, "") ?: ""
+        return raw.split(",").filter { it.isNotBlank() }.toSet()
+    }
 
-                    fun setHelperPhone(ctx: Context, phone: String) {
-                                prefs(ctx).edit().putString(KEY_HELPER_PHONE, phone).apply()
-                    }
+    fun setApprovalMethods(ctx: Context, methods: Set<String>) {
+        prefs(ctx).edit().putString(KEY_APPROVAL_METHODS, methods.joinToString(",")).apply()
+    }
 
-                        fun getManualPin1(ctx: Context): String? = prefs(ctx).getString(KEY_MANUAL_PIN1, null)
+    fun getHelperPhone(ctx: Context): String? = prefs(ctx).getString(KEY_HELPER_PHONE, null)
 
-                            fun setManualPin1(ctx: Context, pin: String) {
-                                        prefs(ctx).edit().putString(KEY_MANUAL_PIN1, pin).apply()
-                            }
+    fun setHelperPhone(ctx: Context, phone: String) {
+        prefs(ctx).edit().putString(KEY_HELPER_PHONE, phone).apply()
+    }
 
-                                fun generatePin2(ctx: Context): String {
-                                            val pin = (100000..999999).random().toString()
-                                                    prefs(ctx).edit()
-                                                                .putString(KEY_PIN2_VALUE, pin)
-                                                                            .putLong(KEY_PIN2_GENERATED_AT, System.currentTimeMillis())
-                                                                                        .apply()
-                                                                                                return pin
-                                }
+    fun getManualPin1(ctx: Context): String? = prefs(ctx).getString(KEY_MANUAL_PIN1, null)
 
-                                    fun getPin2(ctx: Context): String? = prefs(ctx).getString(KEY_PIN2_VALUE, null)
+    fun setManualPin1(ctx: Context, pin: String) {
+        prefs(ctx).edit().putString(KEY_MANUAL_PIN1, pin).apply()
+    }
 
-                                        fun clearPin2(ctx: Context) {
-                                                    prefs(ctx).edit().remove(KEY_PIN2_VALUE).remove(KEY_PIN2_GENERATED_AT).apply()
-                                        }
+    fun generatePin2(ctx: Context): String {
+        val pin = (100000..999999).random().toString()
+        prefs(ctx).edit()
+        .putString(KEY_PIN2_VALUE, pin)
+        .putLong(KEY_PIN2_GENERATED_AT, System.currentTimeMillis())
+        .apply()
+        return pin
+    }
 
-                                            fun markSmsApprovalRequested(ctx: Context) {
-                                                        prefs(ctx).edit().putLong(KEY_SMS_REQUESTED_AT, System.currentTimeMillis()).apply()
-                                            }
+    fun getPin2(ctx: Context): String? = prefs(ctx).getString(KEY_PIN2_VALUE, null)
 
-                                                fun getSmsRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_SMS_REQUESTED_AT, 0L)
+    fun clearPin2(ctx: Context) {
+        prefs(ctx).edit().remove(KEY_PIN2_VALUE).remove(KEY_PIN2_GENERATED_AT).apply()
+    }
 
-                                                    fun markCallbackRequested(ctx: Context) {
-                                                                prefs(ctx).edit().putLong(KEY_CALLBACK_REQUESTED_AT, System.currentTimeMillis()).apply()
-                                                    }
+    fun markSmsApprovalRequested(ctx: Context) {
+        prefs(ctx).edit().putLong(KEY_SMS_REQUESTED_AT, System.currentTimeMillis()).apply()
+    }
 
-                                                        fun getCallbackRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_CALLBACK_REQUESTED_AT, 0L)
+    fun getSmsRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_SMS_REQUESTED_AT, 0L)
+
+    fun markCallbackRequested(ctx: Context) {
+        prefs(ctx).edit().putLong(KEY_CALLBACK_REQUESTED_AT, System.currentTimeMillis()).apply()
+    }
+
+    fun getCallbackRequestedAt(ctx: Context): Long = prefs(ctx).getLong(KEY_CALLBACK_REQUESTED_AT, 0L)
+
+    // ---- Beállítások zárolása ----
+
+    /** Éppen érvényben van-e a tiltás: a kapcsoló be van kapcsolva, és a tiltási idősávban vagyunk. */
+    fun isBlockingActiveNow(ctx: Context): Boolean =
+        isSimpleBlockingEnabled(ctx) && isNowWithinSchedule(ctx)
+
+    /**
+     * Az idősáv csak a lejárta után, vagyis a tiltási idősávon kívül módosítható.
+     * Ha még nincs idősáv (egész napos tiltás), az első idősáv csak sikeres feloldás után adható meg.
+     */
+    fun canEditSchedule(ctx: Context): Boolean {
+        if (!isBlockingActiveNow(ctx)) return true
+        return getWindows(ctx).isEmpty() && isTemporarilyUnlocked(ctx)
+    }
+
+    /** Lazítás (tiltás kikapcsolása, app kivétele a listából): idősávon kívül, vagy sikeres feloldás után. */
+    fun canLoosenProtection(ctx: Context): Boolean =
+        !isBlockingActiveNow(ctx) || isTemporarilyUnlocked(ctx)
 }
