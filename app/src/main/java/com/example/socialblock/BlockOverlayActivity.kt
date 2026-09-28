@@ -2,6 +2,7 @@ package com.example.socialblock
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.socialblock.databinding.ActivityBlockOverlayBinding
 
@@ -19,14 +20,20 @@ class BlockOverlayActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pkg = intent.getStringExtra(EXTRA_BLOCKED_PACKAGE) ?: ""
-        binding.textBlockedApp.text = getString(R.string.blocked_message, pkg)
+        val pm = packageManager
 
-        val used = ScheduleManager.unlocksUsedThisWeek(this)
-        val remaining = ScheduleManager.MAX_UNLOCKS_PER_WEEK - used
-        binding.textUnlocksRemaining.text =
-            getString(R.string.unlocks_remaining, remaining)
+        val label = try {
+            pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
+        } catch (e: Exception) {
+            pkg
+        }
+        try {
+            binding.imageBlockedApp.setImageDrawable(pm.getApplicationIcon(pkg))
+        } catch (e: Exception) {
+            binding.imageBlockedApp.visibility = View.GONE
+        }
+        binding.textBlockedApp.text = getString(R.string.blocked_message, label)
 
-        binding.buttonRequestUnlock.isEnabled = ScheduleManager.canRequestUnlock(this)
         binding.buttonRequestUnlock.setOnClickListener {
             startActivity(Intent(this, UnlockFlowActivity::class.java))
         }
@@ -39,6 +46,21 @@ class BlockOverlayActivity : AppCompatActivity() {
             startActivity(homeIntent)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Ha közben sikeresen feloldottak, a blokkoló képernyő eltűnik,
+        // és visszakerülünk az alatta lévő apphoz.
+        if (ScheduleManager.isTemporarilyUnlocked(this)) {
+            finish()
+            return
+        }
+
+        val remaining = ScheduleManager.MAX_UNLOCKS_PER_WEEK - ScheduleManager.unlocksUsedThisWeek(this)
+        binding.textUnlocksRemaining.text = getString(R.string.unlocks_remaining, remaining)
+        binding.buttonRequestUnlock.isEnabled = ScheduleManager.canRequestUnlock(this)
     }
 
     // Letiltjuk a vissza gombot, hogy ne lehessen egyszerűen "átlapozni" a blokkolón
