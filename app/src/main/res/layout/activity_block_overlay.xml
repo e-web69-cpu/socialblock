@@ -1,32 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp"
-    android:background="#111111"
+    android:gravity="center_horizontal"
+    android:paddingStart="28dp"
+    android:paddingEnd="28dp"
+    android:paddingTop="88dp"
+    android:paddingBottom="40dp"
+    android:background="@color/bg_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView android:id="@+id/textBlockedApp"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
+    <ImageView
+        android:id="@+id/imageBlockedApp"
+        android:contentDescription="@null"
+        android:layout_width="88dp"
+        android:layout_height="88dp" />
+
+    <TextView
+        android:text="@string/block_title"
+        android:textColor="@color/text_primary"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <TextView android:id="@+id/textUnlocksRemaining"
-        android:textColor="#CCCCCC"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textBlockedApp"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <Button android:id="@+id/buttonRequestUnlock"
-        android:text="@string/request_unlock"
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/bg_card"
+        android:padding="18dp"
         android:layout_marginTop="32dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button android:id="@+id/buttonGoHome"
+        <TextView
+            android:text="@string/block_hint"
+            android:textColor="@color/accent"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textUnlocksRemaining"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/buttonGoHome"
         android:text="@string/go_home"
+        android:background="@drawable/bg_button_primary"
+        android:textColor="@color/text_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonRequestUnlock"
+        android:text="@string/request_unlock"
+        android:background="@drawable/bg_search"
+        android:textColor="@color/text_secondary"
         android:layout_marginTop="12dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
