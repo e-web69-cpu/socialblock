@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="block_title">Állj meg egy pillanatra</string>
+    <string name="block_hint">Amit most írnál vagy megnéznél, holnap reggel is megvár.</string>
+    <string name="schedule_locked">Az idősáv csak a lejárta után módosítható, vagyis a tiltási idősávon kívül. Ha még nincs idősávod, add meg a tiltás bekapcsolása előtt.</string>
+    <string name="settings_locked">A tiltási idősávban ez csak sikeres feloldás után módosítható.</string>
+</resources>
