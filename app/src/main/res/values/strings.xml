@@ -27,9 +27,10 @@
 
     <string name="select_apps_title">3. Blokkolandó appok kiválasztása</string>
 
-    <string name="blocked_message">%1$s jelenleg tiltva van a beállított idősávban.</string>
-    <string name="unlocks_remaining">Ezen a héten még %1$d feloldási kérésed van hátra.</string>
+    <string name="blocked_message">%1$s %2$s tiltva van a beállított idősávban: %3$s</string>
+    <string name="unlocks_remaining">Ezen a héten még %1$d feloldási kérésed van.</string>
     <string name="request_unlock">Feloldás kérése</string>
+    <string name="brand_name">SociaLock</string>
     <string name="go_home">Vissza a kezdőképernyőre</string>
 
     <string name="justification_prompt">Miért van szükséged most a feloldásra? (Írd le részletesen és őszintén — ez bekerül a naplóba.)</string>

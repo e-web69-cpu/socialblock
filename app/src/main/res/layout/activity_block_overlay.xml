@@ -1,86 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Blokkoló képernyő: fejlécsáv + tartalom; a sorok között egyforma, a képernyő magasságához igazodó térköz -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:paddingStart="28dp"
-    android:paddingEnd="28dp"
-    android:paddingTop="88dp"
-    android:paddingBottom="40dp"
-    android:background="@color/bg_dark"
+    android:background="@drawable/bg_block_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageBlockedApp"
-        android:contentDescription="@null"
-        android:layout_width="88dp"
-        android:layout_height="88dp" />
-
-    <TextView
-        android:text="@string/block_title"
-        android:textColor="@color/text_primary"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="28dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textBlockedApp"
-        android:textColor="@color/text_secondary"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+    <!-- Fejlécsáv -->
     <LinearLayout
-        android:orientation="vertical"
-        android:background="@drawable/bg_card"
-        android:padding="18dp"
-        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_header"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:minHeight="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/socialock_logo"
+            android:contentDescription="@string/brand_name"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:text="@string/block_status_prefix"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/block_status_active"
+            android:textColor="@color/danger"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.06"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Tartalom -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- A megnyitni próbált app gyári ikonja, önmagában -->
+        <ImageView
+            android:id="@+id/imageBlockedApp"
+            android:contentDescription="@null"
+            android:layout_width="88dp"
+            android:layout_height="88dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/block_title"
+            android:textColor="@color/text_primary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01"
+            android:maxLines="1"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeMaxTextSize="26sp"
+            android:autoSizeStepGranularity="1sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textBlockedApp"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:text="@string/block_hint"
             android:textColor="@color/accent"
-            android:textSize="15sp"
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.2"
             android:gravity="center"
+            android:background="@drawable/bg_card_glass"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textUnlocksRemaining"
+            android:textColor="#C9C2FF"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="11sp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeStepGranularity="0.5sp"
+            android:gravity="center"
+            android:background="@drawable/bg_pill"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonGoHome"
+            android:text="@string/go_home"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:minHeight="56dp"
+            android:elevation="10dp"
+            android:outlineSpotShadowColor="#8A7BFF"
+            android:outlineAmbientShadowColor="#8A7BFF"
+            android:stateListAnimator="@null"
+            android:background="@drawable/bg_button_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRequestUnlock"
+            android:text="@string/request_unlock"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/text_button_outline"
+            android:minHeight="52dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/bg_button_outline"
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textUnlocksRemaining"
-        android:textColor="@color/text_secondary"
-        android:textSize="13sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/buttonGoHome"
-        android:text="@string/go_home"
-        android:background="@drawable/bg_button_primary"
-        android:textColor="@color/text_primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonRequestUnlock"
-        android:text="@string/request_unlock"
-        android:background="@drawable/bg_search"
-        android:textColor="@color/text_secondary"
-        android:layout_marginTop="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

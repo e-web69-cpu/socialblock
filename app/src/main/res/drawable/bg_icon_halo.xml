@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fénykör + finom keret a megnyitni próbált app ikonja körül (átlátszó belső) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <gradient android:type="radial" android:gradientRadius="72dp" android:startColor="#406F60F0" android:centerColor="#186F60F0" android:endColor="#006F60F0" />
+        </shape>
+    </item>
+    <item android:top="20dp" android:bottom="20dp" android:left="20dp" android:right="20dp">
+        <shape android:shape="oval">
+            <solid android:color="#0DFFFFFF" />
+            <stroke android:width="1dp" android:color="#806F60F0" />
+        </shape>
+    </item>
+</layer-list>

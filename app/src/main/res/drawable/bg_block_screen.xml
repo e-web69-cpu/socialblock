@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Blokkoló képernyő háttere: sötétkék színátmenet, lila fény felül, zöld derengés alul -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:angle="270" android:startColor="#1A1D45" android:centerColor="#10122A" android:endColor="#0B0C1C" />
+        </shape>
+    </item>
+    <item android:gravity="top|center_horizontal" android:top="-140dp" android:width="520dp" android:height="520dp">
+        <shape android:shape="oval">
+            <gradient android:type="radial" android:gradientRadius="260dp" android:startColor="#665846E6" android:centerColor="#225846E6" android:endColor="#005846E6" />
+        </shape>
+    </item>
+    <item android:gravity="bottom|end" android:bottom="-160dp" android:end="-160dp" android:width="420dp" android:height="420dp">
+        <shape android:shape="oval">
+            <gradient android:type="radial" android:gradientRadius="210dp" android:startColor="#2633E1B4" android:endColor="#0033E1B4" />
+        </shape>
+    </item>
+    <item android:gravity="center_vertical|start" android:start="-120dp" android:width="300dp" android:height="300dp">
+        <shape android:shape="oval">
+            <gradient android:type="radial" android:gradientRadius="150dp" android:startColor="#1A8A7BFF" android:endColor="#008A7BFF" />
+        </shape>
+    </item>
+    <!-- Finom pöttyrács -->
+    <item android:drawable="@drawable/bg_dots" />
+</layer-list>
