@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        styleHero()
+        playEntranceAnimation()
+
         binding.recyclerApps.layoutManager = LinearLayoutManager(this)
         loadInstalledApps()
 
@@ -106,6 +109,65 @@ class MainActivity : AppCompatActivity() {
         refreshScheduleLock()
         ScheduleManager.refreshHelper(this)
         refreshHelperCard()
+        refreshHeaderStatus()
+    }
+
+    // ---- Megjelenés (v1.4) ----
+
+    /** Fejléc: „A SociaLock jelenleg: AKTÍV/INAKTÍV”. */
+    private fun refreshHeaderStatus() {
+        val active = ScheduleManager.isBlockingActiveNow(this) && !ScheduleManager.isTemporarilyUnlocked(this)
+        binding.textHeaderStatus.text = getString(if (active) R.string.status_active else R.string.status_inactive)
+        binding.textHeaderStatus.setTextColor(
+            androidx.core.content.ContextCompat.getColor(this, if (active) R.color.danger else R.color.accent)
+        )
+        binding.textHeaderStatus.setBackgroundResource(if (active) R.drawable.bg_status_on else R.drawable.bg_status_off)
+    }
+
+    /** Színátmenetes cím és lassan „lélegző” logó. */
+    private fun styleHero() {
+        val title = binding.textHeroTitle
+        title.post {
+            val w = title.paint.measureText(title.text.toString())
+            title.paint.shader = android.graphics.LinearGradient(
+                0f, 0f, w, 0f,
+                intArrayOf(
+                    android.graphics.Color.parseColor("#C9C2FF"),
+                    android.graphics.Color.parseColor("#8A7BFF"),
+                    android.graphics.Color.parseColor("#33E1B4")
+                ),
+                null, android.graphics.Shader.TileMode.CLAMP
+            )
+            title.invalidate()
+        }
+        android.animation.ObjectAnimator.ofPropertyValuesHolder(
+            binding.imageHeroLogo,
+            android.animation.PropertyValuesHolder.ofFloat(android.view.View.SCALE_X, 1f, 1.06f),
+            android.animation.PropertyValuesHolder.ofFloat(android.view.View.SCALE_Y, 1f, 1.06f)
+        ).apply {
+            duration = 2200
+            repeatCount = android.animation.ValueAnimator.INFINITE
+            repeatMode = android.animation.ValueAnimator.REVERSE
+            interpolator = android.view.animation.AccelerateDecelerateInterpolator()
+            start()
+        }
+    }
+
+    /** A kártyák egymás után, lentről beúsznak. */
+    private fun playEntranceAnimation() {
+        val container = binding.contentContainer
+        val shift = 40f * resources.displayMetrics.density
+        for (i in 0 until container.childCount) {
+            val v = container.getChildAt(i)
+            v.alpha = 0f
+            v.translationY = shift
+            v.animate()
+                .alpha(1f).translationY(0f)
+                .setStartDelay(80L * i)
+                .setDuration(500)
+                .setInterpolator(android.view.animation.DecelerateInterpolator(1.6f))
+                .start()
+        }
     }
 
     private fun refreshScheduleLock() {

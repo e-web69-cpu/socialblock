@@ -49,4 +49,16 @@
     <string name="helper_phone_invalid">Adj meg egy érvényes telefonszámot.</string>
     <string name="schedule_required">Az idősáv kötelező: add meg és mentsd el a tiltás bekapcsolása előtt.</string>
     <string name="schedule_invalid">Az idősáv legalább 1 perc és legfeljebb 23 óra lehet.</string>
+
+    <!-- Főképernyő (v1.4) -->
+    <string name="app_version_label">v1.4</string>
+    <string name="permission_granted_full">✓ Engedélyezve</string>
+    <string name="setup_permissions_title_v14">Jogosultságok</string>
+    <string name="schedule_title_v14">Tiltási idősáv</string>
+    <string name="helper_title_v14">Segítő</string>
+    <string name="apps_title_v14">Tiltandó appok</string>
+    <string name="schedule_start_label">Kezdés (óra : perc)</string>
+    <string name="schedule_end_label">Vége (óra : perc)</string>
+    <string name="status_active">AKTÍV</string>
+    <string name="status_inactive">INAKTÍV</string>
 </resources>
