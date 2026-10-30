@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Blokkoló képernyő: fejlécsáv + tartalom; a sorok között egyforma, a képernyő magasságához igazodó térköz -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Élő, animált háttér -->
+    <com.example.socialblock.AnimatedBackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+<LinearLayout
     android:orientation="vertical"
-    android:background="@drawable/bg_block_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -93,7 +101,7 @@
         <TextView
             android:id="@+id/textBlockedApp"
             android:textColor="@color/text_secondary"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:lineSpacingMultiplier="1.2"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -107,7 +115,7 @@
         <TextView
             android:text="@string/block_hint"
             android:textColor="@color/accent"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:lineSpacingMultiplier="1.2"
             android:gravity="center"
             android:background="@drawable/bg_card_glass"
@@ -126,11 +134,11 @@
         <TextView
             android:id="@+id/textUnlocksRemaining"
             android:textColor="#C9C2FF"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:maxLines="1"
             android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="11sp"
-            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="15sp"
             android:autoSizeStepGranularity="0.5sp"
             android:gravity="center"
             android:background="@drawable/bg_pill"
@@ -151,7 +159,7 @@
             android:id="@+id/buttonGoHome"
             android:text="@string/go_home"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
             android:minHeight="56dp"
@@ -167,7 +175,7 @@
             android:id="@+id/buttonRequestUnlock"
             android:text="@string/request_unlock"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@color/text_button_outline"
             android:minHeight="52dp"
             android:stateListAnimator="@null"
@@ -179,3 +187,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</FrameLayout>

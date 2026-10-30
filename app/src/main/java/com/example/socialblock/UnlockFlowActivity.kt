@@ -50,17 +50,18 @@ class UnlockFlowActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val scroll = ScrollView(this).apply {
-            setBackgroundResource(R.drawable.bg_block_screen)
-            isFillViewport = true
-        }
+        val scroll = ScrollView(this).apply { isFillViewport = true }
         content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             val p = dp(24)
             setPadding(p, dp(28), p, p)
         }
         scroll.addView(content)
-        setContentView(scroll)
+        // Élő, animált háttér a folyamat mögött is
+        val root = android.widget.FrameLayout(this)
+        root.addView(AnimatedBackgroundView(this))
+        root.addView(scroll)
+        setContentView(root)
         requestNeededPermissions()
     }
 
