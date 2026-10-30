@@ -96,6 +96,15 @@ class UnlockFlowActivity : AppCompatActivity() {
     private fun render() {
         stopTicker()
         content.removeAllViews()
+        renderBody()
+        // Copyright lábléc minden állapotban
+        addText(getString(R.string.footer_copyright), R.color.text_secondary, sizeSp = 11f, topMargin = 28).apply {
+            alpha = 0.7f
+            gravity = Gravity.CENTER
+        }
+    }
+
+    private fun renderBody() {
         addTitle(getString(R.string.unlock_title))
 
         if (ScheduleManager.isTemporarilyUnlocked(this)) {
