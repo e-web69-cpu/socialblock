@@ -5,6 +5,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <com.example.socialblock.AnimatedBackgroundView
+        android:tag="main"
         android:layout_width="match_parent" android:layout_height="match_parent" />
 
     <LinearLayout android:orientation="vertical"

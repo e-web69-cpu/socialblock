@@ -5,7 +5,7 @@
                 <string name="app_subtitle">Önkorlátozás józan ésszel</string>
                 <string name="permission_granted">Engedélyezve</string>
         <string name="search_apps_hint">Alkalmazás keresése</string>
-        <string name="blocking_enabled_label">Tiltás bekapcsolva</string>
+        <string name="blocking_enabled_label">Tiltás bekapcsolva (max. 23 óra)</string>
         <string name="select_single_app_title">4. Tiltandó appok</string>
 
     <string name="setup_permissions_title">1. Jogosultságok beállítása</string>

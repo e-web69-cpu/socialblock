@@ -133,7 +133,7 @@
 
         <TextView
             android:id="@+id/textUnlocksRemaining"
-            android:textColor="#C9C2FF"
+            android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:maxLines="1"
             android:autoSizeTextType="uniform"

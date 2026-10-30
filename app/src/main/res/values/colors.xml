@@ -6,8 +6,8 @@
       <color name="primary">#7C5CFF</color>
       <color name="primary_variant">#5B3EF5</color>
       <color name="accent">#33E1B4</color>
-      <color name="text_primary">#F5F5FF</color>
-      <color name="text_secondary">#A9ACC9</color>
+      <color name="text_primary">#FFFFFF</color>
+      <color name="text_secondary">#FFFFFF</color>
       <color name="success">#33E1B4</color>
       <color name="danger">#FF5C7C</color>
       <color name="divider">#2E3155</color>

@@ -57,11 +57,76 @@ class AnimatedBackgroundView @JvmOverloads constructor(
         }
     }
 
+    // Óriás, vékony vonalas SociaLock-motívum (buborék + lakat), a logó geometriájából (108 egységes tér)
+    private val bubblePath = android.graphics.Path().apply {
+        moveTo(40f, 32f); lineTo(68f, 32f)
+        arcTo(android.graphics.RectF(56f, 32f, 80f, 56f), -90f, 90f)
+        lineTo(80f, 58f)
+        arcTo(android.graphics.RectF(56f, 46f, 80f, 70f), 0f, 90f)
+        lineTo(46f, 70f); lineTo(32f, 82f); lineTo(34.4f, 69.4f)
+        quadTo(28f, 66f, 28f, 58f)
+        lineTo(28f, 44f)
+        arcTo(android.graphics.RectF(28f, 32f, 52f, 56f), 180f, 90f)
+        close()
+        addRoundRect(android.graphics.RectF(36f, 41f, 70f, 45.2f), 2.1f, 2.1f, android.graphics.Path.Direction.CW)
+        addRoundRect(android.graphics.RectF(36f, 49f, 62f, 53.2f), 2.1f, 2.1f, android.graphics.Path.Direction.CW)
+        addRoundRect(android.graphics.RectF(36f, 57f, 54f, 61.2f), 2.1f, 2.1f, android.graphics.Path.Direction.CW)
+        addCircle(54f, 48f, 4.1f, android.graphics.Path.Direction.CW)
+    }
+    private val lockPath = android.graphics.Path().apply {
+        // a logóban: translate(67.2 72.4) scale(0.8) translate(-71 -74)
+        val m = android.graphics.Matrix().apply { setTranslate(-71f, -74f); postScale(0.8f, 0.8f); postTranslate(67.2f, 72.4f) }
+        val shackle = android.graphics.Path().apply {
+            moveTo(61f, 64f); lineTo(61f, 59f)
+            arcTo(android.graphics.RectF(61f, 50f, 79f, 68f), 180f, 180f)
+            lineTo(79f, 64f)
+        }
+        val body = android.graphics.Path().apply {
+            addRoundRect(android.graphics.RectF(55f, 62f, 87f, 86f), 5f, 5f, android.graphics.Path.Direction.CW)
+        }
+        addPath(shackle, m); addPath(body, m)
+    }
+    private val motifPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE; strokeJoin = Paint.Join.ROUND; strokeCap = Paint.Cap.ROUND
+    }
+
+    /** Egy motívum-elhelyezés: középpont (arány), méret (képszélesség arányában), dőlés, tükrözés. */
+    private class Placement(val cx: Float, val cy: Float, val size: Float, val rot: Float, val mirror: Boolean, val phase: Float, val alpha: Float = 1f)
+
+    // Főképernyő (tag="main"): fent a fejléc és az első kártya mögött tükrözve, lent a sötét részen másik dőléssel.
+    private val mainPlacements = listOf(
+        Placement(0.62f, 0.17f, 1.15f, 16f, true, 0f, 0.7f),
+        Placement(0.40f, 0.82f, 1.45f, -12f, false, 2.1f)
+    )
+    // Többi képernyő: jobbra középen, nagyban.
+    private val defaultPlacements = listOf(Placement(0.62f, 0.42f, 1.7f, -18f, false, 0f))
+
+    private fun drawMotif(canvas: Canvas, w: Float, h: Float, t: Float) {
+        val d = resources.displayMetrics.density
+        val list = if (tag == "main") mainPlacements else defaultPlacements
+        for (pl in list) {
+            val tt = t + pl.phase
+            val scale = (w * pl.size) / 108f * (1f + 0.025f * sin(tt * 0.35f))
+            canvas.save()
+            canvas.translate(w * pl.cx + 10f * d * sin(tt * 0.21f), h * pl.cy + 14f * d * cos(tt * 0.17f))
+            canvas.rotate(pl.rot + 4f * sin(tt * 0.12f))
+            if (pl.mirror) canvas.scale(-1f, 1f)
+            canvas.scale(scale, scale)
+            canvas.translate(-54f, -57f)
+            motifPaint.strokeWidth = 2f * d / scale
+            motifPaint.color = Color.argb((160 * pl.alpha).toInt(), 0x9D, 0x90, 0xFF)
+            canvas.drawPath(bubblePath, motifPaint)
+            motifPaint.color = Color.argb((170 * pl.alpha).toInt(), 0x6E, 0xE7, 0xB7)
+            canvas.drawPath(lockPath, motifPaint)
+            canvas.restore()
+        }
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         basePaint.shader = LinearGradient(
             0f, 0f, 0f, h.toFloat(),
-            intArrayOf(Color.parseColor("#1A1D45"), Color.parseColor("#10122A"), Color.parseColor("#0A0B1A")),
+            intArrayOf(Color.parseColor("#252962"), Color.parseColor("#191C41"), Color.parseColor("#12132E")),
             floatArrayOf(0f, 0.5f, 1f), Shader.TileMode.CLAMP
         )
         seedParticles(w, h)
@@ -102,6 +167,9 @@ class AnimatedBackgroundView @JvmOverloads constructor(
             orbPaint.shader = RadialGradient(x, y, r, o.color, Color.TRANSPARENT, Shader.TileMode.CLAMP)
             canvas.drawCircle(x, y, r, orbPaint)
         }
+
+        // Óriás vonalas buborék + lakat
+        drawMotif(canvas, w, h, t)
 
         // Pöttyrács
         val step = 18f * resources.displayMetrics.density
