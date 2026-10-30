@@ -37,8 +37,8 @@ class BlockOverlayActivity : AppCompatActivity() {
             pkg
         }
         try {
-            // A gyári app ikon, a saját (pl. fehér) hátterével együtt.
-            binding.imageBlockedApp.setImageDrawable(pm.getApplicationIcon(pkg))
+            // A gyári app ikon, háttér és keret nélkül (csak az előtér-réteg).
+            binding.imageBlockedApp.setImageDrawable(iconWithoutBackground(pm.getApplicationIcon(pkg)))
         } catch (e: Exception) {
             binding.imageBlockedApp.visibility = View.GONE
         }
@@ -78,7 +78,7 @@ class BlockOverlayActivity : AppCompatActivity() {
             val end = start + key.length
             span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             span.setSpan(RelativeSizeSpan(1.15f), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            span.setSpan(ForegroundColorSpan(Color.WHITE), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            span.setSpan(ForegroundColorSpan(Color.parseColor("#111827")), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         binding.textUnlocksRemaining.text = span
         // Segítő nélkül nincs feloldás; folyamatban lévő kérésnél a gomb a kérés képernyőjére visz.
@@ -97,6 +97,38 @@ class BlockOverlayActivity : AppCompatActivity() {
     // Letiltjuk a vissza gombot, hogy ne lehessen egyszerűen "átlapozni" a blokkolón
     override fun onBackPressed() {
         // szándékosan nem hívjuk a super-t
+    }
+
+    /**
+     * Adaptív ikonnál csak az előtér-réteget használjuk (a háttér, pl. fehér lap, elmarad),
+     * és levágjuk körülötte az átlátszó szélt, hogy az ikon kitöltse a helyét.
+     */
+    private fun iconWithoutBackground(icon: android.graphics.drawable.Drawable): android.graphics.drawable.Drawable {
+        if (android.os.Build.VERSION.SDK_INT < 26 || icon !is android.graphics.drawable.AdaptiveIconDrawable) return icon
+        val fg = icon.foreground ?: return icon
+        return try {
+            val size = 432
+            val bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+            val canvas = android.graphics.Canvas(bmp)
+            fg.setBounds(0, 0, size, size)
+            fg.draw(canvas)
+            var minX = size; var minY = size; var maxX = -1; var maxY = -1
+            val px = IntArray(size * size)
+            bmp.getPixels(px, 0, size, 0, 0, size, size)
+            for (y in 0 until size) for (x in 0 until size) {
+                if ((px[y * size + x] ushr 24) > 16) {
+                    if (x < minX) minX = x; if (x > maxX) maxX = x
+                    if (y < minY) minY = y; if (y > maxY) maxY = y
+                }
+            }
+            if (maxX < 0) return icon
+            val w = maxX - minX + 1; val h = maxY - minY + 1; val side = maxOf(w, h)
+            val out = android.graphics.Bitmap.createBitmap(side, side, android.graphics.Bitmap.Config.ARGB_8888)
+            android.graphics.Canvas(out).drawBitmap(bmp,
+                android.graphics.Rect(minX, minY, maxX + 1, maxY + 1),
+                android.graphics.Rect((side - w) / 2, (side - h) / 2, (side - w) / 2 + w, (side - h) / 2 + h), null)
+            android.graphics.drawable.BitmapDrawable(resources, out)
+        } catch (e: Exception) { icon }
     }
 
     /** Az éppen érvényes (vagy ha egyik sem, az első) beállított idősáv, pl. „18:00–02:30”. */

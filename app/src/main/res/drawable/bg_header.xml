@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fejlécsáv: sötétebb, áttetsző háttér, alul finom lila vonal -->
+<!-- Fejlécsáv: fehér, alul finom szürke vonal -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#8C6F60F0" />
+            <solid android:color="#E5E7EB" />
         </shape>
     </item>
     <item android:bottom="1dp">
         <shape android:shape="rectangle">
-            <gradient android:angle="270" android:startColor="#F2353A80" android:endColor="#CC1F2256" />
+            <solid android:color="#E6FFFFFF" />
         </shape>
     </item>
 </layer-list>

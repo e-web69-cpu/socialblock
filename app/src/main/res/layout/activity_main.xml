@@ -56,14 +56,14 @@
                 android:padding="18dp"
                 android:layout_marginTop="16dp"
                 android:elevation="6dp"
-                android:outlineSpotShadowColor="#8A7BFF"
+                android:outlineSpotShadowColor="#2D65F8"
                 
                 android:layout_width="match_parent" android:layout_height="wrap_content">
 
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:id="@+id/badgePerm" android:text="1" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgePerm" android:text="1" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/setup_permissions_title_v14" android:textColor="@color/text_primary"
@@ -132,14 +132,14 @@
                 android:padding="18dp"
                 android:layout_marginTop="16dp"
                 android:elevation="6dp"
-                android:outlineSpotShadowColor="#8A7BFF"
+                android:outlineSpotShadowColor="#2D65F8"
                 
                 android:layout_width="match_parent" android:layout_height="wrap_content">
 
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:id="@+id/badgeSchedule" android:text="2" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeSchedule" android:text="2" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/schedule_title_v14" android:textColor="@color/text_primary"
@@ -162,7 +162,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="6dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
                     <EditText android:id="@+id/inputStartHour" android:hint="@string/start_hour"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="number"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:gravity="center" android:maxLength="2" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" />
@@ -170,7 +170,7 @@
                         android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content" />
                     <EditText android:id="@+id/inputStartMinute" android:hint="@string/start_minute"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="number"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:gravity="center" android:maxLength="2" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" />
@@ -181,7 +181,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="6dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
                     <EditText android:id="@+id/inputEndHour" android:hint="@string/end_hour"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="number"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:gravity="center" android:maxLength="2" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" />
@@ -189,16 +189,16 @@
                         android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content" />
                     <EditText android:id="@+id/inputEndMinute" android:hint="@string/end_minute"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="number"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:gravity="center" android:maxLength="2" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" />
                 </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton android:id="@+id/buttonSaveSchedule"
                     android:text="@string/save_schedule" android:textAllCaps="false" android:textSize="16sp" android:textStyle="bold"
-                    android:textColor="@color/text_primary" android:background="@drawable/bg_button_gradient"
+                    android:textColor="#FFFFFF" android:background="@drawable/bg_button_gradient"
                     android:stateListAnimator="@null" android:minHeight="52dp" android:elevation="8dp"
-                    android:outlineSpotShadowColor="#8A7BFF" android:outlineAmbientShadowColor="#8A7BFF"
+                    android:outlineSpotShadowColor="#2D65F8" android:outlineAmbientShadowColor="#2D65F8"
                     android:layout_marginTop="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
                 <TextView android:id="@+id/textSaveConfirmation" android:text="@string/schedule_saved"
                     android:textColor="@color/accent" android:visibility="gone" android:layout_marginTop="8dp"
@@ -211,14 +211,14 @@
                 android:padding="18dp"
                 android:layout_marginTop="16dp"
                 android:elevation="6dp"
-                android:outlineSpotShadowColor="#8A7BFF"
+                android:outlineSpotShadowColor="#2D65F8"
                 
                 android:layout_width="match_parent" android:layout_height="wrap_content">
 
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:id="@+id/badgeHelper" android:text="3" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeHelper" android:text="3" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/helper_title_v14" android:textColor="@color/text_primary"
@@ -240,15 +240,15 @@
                         android:layout_width="wrap_content" android:layout_height="wrap_content" />
                 </RadioGroup>
                 <EditText android:id="@+id/inputHelperPhone" android:hint="@string/helper_phone_input_hint"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="phone"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:layout_marginTop="8dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
                 <androidx.appcompat.widget.AppCompatButton android:id="@+id/buttonSaveHelper"
                     android:text="@string/helper_save" android:textAllCaps="false" android:textSize="16sp" android:textStyle="bold"
-                    android:textColor="@color/text_primary" android:background="@drawable/bg_button_gradient"
+                    android:textColor="#FFFFFF" android:background="@drawable/bg_button_gradient"
                     android:stateListAnimator="@null" android:minHeight="52dp" android:elevation="8dp"
-                    android:outlineSpotShadowColor="#8A7BFF" android:outlineAmbientShadowColor="#8A7BFF"
+                    android:outlineSpotShadowColor="#2D65F8" android:outlineAmbientShadowColor="#2D65F8"
                     android:layout_marginTop="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
                 <TextView android:id="@+id/textHelperStatus" android:textColor="@color/text_secondary" android:textSize="14sp"
                     android:lineSpacingMultiplier="1.2" android:layout_marginTop="12dp"
@@ -261,14 +261,14 @@
                 android:padding="18dp"
                 android:layout_marginTop="16dp"
                 android:elevation="6dp"
-                android:outlineSpotShadowColor="#8A7BFF"
+                android:outlineSpotShadowColor="#2D65F8"
                 
                 android:layout_width="match_parent" android:layout_height="wrap_content">
 
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:id="@+id/badgeApps" android:text="4" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeApps" android:text="4" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/apps_title_v14" android:textColor="@color/text_primary"
@@ -278,7 +278,7 @@
                 </LinearLayout>
 
                 <EditText android:id="@+id/inputSearchApps" android:hint="@string/search_apps_hint"
-                        android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary"
+                        android:textColor="@color/text_primary" android:textColorHint="#9CA3AF"
                         android:background="@drawable/bg_input_neon" android:inputType="text"
                         android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp"
                         android:textSize="16sp" android:drawableStart="@android:drawable/ic_menu_search" android:drawablePadding="10dp" android:maxLines="1" android:layout_marginBottom="12dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
@@ -288,9 +288,9 @@
             </LinearLayout>
 
                 <!-- Lábléc -->
-                <View android:background="#338A7BFF" android:layout_marginTop="28dp"
+                <View android:background="#E5E7EB" android:layout_marginTop="28dp"
                     android:layout_width="match_parent" android:layout_height="1dp" />
-                <TextView android:text="@string/footer_copyright" android:textColor="@color/text_secondary"
+                <TextView android:text="@string/footer_copyright" android:textColor="#6B7280"
                     android:textSize="12sp" android:gravity="center" android:letterSpacing="0.04"
                     android:layout_marginTop="14dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>

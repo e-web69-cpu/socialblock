@@ -70,8 +70,8 @@
         <ImageView
             android:id="@+id/imageBlockedApp"
             android:contentDescription="@null"
-            android:layout_width="88dp"
-            android:layout_height="88dp" />
+            android:layout_width="97dp"
+            android:layout_height="97dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -114,7 +114,7 @@
 
         <TextView
             android:text="@string/block_hint"
-            android:textColor="@color/accent"
+            android:textColor="#059669"
             android:textSize="15sp"
             android:lineSpacingMultiplier="1.2"
             android:gravity="center"
@@ -161,11 +161,11 @@
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
+            android:textColor="#FFFFFF"
             android:minHeight="56dp"
             android:elevation="10dp"
-            android:outlineSpotShadowColor="#8A7BFF"
-            android:outlineAmbientShadowColor="#8A7BFF"
+            android:outlineSpotShadowColor="#2D65F8"
+            android:outlineAmbientShadowColor="#2D65F8"
             android:stateListAnimator="@null"
             android:background="@drawable/bg_button_gradient"
             android:layout_width="match_parent"
@@ -186,7 +186,7 @@
 
         <TextView
             android:text="@string/footer_copyright"
-            android:textColor="@color/text_secondary"
+            android:textColor="#6B7280"
             android:textSize="11sp"
             android:alpha="0.7"
             android:gravity="center"

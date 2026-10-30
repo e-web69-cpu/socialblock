@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Üvegkártya neon színátmenetes kerettel -->
+<!-- Fehér kártya finom kék-szürke-zöld kerettel -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <gradient android:angle="315" android:startColor="#998A7BFF" android:centerColor="#332F7CFF" android:endColor="#8033E1B4" />
+            <gradient android:angle="315" android:startColor="#662D65F8" android:centerColor="#E5E7EB" android:endColor="#666EE7B7" />
             <corners android:radius="22dp" />
         </shape>
     </item>
     <item android:top="1dp" android:left="1dp" android:right="1dp" android:bottom="1dp">
         <shape android:shape="rectangle">
-            <gradient android:angle="315" android:startColor="#E6171A3A" android:endColor="#E60E1024" />
+            <solid android:color="#FFFFFF" />
             <corners android:radius="21dp" />
         </shape>
     </item>

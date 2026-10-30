@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <style name="Theme.SocialBlock" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <style name="Theme.SocialBlock" parent="Theme.MaterialComponents.Light.NoActionBar">
                     <item name="android:windowBackground">@color/bg_dark</item>
                     <item name="colorPrimary">@color/primary</item>
                     <item name="colorPrimaryDark">@color/primary_variant</item>

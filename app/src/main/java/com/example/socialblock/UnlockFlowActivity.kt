@@ -359,8 +359,8 @@ class UnlockFlowActivity : AppCompatActivity() {
             this.hint = hint
             this.inputType = inputType
             setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-            setHintTextColor(ContextCompat.getColor(context, R.color.text_secondary))
-            setBackgroundResource(R.drawable.bg_search)
+            setHintTextColor(android.graphics.Color.parseColor("#9CA3AF"))
+            setBackgroundResource(R.drawable.bg_input_neon)
             val p = dp(14)
             setPadding(dp(16), p, dp(16), p)
         }
@@ -372,10 +372,10 @@ class UnlockFlowActivity : AppCompatActivity() {
     }
 
     private fun addPrimaryButton(text: String, parent: LinearLayout = content, onClick: () -> Unit): Button =
-        addButton(text, R.drawable.bg_button_gradient, R.color.text_primary, parent, onClick)
+        addButton(text, R.drawable.bg_button_gradient, android.R.color.white, parent, onClick)
 
     private fun addSecondaryButton(text: String, parent: LinearLayout = content, onClick: () -> Unit): Button =
-        addButton(text, R.drawable.bg_button_outline, R.color.text_secondary, parent, onClick)
+        addButton(text, R.drawable.bg_button_outline, R.color.text_button_outline, parent, onClick)
 
     private fun addButton(text: String, bgRes: Int, colorRes: Int, parent: LinearLayout, onClick: () -> Unit): Button {
         val b = Button(this).apply {
@@ -384,7 +384,7 @@ class UnlockFlowActivity : AppCompatActivity() {
             textSize = 16f
             gravity = Gravity.CENTER
             setBackgroundResource(bgRes)
-            setTextColor(ContextCompat.getColor(context, colorRes))
+            setTextColor(ContextCompat.getColorStateList(context, colorRes))
             stateListAnimator = null
             minHeight = dp(52)
             setOnClickListener { onClick() }

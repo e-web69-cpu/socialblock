@@ -129,8 +129,8 @@ class MainActivity : AppCompatActivity() {
         val title = binding.textHeroTitle
         val text = title.text.toString()
         val span = android.text.SpannableString(text)
-        val blue = android.graphics.Color.parseColor("#8A7BFF")
-        val green = android.graphics.Color.parseColor("#6EE7B7")
+        val blue = android.graphics.Color.parseColor("#3A6EF8")
+        val green = android.graphics.Color.parseColor("#10B981")
         val sIdx = text.indexOf('S')
         val lIdx = text.indexOf('L')
         if (sIdx >= 0) span.setSpan(android.text.style.ForegroundColorSpan(blue), sIdx, sIdx + 1, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
