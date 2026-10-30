@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -43,3 +45,16 @@ jobs:
         with:
           name: socialblock-release-aab
           path: app/build/outputs/bundle/release/app-release.aab
+
+      - name: Publish APK to apk branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p /tmp/apkpub
+          cp app/build/outputs/apk/debug/app-debug.apk /tmp/apkpub/SociaLock-latest.apk
+          cd /tmp/apkpub
+          git init -q -b apk
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -q -m "APK ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" apk
