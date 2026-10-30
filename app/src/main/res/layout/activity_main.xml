@@ -36,21 +36,21 @@
                         android:layout_width="72dp" android:layout_height="72dp" />
                     <LinearLayout android:orientation="vertical" android:layout_marginStart="14dp"
                         android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content">
-                        <TextView android:id="@+id/textHeroTitle" android:text="@string/brand_name" android:textColor="@color/text_primary"
-                            android:textSize="34sp" android:textStyle="bold" android:letterSpacing="-0.01"
-                            android:layout_width="wrap_content" android:layout_height="wrap_content" />
                         <TextView android:id="@+id/textHeroVersion" android:text="@string/app_version_label" android:textColor="@color/accent"
-                            android:textSize="13sp" android:letterSpacing="0.2" android:fontFamily="monospace"
+                            android:textSize="12sp" android:letterSpacing="0.25" android:fontFamily="monospace"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView android:id="@+id/textHeroTitle" android:text="@string/brand_name" android:textColor="@color/text_primary"
+                            android:textSize="34sp" android:textStyle="bold" android:letterSpacing="-0.01" android:includeFontPadding="false"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView android:id="@+id/textHeroSubtitle" android:text="@string/app_subtitle" android:textColor="@color/text_primary"
+                            android:textSize="13sp" android:alpha="0.85" android:maxLines="1" android:layout_marginTop="2dp"
                             android:layout_width="wrap_content" android:layout_height="wrap_content" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView android:id="@+id/textHeroSubtitle" android:text="@string/app_subtitle" android:textColor="@color/text_primary"
-                    android:textSize="16sp" android:lineSpacingMultiplier="1.2" android:alpha="0.85"
-                    android:layout_marginTop="12dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
-
             <LinearLayout
                 android:orientation="vertical"
+                android:id="@+id/cardPermissions"
                 android:background="@drawable/bg_card_neon"
                 android:padding="18dp"
                 android:layout_marginTop="16dp"
@@ -62,7 +62,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:text="1" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgePerm" android:text="1" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/setup_permissions_title_v14" android:textColor="@color/text_primary"
@@ -138,7 +138,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:text="2" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeSchedule" android:text="2" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/schedule_title_v14" android:textColor="@color/text_primary"
@@ -217,7 +217,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:text="3" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeHelper" android:text="3" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/helper_title_v14" android:textColor="@color/text_primary"
@@ -267,7 +267,7 @@
                 <LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
                     android:layout_marginBottom="14dp"
                     android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:text="4" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
+                    <TextView android:id="@+id/badgeApps" android:text="4" android:textColor="#0B0D1A" android:textStyle="bold" android:textSize="14sp"
                         android:gravity="center" android:background="@drawable/bg_badge"
                         android:layout_width="28dp" android:layout_height="28dp" />
                     <TextView android:text="@string/apps_title_v14" android:textColor="@color/text_primary"

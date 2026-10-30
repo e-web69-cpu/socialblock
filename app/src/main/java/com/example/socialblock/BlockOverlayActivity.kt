@@ -90,6 +90,8 @@ class BlockOverlayActivity : AppCompatActivity() {
             else -> getString(R.string.request_unlock)
         }
         binding.buttonRequestUnlock.isEnabled = hasHelper && (inProgress || ScheduleManager.canRequestUnlock(this))
+        // Segítő nélkül nincs feloldás, ezért a heti keretet sem mutatjuk.
+        binding.textUnlocksRemaining.visibility = if (hasHelper) android.view.View.VISIBLE else android.view.View.GONE
     }
 
     // Letiltjuk a vissza gombot, hogy ne lehessen egyszerűen "átlapozni" a blokkolón

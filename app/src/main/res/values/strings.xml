@@ -2,7 +2,7 @@
 <resources>
             <string name="app_name">SociaLock</string>
     <string name="app_title">SociaLock v1.4</string>
-                <string name="app_subtitle">Önkorlátozás józan ésszel, mielőtt bajt csinálsz</string>
+                <string name="app_subtitle">Önkorlátozás józan ésszel</string>
                 <string name="permission_granted">Engedélyezve</string>
         <string name="search_apps_hint">Alkalmazás keresése</string>
         <string name="blocking_enabled_label">Tiltás bekapcsolva</string>

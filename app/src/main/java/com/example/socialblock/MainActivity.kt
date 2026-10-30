@@ -124,21 +124,31 @@ class MainActivity : AppCompatActivity() {
         binding.textHeaderStatus.setBackgroundResource(if (active) R.drawable.bg_status_on else R.drawable.bg_status_off)
     }
 
-    /** Színátmenetes cím és lassan „lélegző” logó. */
+    /** Cím: csak az S (arculati kék) és az L (lakat zöld) színes; az alcím a cím szélességében; „lélegző” logó. */
     private fun styleHero() {
         val title = binding.textHeroTitle
+        val text = title.text.toString()
+        val span = android.text.SpannableString(text)
+        val blue = android.graphics.Color.parseColor("#8A7BFF")
+        val green = android.graphics.Color.parseColor("#6EE7B7")
+        val sIdx = text.indexOf('S')
+        val lIdx = text.indexOf('L')
+        if (sIdx >= 0) span.setSpan(android.text.style.ForegroundColorSpan(blue), sIdx, sIdx + 1, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        if (lIdx >= 0) span.setSpan(android.text.style.ForegroundColorSpan(green), lIdx, lIdx + 1, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        title.text = span
+
+        // Az alcím szélességét a betűközzel a címéhez igazítjuk.
+        val sub = binding.textHeroSubtitle
         title.post {
-            val w = title.paint.measureText(title.text.toString())
-            title.paint.shader = android.graphics.LinearGradient(
-                0f, 0f, w, 0f,
-                intArrayOf(
-                    android.graphics.Color.parseColor("#C9C2FF"),
-                    android.graphics.Color.parseColor("#8A7BFF"),
-                    android.graphics.Color.parseColor("#33E1B4")
-                ),
-                null, android.graphics.Shader.TileMode.CLAMP
-            )
-            title.invalidate()
+            val target = title.paint.measureText(text)
+            val subText = sub.text.toString()
+            if (subText.length > 1) {
+                sub.letterSpacing = 0f
+                val base = sub.paint.measureText(subText)
+                val extraPx = (target - base) / (subText.length - 1)
+                val spacingEm = extraPx / sub.textSize
+                sub.letterSpacing = spacingEm.coerceIn(-0.05f, 0.6f)
+            }
         }
         android.animation.ObjectAnimator.ofPropertyValuesHolder(
             binding.imageHeroLogo,
@@ -187,11 +197,25 @@ class MainActivity : AppCompatActivity() {
         android.widget.Toast.makeText(this, getString(resId), android.widget.Toast.LENGTH_LONG).show()
     }
 
+    /** A Jogosultságok kártya csak akkor látszik, ha valamelyik engedély hiányzik; a kártyák számozása ehhez igazodik. */
+    private fun refreshPermissionCard(allGranted: Boolean) {
+        binding.cardPermissions.visibility = if (allGranted) android.view.View.GONE else android.view.View.VISIBLE
+        var n = 1
+        if (!allGranted) binding.badgePerm.text = (n++).toString()
+        binding.badgeSchedule.text = (n++).toString()
+        binding.badgeHelper.text = (n++).toString()
+        binding.badgeApps.text = (n).toString()
+    }
+
     private fun refreshPermissionState() {
         setRowState(binding.rowAccessibility, binding.buttonGrantAccessibility, binding.checkAccessibility, isAccessibilityServiceEnabled())
         setRowState(binding.rowUsage, binding.buttonGrantUsageAccess, binding.checkUsage, isUsageAccessGranted())
         setRowState(binding.rowOverlay, binding.buttonGrantOverlay, binding.checkOverlay, Settings.canDrawOverlays(this))
         setRowState(binding.rowDeviceAdmin, binding.buttonEnableDeviceAdmin, binding.checkDeviceAdmin, isDeviceAdminActive())
+        refreshPermissionCard(
+            isAccessibilityServiceEnabled() && isUsageAccessGranted() &&
+                Settings.canDrawOverlays(this) && isDeviceAdminActive()
+        )
     }
 
     private fun setRowState(
