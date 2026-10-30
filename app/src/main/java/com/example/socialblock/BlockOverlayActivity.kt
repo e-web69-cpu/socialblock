@@ -81,7 +81,15 @@ class BlockOverlayActivity : AppCompatActivity() {
             span.setSpan(ForegroundColorSpan(Color.WHITE), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         binding.textUnlocksRemaining.text = span
-        binding.buttonRequestUnlock.isEnabled = ScheduleManager.canRequestUnlock(this)
+        // Segítő nélkül nincs feloldás; folyamatban lévő kérésnél a gomb a kérés képernyőjére visz.
+        val inProgress = ScheduleManager.flowState(this) != ScheduleManager.STATE_NONE
+        val hasHelper = ScheduleManager.hasHelper(this)
+        binding.buttonRequestUnlock.text = when {
+            !hasHelper -> getString(R.string.unlock_need_helper)
+            inProgress -> getString(R.string.unlock_in_progress)
+            else -> getString(R.string.request_unlock)
+        }
+        binding.buttonRequestUnlock.isEnabled = hasHelper && (inProgress || ScheduleManager.canRequestUnlock(this))
     }
 
     // Letiltjuk a vissza gombot, hogy ne lehessen egyszerűen "átlapozni" a blokkolón

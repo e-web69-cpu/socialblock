@@ -77,17 +77,19 @@ class MainActivity : AppCompatActivity() {
                 showLockedMessage(R.string.settings_locked)
                 return@setOnCheckedChangeListener
             }
+            if (checked && !ScheduleManager.hasWindow(this)) {
+                // Az idősáv kötelező: nélküle nem kapcsolható be a tiltás.
+                buttonView.isChecked = false
+                showLockedMessage(R.string.schedule_required)
+                return@setOnCheckedChangeListener
+            }
             ScheduleManager.setSimpleBlockingEnabled(this, checked)
         }
 
         binding.buttonSaveSchedule.setOnClickListener { saveSchedule() }
         loadExistingSchedule()
 
-        // Az első tesztkörben a külső jóváhagyás még nem érhető el, ezért a kártya rejtve marad.
-        (binding.switchExternalApproval.parent.parent as android.view.View).visibility = android.view.View.GONE
-        binding.switchExternalApproval.isChecked = ScheduleManager.requiresExternalApproval(this)
-        loadApprovalSettings()
-        binding.buttonSaveApproval.setOnClickListener { saveApprovalSettings() }
+        setupHelperCard()
 
         binding.inputSearchApps.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
@@ -102,6 +104,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         refreshPermissionState()
         refreshScheduleLock()
+        ScheduleManager.refreshHelper(this)
+        refreshHelperCard()
     }
 
     private fun refreshScheduleLock() {
@@ -207,42 +211,94 @@ class MainActivity : AppCompatActivity() {
             Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY
         )
 
-        ScheduleManager.setWindows(
-            this,
-            listOf(TimeWindow(allDays, startHour, startMinute, endHour, endMinute))
-        )
+        val window = TimeWindow(allDays, startHour, startMinute, endHour, endMinute)
+        if (!ScheduleManager.isValidWindow(window)) {
+            showLockedMessage(R.string.schedule_invalid)
+            return
+        }
+        ScheduleManager.setWindows(this, listOf(window))
         binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
     }
 
-    private fun loadApprovalSettings() {
-        val methods = ScheduleManager.getApprovalMethods(this)
-        binding.checkboxSmsApproval.isChecked = "sms" in methods
-        binding.checkboxCallbackApproval.isChecked = "callback" in methods
-        binding.checkboxPinApproval.isChecked = "pin" in methods
-        binding.inputHelperPhone.setText(ScheduleManager.getHelperPhone(this) ?: "")
-        binding.inputManualPin1.setText(ScheduleManager.getManualPin1(this) ?: "")
+    // ---- Segítő ----
+
+    private val smsPermissionCode = 7001
+
+    private fun setupHelperCard() {
+        binding.radioHelper.setOnCheckedChangeListener { _, id ->
+            binding.inputHelperPhone.visibility =
+                if (id == R.id.radioHelperYes) android.view.View.VISIBLE else android.view.View.GONE
+        }
+        val current = ScheduleManager.getPendingHelperPhone(this) ?: ScheduleManager.getHelperPhone(this)
+        binding.inputHelperPhone.setText(current ?: "")
+        binding.radioHelper.check(if (current != null) R.id.radioHelperYes else R.id.radioHelperNo)
+        binding.buttonSaveHelper.setOnClickListener { saveHelper() }
     }
 
-    private fun saveApprovalSettings() {
-        val enabled = binding.switchExternalApproval.isChecked
-        ScheduleManager.setRequiresExternalApproval(this, enabled)
+    private fun refreshHelperCard() {
+        val editable = ScheduleManager.canEditHelper(this)
+        val alpha = if (editable) 1f else 0.5f
+        listOf<android.view.View>(
+            binding.radioHelperYes, binding.radioHelperNo, binding.inputHelperPhone, binding.buttonSaveHelper
+        ).forEach { it.isEnabled = editable; it.alpha = alpha }
 
-        val methods = mutableSetOf<String>()
-        if (binding.checkboxSmsApproval.isChecked) methods.add("sms")
-        if (binding.checkboxCallbackApproval.isChecked) methods.add("callback")
-        if (binding.checkboxPinApproval.isChecked) methods.add("pin")
+        val active = ScheduleManager.getHelperPhone(this)
+        val pending = ScheduleManager.getPendingHelperPhone(this)
+        val lines = mutableListOf<String>()
+        lines += if (active != null) getString(R.string.helper_status_active, active)
+        else getString(R.string.helper_status_none)
+        if (pending != null) {
+            val effectiveAt = ScheduleManager.helperChangeEffectiveAt(this)
+            lines += if (effectiveAt == 0L) getString(R.string.helper_status_pending, pending)
+            else getString(
+                R.string.helper_status_change, pending,
+                java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT, java.text.DateFormat.SHORT)
+                    .format(java.util.Date(effectiveAt))
+            )
+        }
+        if (!editable) lines += getString(R.string.helper_locked)
+        binding.textHelperStatus.text = lines.joinToString("\n")
+    }
 
-        if (enabled && methods.isEmpty()) {
-            binding.textApprovalSaved.text = getString(R.string.approval_min_one_required)
-            binding.textApprovalSaved.visibility = android.view.View.VISIBLE
+    private fun saveHelper() {
+        if (!ScheduleManager.canEditHelper(this)) {
+            showLockedMessage(R.string.helper_locked)
             return
         }
+        if (binding.radioHelper.checkedRadioButtonId != R.id.radioHelperYes) {
+            ScheduleManager.removeHelper(this)
+            showLockedMessage(R.string.helper_removed)
+            refreshHelperCard()
+            return
+        }
+        val phone = binding.inputHelperPhone.text.toString().trim()
+        if (phone.filter { it.isDigit() }.length < 8) {
+            showLockedMessage(R.string.helper_phone_invalid)
+            return
+        }
+        val needed = listOf(
+            android.Manifest.permission.SEND_SMS,
+            android.Manifest.permission.READ_SMS,
+            android.Manifest.permission.READ_CALL_LOG
+        ).filter {
+            androidx.core.content.ContextCompat.checkSelfPermission(this, it) !=
+                android.content.pm.PackageManager.PERMISSION_GRANTED
+        }
+        if (needed.isNotEmpty()) {
+            androidx.core.app.ActivityCompat.requestPermissions(this, needed.toTypedArray(), smsPermissionCode)
+            return
+        }
+        val ok = ScheduleManager.requestHelper(this, phone)
+        showLockedMessage(if (ok) R.string.helper_request_sent else R.string.helper_sms_failed)
+        refreshHelperCard()
+    }
 
-        ScheduleManager.setApprovalMethods(this, methods)
-        ScheduleManager.setHelperPhone(this, binding.inputHelperPhone.text.toString().trim())
-        ScheduleManager.setManualPin1(this, binding.inputManualPin1.text.toString().trim())
-
-        binding.textApprovalSaved.text = getString(R.string.approval_settings_saved)
-        binding.textApprovalSaved.visibility = android.view.View.VISIBLE
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == smsPermissionCode &&
+            grantResults.isNotEmpty() && grantResults.all { it == android.content.pm.PackageManager.PERMISSION_GRANTED }
+        ) {
+            saveHelper()
+        }
     }
 }

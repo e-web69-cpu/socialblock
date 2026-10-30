@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Feloldási folyamat (v1.3) -->
+    <string name="unlock_title">Feloldás kérése</string>
+    <string name="close">Bezárás</string>
+    <string name="unlock_already_active">A tiltás most fel van oldva, 15 percig.</string>
+    <string name="unlock_no_helper">Segítő nélkül nincs feloldás: a tiltás a beállított idősáv végéig tart. Segítőt tiltási időn kívül adhatsz meg a beállításokban.</string>
+    <string name="unlock_intro">A feloldás menete: %1$d perc várakozás, utána a segítőd SMS-ben kap egy kódot (%2$d percig érvényes). Beszéltek telefonon legalább 90 másodpercig, válaszolsz két kérdésre, begépelsz egy mondatot, és beírod a kódot. Utána 15 percre feloldódik a tiltás.</string>
+    <string name="unlock_start">Kérés indítása</string>
+    <string name="unlock_wait_countdown">A segítő SMS-t kap: %1$s múlva</string>
+    <string name="unlock_wait_info">Addig visszavonhatod a kérést, és a segítő semmit nem kap.</string>
+    <string name="unlock_sending_pin">A kód küldése a segítőnek…</string>
+    <string name="unlock_sms_failed">Az SMS nem ment el (nincs térerő vagy SMS-engedély). Nincs kód, a kérés újrakezdhető.</string>
+    <string name="unlock_restart">Új kérés</string>
+    <string name="unlock_pin_valid">A kód érvényes még: %1$s</string>
+    <string name="unlock_pin_sent">A segítőd megkapta a kódot SMS-ben. Hívd fel (vagy ő téged), és beszéljetek.</string>
+    <string name="unlock_pin_expired">A kód lejárt. Új kérést indíthatsz.</string>
+    <string name="unlock_step_call">1. Telefonhívás a segítővel</string>
+    <string name="unlock_call_waiting">Várakozás a hívásra: legalább %2$d másodperces, kapcsolt hívás a %1$s számmal. A hívás után ez magától frissül.</string>
+    <string name="unlock_call_ok">A hívás megvolt.</string>
+    <string name="unlock_step_confirm">2. Megerősítés</string>
+    <string name="unlock_typing_hint">Gépeld be pontosan a fenti mondatot</string>
+    <string name="unlock_step_pin">3. A segítőtől kapott kód</string>
+    <string name="pin_hint">6 jegyű kód</string>
+    <string name="pin_wrong_left">Hibás kód. Még %1$d próbálkozás.</string>
+    <string name="unlock_cancel">Kérés visszavonása</string>
+    <string name="unlock_cancel_confirm_before_pin">Visszavonod a kérést? A segítő semmit nem kap, és ez nem számít bele a heti 3-ba.</string>
+    <string name="unlock_cancel_confirm_after_pin">Visszavonod a kérést? A kód azonnal érvénytelen lesz, és a segítő SMS-t kap a visszavonásról.</string>
+    <string name="unlock_cancel_yes">Igen, visszavonom</string>
+    <string name="unlock_cancel_no">Mégsem</string>
+    <string name="unlock_in_progress">Feloldási kérés folyamatban</string>
+    <string name="unlock_need_helper">Segítő nélkül nincs feloldás</string>
+
+    <!-- Beállítások (v1.3) -->
+    <string name="helper_title">3. Segítő</string>
+    <string name="helper_info">Feloldás csak segítővel lehetséges. Ha nem kérsz segítőt, a tiltást mindig ki kell várni.</string>
+    <string name="helper_yes">Segítőt kérek</string>
+    <string name="helper_no">Nem kérek segítőt</string>
+    <string name="helper_phone_input_hint">Segítő telefonszáma (pl. +36301234567)</string>
+    <string name="helper_save">Mentés</string>
+    <string name="helper_locked">A segítő csak tiltási időn kívül módosítható.</string>
+    <string name="helper_status_none">Nincs segítő megadva: feloldás nincs.</string>
+    <string name="helper_status_active">Aktív segítő: %1$s</string>
+    <string name="helper_status_pending">Várakozás a beleegyezésre: %1$s (IGEN válasz SMS-ben, 48 órán belül).</string>
+    <string name="helper_status_change">A segítő %1$s-re cserélődik ekkor: %2$s.</string>
+    <string name="helper_request_sent">SMS elküldve. A segítő akkor lép életbe, ha IGEN-nel válaszol.</string>
+    <string name="helper_sms_failed">Az SMS nem ment el. Ellenőrizd a számot és az SMS-engedélyt.</string>
+    <string name="helper_removed">A segítő törölve. Feloldás nincs, a tiltást ki kell várni.</string>
+    <string name="helper_phone_invalid">Adj meg egy érvényes telefonszámot.</string>
+    <string name="schedule_required">Az idősáv kötelező: add meg és mentsd el a tiltás bekapcsolása előtt.</string>
+    <string name="schedule_invalid">Az idősáv legalább 1 perc és legfeljebb 23 óra lehet.</string>
+</resources>
