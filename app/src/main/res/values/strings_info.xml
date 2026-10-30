@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v1.5: menüből olvasható leírások (HTML, Html.fromHtml-lel jelenik meg) -->
+<resources>
+    <string name="menu_title">Menü</string>
+    <string name="info_install_title">Telepítési útmutató</string>
+    <string name="info_howto_title">Működés</string>
+    <string name="info_protocol_title">Feloldási protokoll</string>
+    <string name="info_privacy_title">Adatvédelmi tájékoztató</string>
+    <string name="info_a11y_title">Kisegítő lehetőség – tájékoztató</string>
+
+    <string name="a11y_accept">Elfogadom</string>
+    <string name="a11y_decline">Mégse</string>
+
+    <string name="info_install_body"><![CDATA[
+<p>Az app nem a Play Áruházból jön, ezért az első telepítés hosszabb. Számolj 10–15 perccel, és csináld végig egyben. A menük neve telefononként kicsit eltérhet.</p>
+<h3>1. A telepítőfájl</h3>
+<p>Nyisd meg a telefonon a kapott Drive-linket, és töltsd le a <b>SociaLock_v….apk</b> fájlt. A fájl a <b>Letöltések</b> mappába kerül.</p>
+<h3>2. Telepítés ismeretlen forrásból</h3>
+<p>1. Koppints a letöltött .apk fájlra.<br>
+2. Az Android megkérdezi, engedélyezed-e az ismeretlen alkalmazások telepítését abból az appból, amelyből megnyitottad (pl. Chrome, Drive vagy Fájlok). Válaszd a <b>Beállítások</b> gombot, és kapcsold be: <b>Ennek a forrásnak az engedélyezése</b>.<br>
+3. Lépj vissza, és koppints a <b>Telepítés</b> gombra.<br>
+4. Ha a Google Play Protect figyelmeztet („Ismeretlen fejlesztő”), válaszd a <b>Telepítés mindenképp</b> lehetőséget (esetleg a <b>Részletek</b> alatt). Sideloadolt appnál ez normális.<br>
+5. Koppints a <b>Megnyitás</b> gombra.</p>
+<h3>3. Kisegítő lehetőség (a legnehezebb lépés)</h3>
+<p>Android 13-tól az ismeretlen forrásból telepített appoknál ezt a rendszer alapból letiltja („Korlátozott beállítás”), ezért két körben kell csinálni.</p>
+<p><b>A. kör – a korlátozás feloldása</b><br>
+1. Az appban koppints a <b>Kisegítő lehetőség engedélyezése</b> gombra, és fogadd el a tájékoztatót.<br>
+2. Keresd meg a listában a <b>SociaLock</b> nevet (Samsungon a <b>Telepített alkalmazások</b> alatt).<br>
+3. Próbáld bekapcsolni. Szürke lesz, vagy felugrik a <b>Korlátozott beállítás</b> üzenet – ez normális. Koppints az <b>OK</b>-ra.<br>
+4. Nyisd meg a telefon <b>Beállítások → Alkalmazások → SociaLock</b> oldalát.<br>
+5. Koppints a jobb felső sarokban a <b>három pontra (⋮)</b>, és válaszd a <b>Korlátozott beállítások engedélyezése</b> lehetőséget. (Ez csak a 3. lépés próbálkozása után jelenik meg.)<br>
+6. Hagyd jóvá a telefon PIN-kódjával vagy ujjlenyomatával.</p>
+<p><b>B. kör – a bekapcsolás</b><br>
+1. Lépj vissza az appba, és koppints újra a <b>Kisegítő lehetőség engedélyezése</b> gombra.<br>
+2. Nyisd meg a SociaLock sort, kapcsold be, és hagyd jóvá az <b>Engedélyezés</b> gombbal.<br>
+3. Ellenőrzés: az appban a gomb helyén <b>Engedélyezve</b> látszik.</p>
+<h3>4. A többi engedély</h3>
+<p>Ezeket elég bekapcsolni a megnyíló beállításokban, majd visszalépni az appba:<br>
+• <b>Használati hozzáférés</b> – SociaLock bekapcsolása.<br>
+• <b>Más appok fölé rajzolás</b> – SociaLock bekapcsolása.<br>
+• <b>Eltávolítás elleni védelem</b> – Aktiválás.<br>
+Ha minden engedély megvan, a jogosultság-kártya eltűnik.</p>
+<h3>5. Akkumulátor</h3>
+<p>Hogy a telefon ne állítsa le az appot a háttérben: <b>Beállítások → Alkalmazások → SociaLock → Akkumulátor</b>, és válaszd a <b>Nem korlátozott</b> (vagy <b>Nincs optimalizálva</b>) lehetőséget.</p>
+<h3>6. Beállítás</h3>
+<p>1. <b>Tiltási idősáv:</b> add meg a kezdést és a végét (max. 23 óra), kapcsold be a tiltást, és mentsd. Tiltás közben csak szigorítani lehet.<br>
+2. <b>Segítő:</b> ha kérsz segítőt, add meg a telefonszámát. Ő SMS-t kap, és IGEN válasszal 48 órán belül jóváhagyja.<br>
+3. <b>Appok:</b> jelöld be, mit tiltson az app.</p>
+]]></string>
+
+    <string name="info_howto_body"><![CDATA[
+<p>A SociaLock a közösségi és e-mail appokat egy általad beállított napi idősávban tiltja. Arra az időre állítsd, amikor rád nézve a legkockázatosabb (pl. késő este), és amikor utólag megbánható üzenetek születnek.</p>
+<h3>Tiltás</h3>
+<p>• Az idősáv kötelező, 1 perctől legfeljebb 23 óráig tarthat.<br>
+• Ha az idősávban megnyitsz egy tiltott appot, a SociaLock blokkoló képernyője jön fel helyette.<br>
+• Tiltás közben a beállításokat csak szigorítani lehet; lazítani csak az idősávon kívül.</p>
+<h3>Segítő</h3>
+<p>• Segítő nélkül nincs feloldás: a tiltást ki kell várni.<br>
+• Segítő egy általad választott ember telefonszáma. Az app SMS-ben kéri a beleegyezését, és csak az IGEN válasz után él.<br>
+• A segítő cseréje 48 óra késleltetéssel lép életbe.</p>
+<h3>Feloldás</h3>
+<p>• Hetente legfeljebb 3 sikeres feloldás, egyenként 15 percre.<br>
+• A feloldás szándékosan lassú és macerás (részletek: Feloldási protokoll).<br>
+• Józanul a feloldás csak egy kis macera, ittasan viszont igazán kínlódós, és egy külső segítő jóváhagyása is kell hozzá.</p>
+<h3>Állapot</h3>
+<p>A fejlécben látszik, hogy a SociaLock éppen <b>AKTÍV</b> (tilt) vagy <b>INAKTÍV</b>.</p>
+]]></string>
+
+    <string name="info_protocol_body"><![CDATA[
+<p>A feloldás csak a telefonos appból indítható, és csak akkor, ha van jóváhagyott segítőd.</p>
+<h3>Lépések</h3>
+<p>1. <b>Várakozás:</b> 30 perc, éjszaka (22:00–06:00) 60 perc.<br>
+2. <b>PIN-SMS:</b> a várakozás után az app SMS-ben 6 jegyű kódot küld a segítődnek. A kód 15 percig érvényes.<br>
+3. <b>Telefonhívás</b> a segítővel, legalább 90 másodperc, kapcsolt hívás (az app a hívásnaplóból ellenőrzi).<br>
+4. <b>Két megerősítő kérdés</b> (józan vagyok / nem fogom megbánni).<br>
+5. <b>Gépelési próba.</b><br>
+6. <b>PIN beírása:</b> a segítő a hívásban adja meg; 3 hibás próba után a kérés lezárul.<br>
+7. <b>15 perc feloldás.</b></p>
+<h3>Visszavonás</h3>
+<p>• A kérés minden lépésben visszavonható.<br>
+• Ha a PIN-SMS már elment, a kód azonnal érvénytelen lesz, és a segítő erről második SMS-t kap.<br>
+• A visszavont vagy lejárt kérés nem számít bele a heti 3-ba.</p>
+<h3>Korlátok</h3>
+<p>• Hetente legfeljebb 3 sikeres feloldás.<br>
+• Az app a hívásnak csak a tényét és a hosszát látja, a tartalmát nem.</p>
+]]></string>
+
+    <string name="info_a11y_body"><![CDATA[
+<p>A SociaLock a <b>Kisegítő lehetőség</b> (AccessibilityService) funkciót használja, hogy megtudja, <b>melyik app kerül előtérbe</b> a telefonon.</p>
+<p><b>Mire használja:</b> ha a beállított tiltási idősávban egy általad tiltott app nyílik meg, a SociaLock a blokkoló képernyőt mutatja helyette.</p>
+<p><b>Mit lát:</b> csak az előtérbe kerülő app csomagnevét (pl. com.facebook.orca). A képernyő tartalmát, az üzeneteidet és a beírt szövegeket <b>nem</b> olvassa.</p>
+<p><b>Hová kerül az adat:</b> sehová. Az app ezt az információt csak a telefonon, abban a pillanatban használja, nem tárolja és nem küldi el senkinek.</p>
+<p>A funkció bármikor kikapcsolható a telefon Kisegítő lehetőségek beállításaiban; ekkor a tiltás nem működik.</p>
+]]></string>
+
+    <string name="info_privacy_body"><![CDATA[
+<p><b>Adatkezelő:</b> E-WEB Consulting Kft. – [székhely] – [kapcsolati e-mail]</p>
+<p>A SociaLock önkorlátozó alkalmazás. Az adatokat kizárólag a telefonodon kezeli; jelenleg semmilyen adatot nem küld szerverre.</p>
+<h3>Milyen adatokat kezel az app</h3>
+<p>• <b>Beállítások:</b> tiltási idősáv, tiltott appok listája, feloldási állapot és heti számláló – a telefonon tárolva.<br>
+• <b>Segítő telefonszáma:</b> amit te adsz meg; a telefonon tárolva, csak a segítőnek küldött SMS-ekhez használva.<br>
+• <b>Telepített appok listája:</b> hogy kiválaszthasd, mit tiltson. Nem tárolja és nem továbbítja.<br>
+• <b>Előtérben lévő app</b> (Kisegítő lehetőség, Használati hozzáférés): csak a tiltáshoz, abban a pillanatban.</p>
+<h3>Engedélyek és céljuk</h3>
+<p>• <b>SMS küldése:</b> beleegyezés-kérés, PIN-kód és visszavonási értesítés küldése a segítőnek.<br>
+• <b>SMS olvasása:</b> kizárólag a segítő IGEN válaszának felismerése a segítő számáról. Más üzenetet nem olvas és nem tárol.<br>
+• <b>Hívásnapló olvasása:</b> kizárólag annak ellenőrzése, hogy a feloldási kérés után volt-e legalább 90 másodperces kapcsolt hívás a segítővel. A hívások tartalmához nem fér hozzá.<br>
+• <b>Más appok fölé rajzolás:</b> a blokkoló képernyő megjelenítése.<br>
+• <b>Eszközkezelő (eltávolítás elleni védelem):</b> az app gyors eltávolításának megnehezítése.</p>
+<h3>Továbbítás, megőrzés, törlés</h3>
+<p>Az app adatot harmadik félnek nem ad át, és nem használ hirdetési vagy elemző szolgáltatást. Az adatok addig maradnak a telefonon, amíg az app telepítve van; az app eltávolításával vagy az adatai törlésével (Beállítások → Alkalmazások → SociaLock → Tárhely → Adatok törlése) minden adat törlődik.</p>
+<h3>Jogaid</h3>
+<p>Kérdés vagy kérés esetén írj a fenti kapcsolati címre.</p>
+<p><i>Hatály: 2026. október 30.</i></p>
+]]></string>
+</resources>

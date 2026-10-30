@@ -46,7 +46,42 @@ class MainActivity : AppCompatActivity() {
         loadInstalledApps()
 
         binding.buttonGrantAccessibility.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            // Play-szabály: külön tájékoztatás és kifejezett hozzájárulás a Kisegítő lehetőség előtt
+            val prefs = getSharedPreferences("socialock_consent", MODE_PRIVATE)
+            if (prefs.getBoolean("a11y_consent", false)) {
+                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            } else {
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle(R.string.info_a11y_title)
+                    .setMessage(android.text.Html.fromHtml(getString(R.string.info_a11y_body), android.text.Html.FROM_HTML_MODE_COMPACT))
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.a11y_accept) { _, _ ->
+                        prefs.edit().putBoolean("a11y_consent", true).apply()
+                        startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                    }
+                    .setNegativeButton(R.string.a11y_decline, null)
+                    .show()
+            }
+        }
+
+        binding.buttonMenu.setOnClickListener { v ->
+            val items = listOf(
+                R.string.info_install_title to R.string.info_install_body,
+                R.string.info_howto_title to R.string.info_howto_body,
+                R.string.info_protocol_title to R.string.info_protocol_body,
+                R.string.info_privacy_title to R.string.info_privacy_body,
+                R.string.info_a11y_title to R.string.info_a11y_body
+            )
+            val popup = android.widget.PopupMenu(this, v)
+            items.forEachIndexed { i, (title, _) -> popup.menu.add(0, i, i, title) }
+            popup.setOnMenuItemClickListener { item ->
+                val (title, body) = items[item.itemId]
+                startActivity(Intent(this, InfoActivity::class.java)
+                    .putExtra(InfoActivity.EXTRA_TITLE, title)
+                    .putExtra(InfoActivity.EXTRA_BODY, body))
+                true
+            }
+            popup.show()
         }
 
         binding.buttonGrantUsageAccess.setOnClickListener {

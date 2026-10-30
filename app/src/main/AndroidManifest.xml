@@ -44,6 +44,10 @@
             android:name=".UnlockFlowActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+
         <!-- Accessibility Service: figyeli, melyik app került előtérbe -->
         <service
             android:name=".BlockAccessibilityService"
