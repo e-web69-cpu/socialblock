@@ -122,6 +122,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnCheckedChangeListener
             }
             ScheduleManager.setSimpleBlockingEnabled(this, checked)
+            refreshLockState()
         }
 
         binding.buttonSaveSchedule.setOnClickListener { saveSchedule() }
@@ -141,6 +142,26 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         refreshPermissionState()
+        refreshLockState()
+        lockTicker.postDelayed(lockTick, 5_000)
+    }
+
+    override fun onPause() {
+        lockTicker.removeCallbacks(lockTick)
+        super.onPause()
+    }
+
+    // A zárolás állapota akkor is frissül, ha a felhasználó az oldalon marad és közben elindul a tiltási idősáv.
+    private val lockTicker = android.os.Handler(android.os.Looper.getMainLooper())
+    private val lockTick = object : Runnable {
+        override fun run() {
+            refreshLockState()
+            lockTicker.postDelayed(this, 5_000)
+        }
+    }
+
+    /** Idősáv, segítő és fejléc állapotának frissítése az aktuális tiltás szerint. */
+    private fun refreshLockState() {
         refreshScheduleLock()
         ScheduleManager.refreshHelper(this)
         refreshHelperCard()
@@ -339,6 +360,7 @@ class MainActivity : AppCompatActivity() {
         }
         ScheduleManager.setWindows(this, listOf(window))
         binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
+        refreshLockState()
     }
 
     // ---- Segítő ----
