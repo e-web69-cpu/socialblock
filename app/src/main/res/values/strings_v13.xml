@@ -39,7 +39,7 @@
     <string name="helper_phone_input_hint">Segítő telefonszáma (pl. +36301234567)</string>
     <string name="helper_save">Mentés</string>
     <string name="helper_locked">A segítő csak tiltási időn kívül módosítható.</string>
-    <string name="helper_status_none">Nincs segítő megadva: feloldás nincs.</string>
+    <string name="helper_status_none">Nincs segítő megadva, feloldás vagy módosítás csak az idősávon kívül lehetséges!</string>
     <string name="helper_status_active">Aktív segítő: %1$s</string>
     <string name="helper_status_pending">Várakozás a beleegyezésre: %1$s (IGEN válasz SMS-ben, 48 órán belül).</string>
     <string name="helper_status_change">A segítő %1$s-re cserélődik ekkor: %2$s.</string>
@@ -61,4 +61,5 @@
     <string name="schedule_end_label">Vége (óra : perc)</string>
     <string name="status_active">AKTÍV</string>
     <string name="status_inactive">INAKTÍV</string>
+    <string name="footer_copyright">© 2026 E-Web Consulting Kft. · All Rights Reserved</string>
 </resources>

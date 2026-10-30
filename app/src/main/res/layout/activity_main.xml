@@ -285,6 +285,13 @@
                     android:nestedScrollingEnabled="true"
                     android:layout_width="match_parent" android:layout_height="420dp" />
             </LinearLayout>
+
+                <!-- Lábléc -->
+                <View android:background="#338A7BFF" android:layout_marginTop="28dp"
+                    android:layout_width="match_parent" android:layout_height="1dp" />
+                <TextView android:text="@string/footer_copyright" android:textColor="@color/text_secondary"
+                    android:textSize="12sp" android:gravity="center" android:letterSpacing="0.04"
+                    android:layout_marginTop="14dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
