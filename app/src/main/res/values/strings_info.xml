@@ -8,6 +8,10 @@
     <string name="info_privacy_title">Adatvédelmi tájékoztató</string>
     <string name="info_a11y_title">Kisegítő lehetőség – tájékoztató</string>
 
+    <string name="schedule_confirm_title">Ellenőrizted az idősávot?</string>
+    <string name="schedule_confirm_message">Tiltási idősáv: %1$s\n\nMentés után a tiltási idősávban az idősáv és a segítő nem módosítható. Ha az idősáv már tart, a tiltás azonnal életbe lép.</string>
+    <string name="schedule_confirm_yes">Igen, ellenőriztem</string>
+    <string name="schedule_confirm_no">Vissza</string>
     <string name="a11y_accept">Elfogadom</string>
     <string name="a11y_decline">Mégse</string>
 

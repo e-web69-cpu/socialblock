@@ -358,9 +358,18 @@ class MainActivity : AppCompatActivity() {
             showLockedMessage(R.string.schedule_invalid)
             return
         }
-        ScheduleManager.setWindows(this, listOf(window))
-        binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
-        refreshLockState()
+        // Második megerősítés: mentés után a tiltási idősávban már nem módosítható.
+        val windowText = String.format(java.util.Locale.ROOT, "%02d:%02d–%02d:%02d", startHour, startMinute, endHour, endMinute)
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle(R.string.schedule_confirm_title)
+            .setMessage(getString(R.string.schedule_confirm_message, windowText))
+            .setPositiveButton(R.string.schedule_confirm_yes) { _, _ ->
+                ScheduleManager.setWindows(this, listOf(window))
+                binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
+                refreshLockState()
+            }
+            .setNegativeButton(R.string.schedule_confirm_no, null)
+            .show()
     }
 
     // ---- Segítő ----
