@@ -18,7 +18,11 @@ class AppListAdapter(
 
       // Üres keresésnél: a kiemelt appok + minden már tiltott app (a kereséssel hozzáadottak is), betűrendben.
       private fun defaultList(): List<String> =
-            (curatedPackages + allPackages.filter { it in selectedPackages }).distinct().sortedBy { labelFor(it).lowercase() }
+            sortSelectedFirst((curatedPackages + allPackages.filter { it in selectedPackages }).distinct())
+
+      // Sorrend: előbb a tiltott (bejelölt) appok A→Z, utána a többi A→Z.
+      private fun sortSelectedFirst(list: List<String>): List<String> =
+            list.sortedWith(compareBy<String>({ it !in selectedPackages }, { labelFor(it).lowercase() }))
 
       private var visiblePackages: List<String> = emptyList()
       private val labelCache = mutableMapOf<String, String>()
@@ -32,10 +36,10 @@ class AppListAdapter(
                         visiblePackages = if (query.isBlank()) {
                                       defaultList()
                         } else {
-                                      allPackages.filter {
+                                      sortSelectedFirst(allPackages.filter {
                                                         labelFor(it).contains(query, ignoreCase = true) ||
                                                             it.contains(query, ignoreCase = true)
-                                      }
+                                      })
                         }
                                 notifyDataSetChanged()
               }
