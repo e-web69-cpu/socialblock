@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
             <string name="app_name">SociaLock</string>
-    <string name="app_title">SociaLock v1.5 BETA</string>
+    <string name="app_title">SociaLock v1.5.1 BETA</string>
                 <string name="app_subtitle">Önkorlátozás józan ésszel</string>
                 <string name="permission_granted">Engedélyezve</string>
         <string name="search_apps_hint">Alkalmazás keresése</string>
