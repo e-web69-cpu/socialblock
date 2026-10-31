@@ -24,10 +24,10 @@
                 android:layout_width="wrap_content" android:layout_height="wrap_content">
                 <ImageView android:src="@drawable/socialock_logo" android:contentDescription="@string/brand_name"
                     android:layout_width="28dp" android:layout_height="28dp" />
-                <TextView android:text="@string/block_status_prefix" android:textColor="@color/text_primary" android:textSize="14sp" android:letterSpacing="-0.02"
+                <TextView android:text="@string/block_status_prefix" android:textColor="@color/text_primary" android:textSize="14dp" android:letterSpacing="-0.02"
                     android:maxLines="1" android:ellipsize="end"
                     android:layout_marginStart="8dp" android:layout_width="wrap_content" android:layout_weight="1" android:layout_height="wrap_content" />
-                <TextView android:id="@+id/textHeaderStatus" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.03"
+                <TextView android:id="@+id/textHeaderStatus" android:textSize="10dp" android:textStyle="bold" android:letterSpacing="0.03"
                     android:paddingStart="8dp" android:paddingEnd="8dp" android:paddingTop="3dp" android:paddingBottom="3dp"
                     android:layout_marginStart="6dp" android:maxLines="1"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" />
