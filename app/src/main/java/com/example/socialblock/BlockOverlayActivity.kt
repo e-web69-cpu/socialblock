@@ -115,13 +115,21 @@ class BlockOverlayActivity : AppCompatActivity() {
             var minX = size; var minY = size; var maxX = -1; var maxY = -1
             val px = IntArray(size * size)
             bmp.getPixels(px, 0, size, 0, 0, size, size)
+            var lumSum = 0.0; var opaque = 0
             for (y in 0 until size) for (x in 0 until size) {
-                if ((px[y * size + x] ushr 24) > 16) {
+                val c = px[y * size + x]
+                if ((c ushr 24) > 16) {
                     if (x < minX) minX = x; if (x > maxX) maxX = x
                     if (y < minY) minY = y; if (y > maxY) maxY = y
+                    if ((c ushr 24) > 200) {
+                        lumSum += (0.299 * ((c shr 16) and 0xFF) + 0.587 * ((c shr 8) and 0xFF) + 0.114 * (c and 0xFF)) / 255.0
+                        opaque++
+                    }
                 }
             }
             if (maxX < 0) return icon
+            // Ha az előtér szinte csak fehér (pl. Facebook „f”), a világos háttéren nem látszana: marad a teljes gyári ikon.
+            if (opaque > 0 && lumSum / opaque > 0.85) return icon
             val w = maxX - minX + 1; val h = maxY - minY + 1; val side = maxOf(w, h)
             val out = android.graphics.Bitmap.createBitmap(side, side, android.graphics.Bitmap.Config.ARGB_8888)
             android.graphics.Canvas(out).drawBitmap(bmp,
