@@ -16,7 +16,11 @@ class AppListAdapter(
       private val onToggle: (String, Boolean) -> Unit
   ) : RecyclerView.Adapter<AppListAdapter.ViewHolder>() {
 
-      private var visiblePackages: List<String> = curatedPackages
+      // Üres keresésnél: a kiemelt appok + minden már tiltott app (a kereséssel hozzáadottak is), betűrendben.
+      private fun defaultList(): List<String> =
+            (curatedPackages + allPackages.filter { it in selectedPackages }).distinct().sortedBy { labelFor(it).lowercase() }
+
+      private var visiblePackages: List<String> = emptyList()
       private val labelCache = mutableMapOf<String, String>()
 
           private fun labelFor(pkg: String): String = labelCache.getOrPut(pkg) {
@@ -26,7 +30,7 @@ class AppListAdapter(
 
               fun filter(query: String) {
                         visiblePackages = if (query.isBlank()) {
-                                      curatedPackages
+                                      defaultList()
                         } else {
                                       allPackages.filter {
                                                         labelFor(it).contains(query, ignoreCase = true) ||
@@ -35,6 +39,8 @@ class AppListAdapter(
                         }
                                 notifyDataSetChanged()
               }
+
+              init { visiblePackages = defaultList() }
 
                   class ViewHolder(view: android.view.View) : RecyclerView.ViewHolder(view) {
                             val icon: ImageView = view.findViewById(R.id.itemIcon)
