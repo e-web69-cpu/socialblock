@@ -64,25 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonMenu.setOnClickListener { v ->
-            val items = listOf(
-                R.string.info_install_title to R.string.info_install_body,
-                R.string.info_howto_title to R.string.info_howto_body,
-                R.string.info_protocol_title to R.string.info_protocol_body,
-                R.string.info_privacy_title to R.string.info_privacy_body,
-                R.string.info_a11y_title to R.string.info_a11y_body
-            )
-            val popup = android.widget.PopupMenu(this, v)
-            items.forEachIndexed { i, (title, _) -> popup.menu.add(0, i, i, title) }
-            popup.setOnMenuItemClickListener { item ->
-                val (title, body) = items[item.itemId]
-                startActivity(Intent(this, InfoActivity::class.java)
-                    .putExtra(InfoActivity.EXTRA_TITLE, title)
-                    .putExtra(InfoActivity.EXTRA_BODY, body))
-                true
-            }
-            popup.show()
-        }
+        binding.buttonMenu.setOnClickListener { v -> InfoMenu.show(this, v) }
 
         binding.buttonGrantUsageAccess.setOnClickListener {
             startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))

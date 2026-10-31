@@ -44,6 +44,8 @@ class BlockOverlayActivity : AppCompatActivity() {
         }
         binding.textBlockedApp.text = getString(R.string.blocked_message, article(label), label, currentWindowText())
 
+        binding.buttonMenu.setOnClickListener { v -> InfoMenu.show(this, v) }
+
         binding.buttonRequestUnlock.setOnClickListener {
             startActivity(Intent(this, UnlockFlowActivity::class.java))
         }

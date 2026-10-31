@@ -19,8 +19,8 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/bg_header"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="10dp"
         android:minHeight="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,14 +28,14 @@
         <ImageView
             android:src="@drawable/socialock_logo"
             android:contentDescription="@string/brand_name"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
         <TextView
             android:text="@string/block_status_prefix"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"
+            android:textSize="15dp"
+            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -50,9 +50,24 @@
             android:paddingEnd="8dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/buttonMenu"
+            android:src="@drawable/ic_menu_dots"
+            android:contentDescription="@string/menu_title"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:layout_marginEnd="0dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp" />
     </LinearLayout>
 
     <!-- Tartalom -->
