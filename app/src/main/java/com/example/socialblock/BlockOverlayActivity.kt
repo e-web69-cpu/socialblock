@@ -108,6 +108,9 @@ class BlockOverlayActivity : AppCompatActivity() {
     private fun iconWithoutBackground(icon: android.graphics.drawable.Drawable): android.graphics.drawable.Drawable {
         if (android.os.Build.VERSION.SDK_INT < 26 || icon !is android.graphics.drawable.AdaptiveIconDrawable) return icon
         val fg = icon.foreground ?: return icon
+        // Csak a fehér/világos hátterű ikonoknál (pl. Messenger, Gmail) hagyjuk el a hátteret;
+        // a színes hátterűek (Facebook, Instagram, TikTok) ugyanúgy jelennek meg, mint a listában.
+        if (!hasLightBackground(icon)) return icon
         return try {
             val size = 432
             val bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
@@ -131,7 +134,7 @@ class BlockOverlayActivity : AppCompatActivity() {
             }
             if (maxX < 0) return icon
             // Ha az előtér szinte csak fehér (pl. Facebook „f”), a világos háttéren nem látszana: marad a teljes gyári ikon.
-            if (opaque > 0 && lumSum / opaque > 0.85) return circleIcon(icon)
+
             val w = maxX - minX + 1; val h = maxY - minY + 1; val side = maxOf(w, h)
             val out = android.graphics.Bitmap.createBitmap(side, side, android.graphics.Bitmap.Config.ARGB_8888)
             android.graphics.Canvas(out).drawBitmap(bmp,
@@ -139,6 +142,22 @@ class BlockOverlayActivity : AppCompatActivity() {
                 android.graphics.Rect((side - w) / 2, (side - h) / 2, (side - w) / 2 + w, (side - h) / 2 + h), null)
             android.graphics.drawable.BitmapDrawable(resources, out)
         } catch (e: Exception) { icon }
+    }
+
+    /** Igaz, ha az adaptív ikon háttérrétege szinte fehér (átlagos világosság > 0,9). */
+    private fun hasLightBackground(icon: android.graphics.drawable.AdaptiveIconDrawable): Boolean {
+        val bg = icon.background ?: return true
+        return try {
+            val size = 108
+            val bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+            bg.setBounds(0, 0, size, size); bg.draw(android.graphics.Canvas(bmp))
+            val px = IntArray(size * size); bmp.getPixels(px, 0, size, 0, 0, size, size)
+            var sum = 0.0; var n = 0
+            for (c in px) if ((c ushr 24) > 200) {
+                sum += (0.299 * ((c shr 16) and 0xFF) + 0.587 * ((c shr 8) and 0xFF) + 0.114 * (c and 0xFF)) / 255.0; n++
+            }
+            n == 0 || sum / n > 0.9
+        } catch (e: Exception) { false }
     }
 
     /** A teljes adaptív ikon (háttér + előtér) szabályos körbe vágva, a látható 72/108-as terület szerint. */
