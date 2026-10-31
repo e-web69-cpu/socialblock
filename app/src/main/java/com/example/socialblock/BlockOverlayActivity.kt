@@ -129,7 +129,7 @@ class BlockOverlayActivity : AppCompatActivity() {
             }
             if (maxX < 0) return icon
             // Ha az előtér szinte csak fehér (pl. Facebook „f”), a világos háttéren nem látszana: marad a teljes gyári ikon.
-            if (opaque > 0 && lumSum / opaque > 0.85) return icon
+            if (opaque > 0 && lumSum / opaque > 0.85) return circleIcon(icon)
             val w = maxX - minX + 1; val h = maxY - minY + 1; val side = maxOf(w, h)
             val out = android.graphics.Bitmap.createBitmap(side, side, android.graphics.Bitmap.Config.ARGB_8888)
             android.graphics.Canvas(out).drawBitmap(bmp,
@@ -137,6 +137,24 @@ class BlockOverlayActivity : AppCompatActivity() {
                 android.graphics.Rect((side - w) / 2, (side - h) / 2, (side - w) / 2 + w, (side - h) / 2 + h), null)
             android.graphics.drawable.BitmapDrawable(resources, out)
         } catch (e: Exception) { icon }
+    }
+
+    /** A teljes adaptív ikon (háttér + előtér) szabályos körbe vágva, a látható 72/108-as terület szerint. */
+    private fun circleIcon(icon: android.graphics.drawable.AdaptiveIconDrawable): android.graphics.drawable.Drawable {
+        val size = 432
+        val full = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+        val c = android.graphics.Canvas(full)
+        icon.background?.let { it.setBounds(0, 0, size, size); it.draw(c) }
+        icon.foreground?.let { it.setBounds(0, 0, size, size); it.draw(c) }
+        val d = size * 72 / 108
+        val out = android.graphics.Bitmap.createBitmap(d, d, android.graphics.Bitmap.Config.ARGB_8888)
+        val oc = android.graphics.Canvas(out)
+        val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG)
+        oc.drawCircle(d / 2f, d / 2f, d / 2f, paint)
+        paint.xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
+        val off = (size - d) / 2
+        oc.drawBitmap(full, android.graphics.Rect(off, off, off + d, off + d), android.graphics.Rect(0, 0, d, d), paint)
+        return android.graphics.drawable.BitmapDrawable(resources, out)
     }
 
     /** Az éppen érvényes (vagy ha egyik sem, az első) beállított idősáv, pl. „18:00–02:30”. */
