@@ -37,8 +37,8 @@ class BlockOverlayActivity : AppCompatActivity() {
             pkg
         }
         try {
-            // A gyári app ikon a saját hátterével/keretével.
-            binding.imageBlockedApp.setImageDrawable(pm.getApplicationIcon(pkg))
+            // A gyári app ikon háttér és keret nélkül; ha az előtér szinte csak fehér (pl. Facebook), a teljes gyári ikon.
+            binding.imageBlockedApp.setImageDrawable(iconWithoutBackground(pm.getApplicationIcon(pkg)))
         } catch (e: Exception) {
             binding.imageBlockedApp.visibility = View.GONE
         }
