@@ -2,8 +2,13 @@ package com.example.socialblock
 
 import android.app.Activity
 import android.content.Intent
+import android.app.AlertDialog
+import android.text.InputType
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.PopupMenu
+import android.widget.TextView
 
 /** A létramenü (útmutató, működés, protokoll, adatvédelem, Kisegítő lehetőség) – fő- és tiltó képernyőn is. */
 object InfoMenu {
@@ -18,7 +23,9 @@ object InfoMenu {
     fun show(activity: Activity, anchor: View) {
         val popup = PopupMenu(activity, anchor)
         items.forEachIndexed { i, (title, _) -> popup.menu.add(0, i, i, title) }
+        popup.menu.add(0, items.size, items.size, R.string.sync_menu_title)
         popup.setOnMenuItemClickListener { item ->
+            if (item.itemId == items.size) { showSyncDialog(activity); return@setOnMenuItemClickListener true }
             val (title, body) = items[item.itemId]
             activity.startActivity(Intent(activity, InfoActivity::class.java)
                 .putExtra(InfoActivity.EXTRA_TITLE, title)
@@ -26,5 +33,29 @@ object InfoMenu {
             true
         }
         popup.show()
+    }
+
+    private fun showSyncDialog(activity: Activity) {
+        val pad = (20 * activity.resources.displayMetrics.density).toInt()
+        val box = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, 0) }
+        box.addView(TextView(activity).apply { setText(R.string.sync_info) })
+        val status = TextView(activity).apply { text = SyncManager.statusText(activity); setPadding(0, pad / 2, 0, pad / 2) }
+        box.addView(status)
+        val input = EditText(activity).apply {
+            setHint(R.string.sync_key_hint)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            setSingleLine(true)
+        }
+        box.addView(input)
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.sync_dialog_title)
+            .setView(box)
+            .setPositiveButton(R.string.sync_save) { _, _ ->
+                val k = input.text.toString().trim()
+                if (k.isNotEmpty()) { SyncManager.setKey(activity, k); SyncManager.syncIfNeeded(activity) }
+            }
+            .setNeutralButton(R.string.sync_clear) { _, _ -> SyncManager.clearKey(activity) }
+            .setNegativeButton(R.string.sync_cancel, null)
+            .show()
     }
 }

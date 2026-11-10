@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_menu_title">Szinkron (szerver)</string>
+    <string name="sync_dialog_title">Szinkron a szerverrel</string>
+    <string name="sync_info">Ha megadsz egy kulcsot, az app feltölti az idősávot, a tiltott appok csomagneveit és az AKTÍV/INAKTÍV állapotot a sb.trendz.hu szerverre, hogy más eszközök (böngésző, számítógép) követni tudják. A segítő száma és a feloldási események nem kerülnek fel. Kulcs nélkül semmi nem megy fel. A kulcsot a szerver üzemeltetőjétől kapod.</string>
+    <string name="sync_key_hint">Kulcs</string>
+    <string name="sync_save">Mentés</string>
+    <string name="sync_clear">Kikapcsolás</string>
+    <string name="sync_cancel">Mégse</string>
+    <string name="sync_status_off">Állapot: ki van kapcsolva.</string>
+    <string name="sync_status_wait">Állapot: bekapcsolva, az első szinkron még nem futott le.</string>
+    <string name="sync_status_ok">Állapot: rendben. Utolsó sikeres szinkron: %1$s</string>
+    <string name="sync_status_err">Állapot: hiba – %1$s</string>
+    <string name="sync_status_err_ok">Állapot: hiba – %1$s. Utolsó sikeres szinkron: %2$s</string>
+</resources>

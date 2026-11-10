@@ -125,6 +125,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         refreshPermissionState()
         refreshLockState()
+        SyncManager.syncIfNeeded(this)
         lockTicker.postDelayed(lockTick, 5_000)
     }
 
@@ -138,6 +139,7 @@ class MainActivity : AppCompatActivity() {
     private val lockTick = object : Runnable {
         override fun run() {
             refreshLockState()
+            SyncManager.syncIfNeeded(this@MainActivity)
             lockTicker.postDelayed(this, 5_000)
         }
     }

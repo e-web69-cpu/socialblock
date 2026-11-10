@@ -11,8 +11,8 @@ android {
         applicationId = "com.example.socialblock"
         minSdk = 26
         targetSdk = 34
-        versionCode = 19
-        versionName = "1.5.1-beta"
+        versionCode = 20
+        versionName = "1.6-beta"
     }
 
     signingConfigs {
