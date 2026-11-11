@@ -39,6 +39,33 @@ object InfoMenu {
         popup.show()
     }
 
+
+    /** Biztosan megjelenik a billentyűzet, és van "Beillesztés" gomb a vágólapról. */
+    private fun addPasteButton(activity: Activity, box: LinearLayout, input: EditText) {
+        val b = android.widget.Button(activity).apply {
+            setText(R.string.paste_clipboard)
+            setOnClickListener {
+                val cm = activity.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                val t = cm.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(activity)?.toString()?.trim().orEmpty()
+                if (t.isNotEmpty()) input.setText(t) else android.widget.Toast.makeText(activity, R.string.paste_empty, android.widget.Toast.LENGTH_SHORT).show()
+            }
+        }
+        box.addView(b)
+    }
+
+    private fun showKeyboard(dialog: AlertDialog, input: EditText) {
+        dialog.window?.apply {
+            clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or android.view.WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+            setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        }
+        input.isFocusable = true; input.isFocusableInTouchMode = true; input.isEnabled = true
+        input.setOnClickListener {
+            input.requestFocus()
+            (dialog.context.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager)
+                .showSoftInput(input, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
     private const val PC_LINK = "https://raw.githubusercontent.com/e-web69-cpu/socialblock/main/dist/SociaLock_windows_modul.zip"
 
     private fun showPcDialog(activity: Activity) {
@@ -52,9 +79,10 @@ object InfoMenu {
             setText(SyncManager.getReadKey(activity))
         }
         box.addView(input)
+        addPasteButton(activity, box, input)
         fun save() { SyncManager.setReadKey(activity, input.text.toString()) }
         val scroll = android.widget.ScrollView(activity).apply { addView(box) }
-        AlertDialog.Builder(activity)
+        val pcDialog = AlertDialog.Builder(activity)
             .setTitle(R.string.pc_menu_title)
             .setView(scroll)
             .setPositiveButton(R.string.pc_share_link) { _, _ ->
@@ -70,7 +98,8 @@ object InfoMenu {
                 android.widget.Toast.makeText(activity, R.string.pc_key_copied, android.widget.Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton(R.string.sync_save) { _, _ -> save() }
-            .show()
+            .create()
+        pcDialog.show(); showKeyboard(pcDialog, input)
     }
 
     private fun showSitesDialog(activity: Activity) {
@@ -108,12 +137,13 @@ object InfoMenu {
             setSingleLine(true)
         }
         box.addView(input)
+        addPasteButton(activity, box, input)
         val consent = android.widget.CheckBox(activity).apply {
             setText(R.string.sync_consent)
             isChecked = SyncManager.hasConsent(activity)
         }
         box.addView(consent)
-        AlertDialog.Builder(activity)
+        val syncDialog = AlertDialog.Builder(activity)
             .setTitle(R.string.sync_dialog_title)
             .setView(android.widget.ScrollView(activity).apply { addView(box) })
             .setPositiveButton(R.string.sync_save) { _, _ ->
@@ -124,6 +154,7 @@ object InfoMenu {
             }
             .setNeutralButton(R.string.sync_clear) { _, _ -> SyncManager.clearKey(activity) }
             .setNegativeButton(R.string.sync_cancel, null)
-            .show()
+            .create()
+        syncDialog.show(); showKeyboard(syncDialog, input)
     }
 }

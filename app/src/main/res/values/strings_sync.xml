@@ -23,4 +23,6 @@
     <string name="pc_key_copied">Kulcs a vágólapon</string>
     <string name="sync_consent">Elfogadom: az idősáv, a tiltott appok csomagnevei, a tiltott weboldalak és az AKTÍV/INAKTÍV állapot felkerül a szerverre, hogy a tiltás a többi eszközömön (pl. számítógép) is érvényes legyen. Ezt bármikor kikapcsolhatom.</string>
     <string name="sync_consent_needed">Elfogadás nélkül a szinkron nem kapcsol be.</string>
+    <string name="paste_clipboard">Beillesztés a vágólapról</string>
+    <string name="paste_empty">A vágólap üres. Előbb másold ki a kulcsot.</string>
 </resources>
