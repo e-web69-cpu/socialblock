@@ -15,4 +15,10 @@
     <string name="sites_menu_title">Tiltott weboldalak</string>
     <string name="sites_info">Ide írd a tiltandó weboldalakat (soronként egyet, pl. facebook.com). A böngészőbővítmény és a számítógépes modul ezeket tiltja a tiltási időszakban, ha a szinkron be van kapcsolva. A telefonon a böngészőt ez nem érinti.</string>
     <string name="sites_hint">facebook.com\ninstagram.com</string>
+    <string name="pc_menu_title">Számítógép (Windows)</string>
+    <string name="pc_steps">Így tiltasz a számítógépen is, minden böngészőben:\n\n1. Koppints a „Link megosztása” gombra, és küldd el magadnak (e-mail, üzenet). A linket a Windows-gépen nyisd meg: letölti a modult.\n\n2. Csomagold ki a letöltött zip-et, kattints duplán az install.bat fájlra, és fogadd el a rendszergazdai kérést.\n\n3. Amikor kéri a kulcsot, illeszd be az olvasó kulcsot. Ide írd be egyszer, és a „Kulcs másolása” gombbal másolhatod át.\n\n4. Kész. A tiltási időszakban a „Tiltott weboldalak” listád oldalai minden böngészőben blokkolva lesznek. A listát és az időablakot továbbra is itt, a telefonon kezeled.\n\nA kulcsot a szerver üzemeltetőjétől kapod. Csak az OLVASÓ kulcsot add meg, a master kulcsot soha.</string>
+    <string name="pc_key_hint">Olvasó kulcs</string>
+    <string name="pc_share_link">Link megosztása</string>
+    <string name="pc_copy_key">Kulcs másolása</string>
+    <string name="pc_key_copied">Kulcs a vágólapon</string>
 </resources>

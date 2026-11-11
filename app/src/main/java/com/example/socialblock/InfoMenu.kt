@@ -25,7 +25,9 @@ object InfoMenu {
         items.forEachIndexed { i, (title, _) -> popup.menu.add(0, i, i, title) }
         popup.menu.add(0, items.size, items.size, R.string.sync_menu_title)
         popup.menu.add(0, items.size + 1, items.size + 1, R.string.sites_menu_title)
+        popup.menu.add(0, items.size + 2, items.size + 2, R.string.pc_menu_title)
         popup.setOnMenuItemClickListener { item ->
+            if (item.itemId == items.size + 2) { showPcDialog(activity); return@setOnMenuItemClickListener true }
             if (item.itemId == items.size + 1) { showSitesDialog(activity); return@setOnMenuItemClickListener true }
             if (item.itemId == items.size) { showSyncDialog(activity); return@setOnMenuItemClickListener true }
             val (title, body) = items[item.itemId]
@@ -35,6 +37,40 @@ object InfoMenu {
             true
         }
         popup.show()
+    }
+
+    private const val PC_LINK = "https://raw.githubusercontent.com/e-web69-cpu/socialblock/main/dist/SociaLock_windows_modul.zip"
+
+    private fun showPcDialog(activity: Activity) {
+        val pad = (20 * activity.resources.displayMetrics.density).toInt()
+        val box = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, 0) }
+        box.addView(TextView(activity).apply { setText(R.string.pc_steps) })
+        val input = EditText(activity).apply {
+            setHint(R.string.pc_key_hint)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            setSingleLine(true)
+            setText(SyncManager.getReadKey(activity))
+        }
+        box.addView(input)
+        fun save() { SyncManager.setReadKey(activity, input.text.toString()) }
+        val scroll = android.widget.ScrollView(activity).apply { addView(box) }
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.pc_menu_title)
+            .setView(scroll)
+            .setPositiveButton(R.string.pc_share_link) { _, _ ->
+                save()
+                activity.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"; putExtra(Intent.EXTRA_TEXT, PC_LINK)
+                }, activity.getString(R.string.pc_share_link)))
+            }
+            .setNeutralButton(R.string.pc_copy_key) { _, _ ->
+                save()
+                val cm = activity.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                cm.setPrimaryClip(android.content.ClipData.newPlainText("SociaLock", input.text.toString().trim()))
+                android.widget.Toast.makeText(activity, R.string.pc_key_copied, android.widget.Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(R.string.sync_save) { _, _ -> save() }
+            .show()
     }
 
     private fun showSitesDialog(activity: Activity) {

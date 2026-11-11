@@ -38,8 +38,11 @@ object SyncManager {
         p(ctx).edit().putString(K_KEY, key.trim()).remove(K_HASH).remove(K_ERR).putLong(K_TRY_AT, 0L).apply()
     }
 
+    fun getReadKey(ctx: Context): String = p(ctx).getString("read_key", "") ?: ""
+    fun setReadKey(ctx: Context, k: String) { p(ctx).edit().putString("read_key", k.trim()).apply() }
+
     fun clearKey(ctx: Context) {
-        p(ctx).edit().clear().apply()
+        val rk = getReadKey(ctx); p(ctx).edit().clear().putString("read_key", rk).apply()
     }
 
     // A szerver szigorúan HH:MM formátumot vár (két számjegyű óra).
