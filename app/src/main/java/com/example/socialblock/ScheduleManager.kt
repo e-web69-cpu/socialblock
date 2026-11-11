@@ -103,6 +103,31 @@ object ScheduleManager {
             .filter { it.contains('.') && Regex("^[a-z0-9.-]+$").matches(it) }
             .distinct().sorted()
 
+    /** Ismert appok weboldalai: ha az appot tiltod, a hozzá tartozó oldal is tiltott lesz a többi eszközön. */
+    private val APP_SITES = mapOf(
+        "com.facebook.katana" to listOf("facebook.com", "fb.com"),
+        "com.facebook.orca" to listOf("messenger.com"),
+        "com.instagram.android" to listOf("instagram.com"),
+        "com.twitter.android" to listOf("x.com", "twitter.com"),
+        "com.zhiliaoapp.musically" to listOf("tiktok.com"),
+        "com.ss.android.ugc.trill" to listOf("tiktok.com"),
+        "com.google.android.gm" to listOf("mail.google.com"),
+        "com.microsoft.office.outlook" to listOf("outlook.com", "outlook.live.com", "outlook.office.com"),
+        "com.yahoo.mobile.client.android.mail" to listOf("mail.yahoo.com"),
+        "com.snapchat.android" to listOf("snapchat.com"),
+        "com.whatsapp" to listOf("web.whatsapp.com"),
+        "org.telegram.messenger" to listOf("web.telegram.org"),
+        "com.reddit.frontpage" to listOf("reddit.com"),
+        "com.google.android.youtube" to listOf("youtube.com"),
+        "com.linkedin.android" to listOf("linkedin.com"),
+        "com.pinterest" to listOf("pinterest.com"),
+        "com.discord" to listOf("discord.com")
+    )
+
+    /** A kézzel megadott oldalak + a tiltott appokhoz tartozó oldalak (ezt kapja a szerver). */
+    fun getEffectiveSites(ctx: Context): List<String> =
+        (getBlockedSites(ctx) + getBlockedPackages(ctx).flatMap { APP_SITES[it] ?: emptyList() }).distinct().sorted()
+
     fun getBlockedSites(ctx: Context): List<String> {
         val arr = JSONArray(prefs(ctx).getString(KEY_BLOCKED_SITES, "[]") ?: "[]")
         return (0 until arr.length()).map { arr.getString(it) }
