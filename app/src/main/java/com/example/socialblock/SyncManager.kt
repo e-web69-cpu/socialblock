@@ -42,19 +42,28 @@ object SyncManager {
         p(ctx).edit().clear().apply()
     }
 
-    private fun fmt(h: Int, m: Int) = String.format(Locale.ROOT, "%d:%02d", h, m)
+    // A szerver szigorúan HH:MM formátumot vár (két számjegyű óra).
+    private fun fmt(h: Int, m: Int) = String.format(Locale.ROOT, "%02d:%02d", h, m)
 
     private fun buildBody(ctx: Context): String {
         val o = JSONObject()
         o.put("enabled", ScheduleManager.isSimpleBlockingEnabled(ctx))
+        val windows = JSONArray()
         val w = ScheduleManager.getWindows(ctx).firstOrNull()
         if (w != null) {
-            o.put("start", fmt(w.startHour, w.startMinute))
-            o.put("end", fmt(w.endHour, w.endMinute))
+            val days = JSONArray()
+            for (d in 1..7) days.put(d) // 1 = vasárnap … 7 = szombat, minden nap
+            val wo = JSONObject()
+            wo.put("days", days)
+            wo.put("start", fmt(w.startHour, w.startMinute))
+            wo.put("end", fmt(w.endHour, w.endMinute))
+            windows.put(wo)
         }
+        o.put("windows", windows)
         val apps = JSONArray()
         ScheduleManager.getBlockedPackages(ctx).sorted().forEach { apps.put(it) }
         o.put("apps", apps)
+        o.put("sites", JSONArray())
         return o.toString()
     }
 
@@ -91,7 +100,8 @@ object SyncManager {
                     200 -> e.putString(K_HASH, body).putLong(K_OK_AT, System.currentTimeMillis()).remove(K_ERR)
                     401 -> e.putString(K_ERR, "Hibás kulcs (401)")
                     403 -> e.putString(K_ERR, "A kulcs nem módosíthat (403)")
-                    423 -> e.putString(K_ERR, "A szerver zárolt állapotot tart (423)")
+                    423, 409 -> e.putString(K_ERR, "A szerver tiltási időben zárolva van ($code)")
+                    400 -> e.putString(K_ERR, "A szerver elutasította az adatot (400)")
                     else -> e.putString(K_ERR, "Szerverhiba ($code)")
                 }
                 e.apply()
