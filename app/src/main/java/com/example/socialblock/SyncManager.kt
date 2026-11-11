@@ -38,11 +38,13 @@ object SyncManager {
         p(ctx).edit().putString(K_KEY, key.trim()).remove(K_HASH).remove(K_ERR).putLong(K_TRY_AT, 0L).apply()
     }
 
+    fun hasConsent(ctx: Context): Boolean = p(ctx).getBoolean("consent", false)
+    fun setConsent(ctx: Context, v: Boolean) { p(ctx).edit().putBoolean("consent", v).apply() }
     fun getReadKey(ctx: Context): String = p(ctx).getString("read_key", "") ?: ""
     fun setReadKey(ctx: Context, k: String) { p(ctx).edit().putString("read_key", k.trim()).apply() }
 
     fun clearKey(ctx: Context) {
-        val rk = getReadKey(ctx); p(ctx).edit().clear().putString("read_key", rk).apply()
+        val rk = getReadKey(ctx); p(ctx).edit().clear().putString("read_key", rk).putBoolean("consent", false).apply()
     }
 
     // A szerver szigorúan HH:MM formátumot vár (két számjegyű óra).
@@ -75,7 +77,7 @@ object SyncManager {
     /** Ha van kulcs és változott az állapot (vagy lejárt a frissítés), feltölti. Bármikor hívható, gyorsan visszatér. */
     fun syncIfNeeded(ctx: Context) {
         val key = p(ctx).getString(K_KEY, null)
-        if (key.isNullOrBlank() || busy) return
+        if (key.isNullOrBlank() || busy || !hasConsent(ctx)) return
         val body = buildBody(ctx)
         val now = System.currentTimeMillis()
         val pr = p(ctx)

@@ -108,12 +108,19 @@ object InfoMenu {
             setSingleLine(true)
         }
         box.addView(input)
+        val consent = android.widget.CheckBox(activity).apply {
+            setText(R.string.sync_consent)
+            isChecked = SyncManager.hasConsent(activity)
+        }
+        box.addView(consent)
         AlertDialog.Builder(activity)
             .setTitle(R.string.sync_dialog_title)
-            .setView(box)
+            .setView(android.widget.ScrollView(activity).apply { addView(box) })
             .setPositiveButton(R.string.sync_save) { _, _ ->
                 val k = input.text.toString().trim()
-                if (k.isNotEmpty()) { SyncManager.setKey(activity, k); SyncManager.syncIfNeeded(activity) }
+                SyncManager.setConsent(activity, consent.isChecked)
+                if (k.isNotEmpty() && consent.isChecked) { SyncManager.setKey(activity, k); SyncManager.syncIfNeeded(activity) }
+                else if (k.isNotEmpty()) android.widget.Toast.makeText(activity, R.string.sync_consent_needed, android.widget.Toast.LENGTH_LONG).show()
             }
             .setNeutralButton(R.string.sync_clear) { _, _ -> SyncManager.clearKey(activity) }
             .setNegativeButton(R.string.sync_cancel, null)
