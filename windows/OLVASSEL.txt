@@ -1,0 +1,12 @@
+SociaLock – Windows-modul v0.1
+
+Telepítés:
+1. Csomagold ki a zip tartalmát egy mappába.
+2. Kattints duplán az install.bat fájlra, és fogadd el a rendszergazdai kérést.
+3. Add meg az OLVASÓ (read) kulcsot (a master kulcsot ide ne írd be).
+
+Mit csinál: percenként olvassa a szerver (sb.trendz.hu) állapotát. A tiltási időszakban a telefonos appban felvett tiltott weboldalakat minden böngészőben blokkolja (hosts fájl). Ha nincs net, az utolsó ismert állapottal dolgozik tovább.
+
+Eltávolítás: uninstall.bat. Szándékosan körülményes: tiltási időszakban nem megy, be kell gépelni egy mondatot, és 10 percet kell várni.
+
+Tudnivalók: a modul csak a megadott oldalakat és azok www./m./mobile./web. változatát blokkolja. Rendszergazda a saját gépén ki tudja kapcsolni, ezt nem lehet teljesen megakadályozni.
