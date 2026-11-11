@@ -63,7 +63,9 @@ object SyncManager {
         val apps = JSONArray()
         ScheduleManager.getBlockedPackages(ctx).sorted().forEach { apps.put(it) }
         o.put("apps", apps)
-        o.put("sites", JSONArray())
+        val sites = JSONArray()
+        ScheduleManager.getBlockedSites(ctx).forEach { sites.put(it) }
+        o.put("sites", sites)
         return o.toString()
     }
 

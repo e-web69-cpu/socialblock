@@ -24,7 +24,9 @@ object InfoMenu {
         val popup = PopupMenu(activity, anchor)
         items.forEachIndexed { i, (title, _) -> popup.menu.add(0, i, i, title) }
         popup.menu.add(0, items.size, items.size, R.string.sync_menu_title)
+        popup.menu.add(0, items.size + 1, items.size + 1, R.string.sites_menu_title)
         popup.setOnMenuItemClickListener { item ->
+            if (item.itemId == items.size + 1) { showSitesDialog(activity); return@setOnMenuItemClickListener true }
             if (item.itemId == items.size) { showSyncDialog(activity); return@setOnMenuItemClickListener true }
             val (title, body) = items[item.itemId]
             activity.startActivity(Intent(activity, InfoActivity::class.java)
@@ -33,6 +35,29 @@ object InfoMenu {
             true
         }
         popup.show()
+    }
+
+    private fun showSitesDialog(activity: Activity) {
+        val pad = (20 * activity.resources.displayMetrics.density).toInt()
+        val box = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, 0) }
+        box.addView(TextView(activity).apply { setText(R.string.sites_info) })
+        val input = EditText(activity).apply {
+            setHint(R.string.sites_hint)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_VARIATION_URI
+            minLines = 5
+            gravity = android.view.Gravity.TOP
+            setText(ScheduleManager.getBlockedSites(activity).joinToString("\n"))
+        }
+        box.addView(input)
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.sites_menu_title)
+            .setView(box)
+            .setPositiveButton(R.string.sync_save) { _, _ ->
+                ScheduleManager.setBlockedSites(activity, ScheduleManager.parseSites(input.text.toString()))
+                SyncManager.syncIfNeeded(activity)
+            }
+            .setNegativeButton(R.string.sync_cancel, null)
+            .show()
     }
 
     private fun showSyncDialog(activity: Activity) {

@@ -37,6 +37,7 @@ object ScheduleManager {
     private const val PREFS = "socialblock_prefs"
     private const val KEY_WINDOWS = "windows"
     private const val KEY_BLOCKED_PACKAGES = "blocked_packages"
+    private const val KEY_BLOCKED_SITES = "blocked_sites"
     private const val KEY_ACTIVE_UNLOCK_UNTIL = "active_unlock_until"
     private const val KEY_SIMPLE_ENABLED = "simple_enabled"
     private const val KEY_UNLOCK_DONE = "unlock_done_v13"
@@ -90,6 +91,27 @@ object ScheduleManager {
         }
         val arr = JSONArray(p.getString(KEY_BLOCKED_PACKAGES, "[]") ?: "[]")
         return (0 until arr.length()).map { arr.getString(it) }.toSet()
+    }
+
+    // ---- Weboldalak (böngészőbővítménynek, a szerveren keresztül) ----
+
+    /** Szövegből tiszta domain-lista: kisbetű, http(s)://, www., útvonal és port levágva. */
+    fun parseSites(text: String): List<String> =
+        text.split('\n', ',', ';', ' ')
+            .map { it.trim().lowercase().removePrefix("http://").removePrefix("https://").removePrefix("www.") }
+            .map { it.substringBefore('/').substringBefore('?').substringBefore(':') }
+            .filter { it.contains('.') && Regex("^[a-z0-9.-]+$").matches(it) }
+            .distinct().sorted()
+
+    fun getBlockedSites(ctx: Context): List<String> {
+        val arr = JSONArray(prefs(ctx).getString(KEY_BLOCKED_SITES, "[]") ?: "[]")
+        return (0 until arr.length()).map { arr.getString(it) }
+    }
+
+    fun setBlockedSites(ctx: Context, sites: List<String>) {
+        val arr = JSONArray()
+        sites.forEach { arr.put(it) }
+        prefs(ctx).edit().putString(KEY_BLOCKED_SITES, arr.toString()).apply()
     }
 
     fun setBlockedPackages(ctx: Context, packages: Set<String>) {

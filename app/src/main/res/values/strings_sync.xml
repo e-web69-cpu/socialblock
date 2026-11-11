@@ -12,4 +12,7 @@
     <string name="sync_status_ok">Állapot: rendben. Utolsó sikeres szinkron: %1$s</string>
     <string name="sync_status_err">Állapot: hiba – %1$s</string>
     <string name="sync_status_err_ok">Állapot: hiba – %1$s. Utolsó sikeres szinkron: %2$s</string>
+    <string name="sites_menu_title">Tiltott weboldalak</string>
+    <string name="sites_info">Ide írd a tiltandó weboldalakat (soronként egyet, pl. facebook.com). A böngészőbővítmény és a számítógépes modul ezeket tiltja a tiltási időszakban, ha a szinkron be van kapcsolva. A telefonon a böngészőt ez nem érinti.</string>
+    <string name="sites_hint">facebook.com\ninstagram.com</string>
 </resources>
