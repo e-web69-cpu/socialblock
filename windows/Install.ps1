@@ -16,7 +16,7 @@ $bin = [Security.Cryptography.ProtectedData]::Protect([Text.Encoding]::UTF8.GetB
 [Convert]::ToBase64String($bin) | Set-Content (Join-Path $dir 'key.bin')
 Copy-Item (Join-Path $PSScriptRoot 'SociaLock-Agent.ps1') $dir -Force
 Copy-Item (Join-Path $PSScriptRoot 'Uninstall.ps1') $dir -Force
-& icacls $dir /inheritance:r /grant:r 'SYSTEM:(OI)(CI)F' 'Administrators:(OI)(CI)RX' | Out-Null
+& icacls $dir /inheritance:r /grant:r '*S-1-5-18:(OI)(CI)F' '*S-1-5-32-544:(OI)(CI)RX' | Out-Null
 $act = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$dir\SociaLock-Agent.ps1`""
 $trg = @((New-ScheduledTaskTrigger -AtStartup), (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)))
 $prin = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest
