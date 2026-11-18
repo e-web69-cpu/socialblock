@@ -18,7 +18,9 @@ import kotlin.concurrent.thread
  */
 object SyncManager {
     private const val PREFS = "socialblock_sync"
-    private const val BASE = "https://sb.trendz.hu/api.php"
+    private const val BASE_LEGACY = "https://sb.trendz.hu/api.php"
+    private const val BASE_V2 = "https://sb.trendz.hu/v2.php"
+    private const val K_BASE = "base"
     private const val K_KEY = "master_key"
     private const val K_HASH = "last_hash"
     private const val K_OK_AT = "last_ok_at"
@@ -32,10 +34,69 @@ object SyncManager {
 
     private fun p(ctx: Context) = ctx.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
+    /** v1.10: saját (névtelen) fiók a v2 szerveren; a régi, kézzel beírt kulcs a tulajdonosi api.php-t használja. */
+    fun isV2(ctx: Context): Boolean = p(ctx).getString(K_BASE, "") == "v2"
+    private fun base(ctx: Context) = if (isV2(ctx)) BASE_V2 else BASE_LEGACY
+
+    private fun post(url: String, key: String?, body: String): Pair<Int, String> {
+        val c = URL(url).openConnection() as HttpURLConnection
+        c.requestMethod = "POST"; c.connectTimeout = 8000; c.readTimeout = 8000; c.doOutput = true
+        if (key != null) c.setRequestProperty("X-Key", key)
+        c.setRequestProperty("Content-Type", "application/json; charset=utf-8")
+        c.outputStream.use { it.write(body.toByteArray(Charsets.UTF_8)) }
+        val code = c.responseCode
+        val text = try { (if (code < 400) c.inputStream else c.errorStream)?.bufferedReader()?.readText() ?: "" } catch (e: Exception) { "" }
+        c.disconnect()
+        return code to text
+    }
+
+    private fun ui(ctx: Context, r: Runnable) { android.os.Handler(ctx.mainLooper).post(r) }
+
+    /** Névtelen fiók létrehozása (nincs bejelentkezés): a szerver master kulcsot ad, csak a telefonon tárolódik. */
+    fun registerAsync(ctx: Context, done: (Boolean) -> Unit) {
+        val app = ctx.applicationContext
+        thread(name = "socialock-register") {
+            val ok = try {
+                val (code, text) = post("$BASE_V2?r=register", null, "{}")
+                if (code == 200) {
+                    val m = JSONObject(text).getString("master")
+                    p(app).edit().putString(K_KEY, m).putString(K_BASE, "v2").remove(K_HASH).remove(K_ERR).putLong(K_TRY_AT, 0L).apply()
+                    true
+                } else false
+            } catch (e: Exception) { false }
+            ui(app) { done(ok) }
+        }
+    }
+
+    /** Rövid, 10 percig érvényes párosítókód a számítógépes modulhoz. */
+    fun requestPairCode(ctx: Context, done: (String?) -> Unit) {
+        val key = p(ctx).getString(K_KEY, null)
+        val app = ctx.applicationContext
+        if (key.isNullOrBlank() || !isV2(ctx)) { done(null); return }
+        thread(name = "socialock-pair") {
+            val code = try {
+                val (c, text) = post("$BASE_V2?r=pair", key, "{}")
+                if (c == 200) JSONObject(text).getString("code") else null
+            } catch (e: Exception) { null }
+            ui(app) { done(code) }
+        }
+    }
+
+    /** Fiók törlése a szerverről (v2), majd helyi kikapcsolás. */
+    fun deleteAccountAsync(ctx: Context, done: (Boolean) -> Unit) {
+        val key = p(ctx).getString(K_KEY, null)
+        val app = ctx.applicationContext
+        if (key.isNullOrBlank() || !isV2(ctx)) { clearKey(app); done(true); return }
+        thread(name = "socialock-delete") {
+            val ok = try { post("$BASE_V2?r=delete", key, "{}").first == 200 } catch (e: Exception) { false }
+            ui(app) { if (ok) clearKey(app); done(ok) }
+        }
+    }
+
     fun hasKey(ctx: Context): Boolean = !p(ctx).getString(K_KEY, null).isNullOrBlank()
 
     fun setKey(ctx: Context, key: String) {
-        p(ctx).edit().putString(K_KEY, key.trim()).remove(K_HASH).remove(K_ERR).putLong(K_TRY_AT, 0L).apply()
+        p(ctx).edit().putString(K_KEY, key.trim()).remove(K_BASE).remove(K_HASH).remove(K_ERR).putLong(K_TRY_AT, 0L).apply()
     }
 
     fun hasConsent(ctx: Context): Boolean = p(ctx).getBoolean("consent", false)
@@ -92,16 +153,7 @@ object SyncManager {
         val app = ctx.applicationContext
         thread(name = "socialock-sync") {
             try {
-                val c = URL(BASE + "?r=rules").openConnection() as HttpURLConnection
-                c.requestMethod = "POST"
-                c.connectTimeout = 8000
-                c.readTimeout = 8000
-                c.doOutput = true
-                c.setRequestProperty("X-Key", key)
-                c.setRequestProperty("Content-Type", "application/json; charset=utf-8")
-                c.outputStream.use { it.write(body.toByteArray(Charsets.UTF_8)) }
-                val code = c.responseCode
-                c.disconnect()
+                val code = post(base(app) + "?r=rules", key, body).first
                 val e = p(app).edit()
                 when (code) {
                     200 -> e.putString(K_HASH, body).putLong(K_OK_AT, System.currentTimeMillis()).remove(K_ERR)

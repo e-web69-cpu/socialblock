@@ -6,12 +6,22 @@ Add-Type -AssemblyName System.Security
 $dir = Join-Path $env:ProgramData 'SociaLock'
 New-Item -ItemType Directory -Force $dir | Out-Null
 Write-Host ''; Write-Host 'SociaLock Windows-modul' -ForegroundColor Cyan
-Write-Host 'Add meg az OLVASO (read) kulcsot. A master kulcsot ide NE írd be.'
-$sec = Read-Host 'Olvaso kulcs' -AsSecureString
-$key = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec))
-if (-not $key) { Write-Host 'Nincs kulcs.'; Read-Host 'Enter'; exit 1 }
-try { $null = Invoke-RestMethod -Uri 'https://sb.trendz.hu/api.php?r=state' -Headers @{ 'X-Key' = $key } -TimeoutSec 15 }
+Write-Host 'Add meg a telefonos appban (Számítógép menü, Párosítókód gomb) kapott 8 karakteres kódot.'
+Write-Host '(Ha a szerver üzemeltetőjétől olvasó kulcsot kaptál, azt is ide írhatod.)'
+$in = (Read-Host 'Párosítókód').Trim()
+if (-not $in) { Write-Host 'Nincs kód.'; Read-Host 'Enter'; exit 1 }
+$code = ($in -replace '[^A-Za-z0-9]', '').ToUpper()
+if ($code.Length -eq 8) {
+  try {
+    $res = Invoke-RestMethod -Method Post -Uri 'https://sb.trendz.hu/v2.php?r=claim' -ContentType 'application/json' -Body (@{ code = $code } | ConvertTo-Json) -TimeoutSec 15
+    $key = $res.read; $endpoint = 'https://sb.trendz.hu/v2.php'
+  } catch { Write-Host 'A kód lejárt, hibás, vagy a szerver nem érhető el. Kérj új kódot a telefonon.' -ForegroundColor Red; Read-Host 'Enter'; exit 1 }
+} else {
+  $key = $in; $endpoint = 'https://sb.trendz.hu/api.php'
+}
+try { $null = Invoke-RestMethod -Uri ($endpoint + '?r=state') -Headers @{ 'X-Key' = $key } -TimeoutSec 15 }
 catch { Write-Host 'A szerver nem fogadta el a kulcsot vagy nem elérhető: ' $_.Exception.Message -ForegroundColor Red; Read-Host 'Enter'; exit 1 }
+Set-Content -Path (Join-Path $dir 'endpoint.txt') -Value $endpoint
 $bin = [Security.Cryptography.ProtectedData]::Protect([Text.Encoding]::UTF8.GetBytes($key), $null, 'LocalMachine')
 [Convert]::ToBase64String($bin) | Set-Content (Join-Path $dir 'key.bin')
 Copy-Item (Join-Path $PSScriptRoot 'SociaLock-Agent.ps1') $dir -Force

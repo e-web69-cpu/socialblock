@@ -99,13 +99,13 @@ Ha minden engedély megvan, a jogosultság-kártya eltűnik.</p>
 
     <string name="info_privacy_body"><![CDATA[
 <p><b>Adatkezelő:</b> E-WEB Consulting Kft. – [székhely] – [kapcsolati e-mail]</p>
-<p>A SociaLock önkorlátozó alkalmazás. Az adatokat alapból kizárólag a telefonodon kezeli. Szerverre csak akkor küld adatot, ha a menüben a „Szinkron (szerver)” alatt kulcsot adsz meg; kulcs nélkül semmit nem küld.</p>
+<p>A SociaLock önkorlátozó alkalmazás. Az adatokat alapból kizárólag a telefonodon kezeli. Szerverre csak akkor küld adatot, ha a menüben a „Szinkron (szerver)” alatt bekapcsolod és elfogadod; enélkül semmit nem küld.</p>
 <h3>Milyen adatokat kezel az app</h3>
 <p>• <b>Beállítások:</b> tiltási idősáv, tiltott appok listája, feloldási állapot és heti számláló – a telefonon tárolva.<br>
 • <b>Segítő telefonszáma:</b> amit te adsz meg; a telefonon tárolva, csak a segítőnek küldött SMS-ekhez használva.<br>
 • <b>Telepített appok listája:</b> hogy kiválaszthasd, mit tiltson. Nem tárolja és nem továbbítja.<br>
 • <b>Előtérben lévő app</b> (Kisegítő lehetőség, Használati hozzáférés): csak a tiltáshoz, abban a pillanatban.</p>
-<p>• <b>Szinkron (opcionális):</b> kulcs megadása után az idősáv, a tiltott appok csomagnevei és az AKTÍV/INAKTÍV állapot a sb.trendz.hu szerverre kerül (titkosított kapcsolaton), hogy más eszközök követni tudják. A segítő telefonszáma, a feloldási események és a telepített appok teljes listája nem kerül fel. A kulcs kikapcsolásával a feltöltés megszűnik.</p>
+<p>• <b>Szinkron (opcionális):</b> bekapcsolás és elfogadás után az app egy névtelen fiókot hoz létre (név, e-mail, telefonszám nélkül), és erre a fiókra kerül fel a tiltási idősáv, a tiltott appok csomagnevei, a tiltott weboldalak és az AKTÍV/INAKTÍV állapot (titkosított kapcsolaton), hogy a számítógéped is kövesse a tiltást. A fiók kulcsa csak a telefonodon van; a szerveren csak a kulcs lenyomata (hash) tárolódik. A számítógép egy egyszer használható, 10 percig érvényes párosítókóddal csatlakozik, és csak olvasni tudja az állapotot. A segítő telefonszáma, a feloldási események és a telepített appok teljes listája nem kerül fel. A „Kikapcsolás” gomb a fiókot és minden adatát törli a szerverről.</p>
 <h3>Engedélyek és céljuk</h3>
 <p>• <b>SMS küldése:</b> beleegyezés-kérés, PIN-kód és visszavonási értesítés küldése a segítőnek.<br>
 • <b>SMS olvasása:</b> kizárólag a segítő IGEN válaszának felismerése a segítő számáról. Más üzenetet nem olvas és nem tárol.<br>
@@ -117,6 +117,6 @@ Ha minden engedély megvan, a jogosultság-kártya eltűnik.</p>
 <p>Az app adatot harmadik félnek nem ad át, és nem használ hirdetési vagy elemző szolgáltatást. Az adatok addig maradnak a telefonon, amíg az app telepítve van; az app eltávolításával vagy az adatai törlésével (Beállítások → Alkalmazások → SociaLock → Tárhely → Adatok törlése) minden adat törlődik.</p>
 <h3>Jogaid</h3>
 <p>Kérdés vagy kérés esetén írj a fenti kapcsolati címre.</p>
-<p><i>Hatály: 2026. november 10.</i></p>
+<p><i>Hatály: 2026. november 18.</i></p>
 ]]></string>
 </resources>

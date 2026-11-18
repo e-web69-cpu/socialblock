@@ -29,7 +29,10 @@ function In-Schedule($windows, [datetime]$d) {
 
 $st = $null
 try {
-  $st = Invoke-RestMethod -Uri 'https://sb.trendz.hu/api.php?r=state' -Headers @{ 'X-Key' = (Get-Key) } -TimeoutSec 15
+  $ep = 'https://sb.trendz.hu/api.php'
+  $epFile = Join-Path $dir 'endpoint.txt'
+  if (Test-Path $epFile) { $x = (Get-Content $epFile -Raw).Trim(); if ($x -like 'https://sb.trendz.hu/*') { $ep = $x } }
+  $st = Invoke-RestMethod -Uri ($ep + '?r=state') -Headers @{ 'X-Key' = (Get-Key) } -TimeoutSec 15
   $st | ConvertTo-Json -Depth 10 | Set-Content -Path $stateFile -Encoding UTF8
 } catch {
   # Hiba/offline: az utolsó ismert állapottal dolgozunk tovább (nem lazítunk).

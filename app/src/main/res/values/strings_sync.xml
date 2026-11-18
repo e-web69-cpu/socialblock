@@ -2,7 +2,7 @@
 <resources>
     <string name="sync_menu_title">Szinkron (szerver)</string>
     <string name="sync_dialog_title">Szinkron a szerverrel</string>
-    <string name="sync_info">Ha megadsz egy kulcsot, az app feltölti az idősávot, a tiltott appok csomagneveit és az AKTÍV/INAKTÍV állapotot a sb.trendz.hu szerverre, hogy más eszközök (böngésző, számítógép) követni tudják. A segítő száma és a feloldási események nem kerülnek fel. Kulcs nélkül semmi nem megy fel. A kulcsot a szerver üzemeltetőjétől kapod.</string>
+    <string name="sync_info">Ha bekapcsolod, az app feltölti az idősávot, a tiltott appok csomagneveit, a tiltott weboldalakat és az AKTÍV/INAKTÍV állapotot a sb.trendz.hu szerverre, hogy a számítógéped is kövesse a tiltást. A segítő száma és a feloldási események nem kerülnek fel. Fiók és bejelentkezés nem kell: elfogadás után az app magától létrehoz egy névtelen fiókot, aminek a kulcsa csak ezen a telefonon van. A „Kikapcsolás” a szerverről is törli az adataidat. A kulcs mezőt hagyd üresen (csak az üzemeltetőnek kell).</string>
     <string name="sync_key_hint">Kulcs</string>
     <string name="sync_save">Mentés</string>
     <string name="sync_clear">Kikapcsolás</string>
@@ -23,6 +23,15 @@
     <string name="pc_key_copied">Kulcs a vágólapon</string>
     <string name="sync_consent">Elfogadom: az idősáv, a tiltott appok csomagnevei, a tiltott weboldalak és az AKTÍV/INAKTÍV állapot felkerül a szerverre, hogy a tiltás a többi eszközömön (pl. számítógép) is érvényes legyen. Ezt bármikor kikapcsolhatom.</string>
     <string name="sync_consent_needed">Elfogadás nélkül a szinkron nem kapcsol be.</string>
+    <string name="sync_registered">Szinkron bekapcsolva, a fiókod létrejött.</string>
+    <string name="sync_register_failed">Nem sikerült létrehozni a fiókot (nincs kapcsolat?). Próbáld újra később.</string>
+    <string name="sync_deleted">Szinkron kikapcsolva, az adataid törölve a szerverről.</string>
+    <string name="sync_delete_failed">Nem sikerült törölni a szerverről (nincs kapcsolat?). Próbáld újra később.</string>
+    <string name="pc_steps_v2">Így tiltasz a számítógépen is, minden böngészőben:\n\n1. Koppints a „Link megosztása” gombra, és küldd el magadnak (e-mail, üzenet). A linket a Windows-gépen nyisd meg: letölti a modult.\n\n2. Csomagold ki a letöltött zip-et, kattints jobb gombbal az install.bat fájlra, és válaszd a „Futtatás rendszergazdaként” pontot. Fogadd el a rendszergazdai kérést (Igen).\n\n3. Amikor a telepítő a párosítókódot kéri, koppints itt a „Párosítókód” gombra, és gépeld be a megjelenő 8 karakteres kódot (a kötőjel elhagyható), majd Enter. A kód 10 percig érvényes, és egyszer használható.\n\n4. A végén a „Kész.” üzenetnek kell megjelennie. A tiltási időszakban a tiltott weboldalak minden böngészőben blokkolva lesznek. Az idősávot és a listát továbbra is itt, a telefonon kezeled.\n\nElőbb kapcsold be a „Szinkron (szerver)” menüben.</string>
+    <string name="pc_get_code">Párosítókód</string>
+    <string name="pc_code_title">Párosítókód</string>
+    <string name="pc_code_message">%1$s\n\nGépeld be a számítógépes telepítőbe. 10 percig érvényes, egyszer használható.</string>
+    <string name="pc_code_failed">Nem sikerült kódot kérni. Be van kapcsolva a szinkron, és van internet?</string>
     <string name="paste_clipboard">Beillesztés a vágólapról</string>
     <string name="paste_empty">A vágólap üres. Előbb másold ki a kulcsot.</string>
 </resources>

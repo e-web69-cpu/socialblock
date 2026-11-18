@@ -69,6 +69,7 @@ object InfoMenu {
     private const val PC_LINK = "https://raw.githubusercontent.com/e-web69-cpu/socialblock/main/dist/SociaLock_windows_modul.zip"
 
     private fun showPcDialog(activity: Activity) {
+        if (SyncManager.isV2(activity)) { showPcDialogV2(activity); return }
         val pad = (20 * activity.resources.displayMetrics.density).toInt()
         val box = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, 0) }
         box.addView(TextView(activity).apply { setText(R.string.pc_steps) })
@@ -100,6 +101,37 @@ object InfoMenu {
             .setNegativeButton(R.string.sync_save) { _, _ -> save() }
             .create()
         pcDialog.show(); showKeyboard(pcDialog, input)
+    }
+
+    /** v1.10: saját fiók esetén nincs hosszú kulcs – a Windows-telepítő egy rövid, 10 percig érvényes párosítókódot kér. */
+    private fun showPcDialogV2(activity: Activity) {
+        val pad = (20 * activity.resources.displayMetrics.density).toInt()
+        val box = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, 0) }
+        box.addView(TextView(activity).apply { setText(R.string.pc_steps_v2) })
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.pc_menu_title)
+            .setView(android.widget.ScrollView(activity).apply { addView(box) })
+            .setPositiveButton(R.string.pc_get_code) { _, _ ->
+                SyncManager.requestPairCode(activity) { code ->
+                    if (code == null) {
+                        android.widget.Toast.makeText(activity, R.string.pc_code_failed, android.widget.Toast.LENGTH_LONG).show()
+                    } else {
+                        val shown = code.substring(0, 4) + "-" + code.substring(4)
+                        AlertDialog.Builder(activity)
+                            .setTitle(R.string.pc_code_title)
+                            .setMessage(activity.getString(R.string.pc_code_message, shown))
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show()
+                    }
+                }
+            }
+            .setNeutralButton(R.string.pc_share_link) { _, _ ->
+                activity.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"; putExtra(Intent.EXTRA_TEXT, PC_LINK)
+                }, activity.getString(R.string.pc_share_link)))
+            }
+            .setNegativeButton(R.string.sync_cancel, null)
+            .show()
     }
 
     private fun showSitesDialog(activity: Activity) {
@@ -149,10 +181,21 @@ object InfoMenu {
             .setPositiveButton(R.string.sync_save) { _, _ ->
                 val k = input.text.toString().trim()
                 SyncManager.setConsent(activity, consent.isChecked)
-                if (k.isNotEmpty() && consent.isChecked) { SyncManager.setKey(activity, k); SyncManager.syncIfNeeded(activity) }
-                else if (k.isNotEmpty()) android.widget.Toast.makeText(activity, R.string.sync_consent_needed, android.widget.Toast.LENGTH_LONG).show()
+                when {
+                    !consent.isChecked -> android.widget.Toast.makeText(activity, R.string.sync_consent_needed, android.widget.Toast.LENGTH_LONG).show()
+                    k.isNotEmpty() -> { SyncManager.setKey(activity, k); SyncManager.syncIfNeeded(activity) }
+                    !SyncManager.hasKey(activity) -> SyncManager.registerAsync(activity) { ok ->
+                        android.widget.Toast.makeText(activity, if (ok) R.string.sync_registered else R.string.sync_register_failed, android.widget.Toast.LENGTH_LONG).show()
+                        if (ok) SyncManager.syncIfNeeded(activity)
+                    }
+                    else -> SyncManager.syncIfNeeded(activity)
+                }
             }
-            .setNeutralButton(R.string.sync_clear) { _, _ -> SyncManager.clearKey(activity) }
+            .setNeutralButton(R.string.sync_clear) { _, _ ->
+                SyncManager.deleteAccountAsync(activity) { ok ->
+                    android.widget.Toast.makeText(activity, if (ok) R.string.sync_deleted else R.string.sync_delete_failed, android.widget.Toast.LENGTH_LONG).show()
+                }
+            }
             .setNegativeButton(R.string.sync_cancel, null)
             .create()
         syncDialog.show(); showKeyboard(syncDialog, input)
