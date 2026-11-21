@@ -1,0 +1,36 @@
+name: Build SMS test APK
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'smstest/**', '.github/workflows/smstest.yml' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: smstest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build debug APK
+        run: gradle assembleDebug --no-daemon
+      - name: Publish APK to smstest-apk branch
+        run: |
+          mkdir -p /tmp/pub
+          cp app/build/outputs/apk/debug/app-debug.apk /tmp/pub/SMS-teszt.apk
+          cd /tmp/pub
+          git init -q -b smstest-apk
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -q -m "SMS-teszt ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" smstest-apk
