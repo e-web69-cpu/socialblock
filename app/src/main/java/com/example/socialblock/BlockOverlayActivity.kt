@@ -27,6 +27,11 @@ class BlockOverlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBlockOverlayBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        EdgeToEdge.apply(this)
+        // Letiltjuk a vissza gombot (Android 16 prediktív visszalépésnél is), hogy ne lehessen „átlapozni” a blokkolón.
+        onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { /* szándékosan semmi */ }
+        })
 
         val pkg = intent.getStringExtra(EXTRA_BLOCKED_PACKAGE) ?: ""
         val pm = packageManager
@@ -94,12 +99,12 @@ class BlockOverlayActivity : AppCompatActivity() {
         binding.buttonRequestUnlock.isEnabled = hasHelper && (inProgress || ScheduleManager.canRequestUnlock(this))
         // Segítő nélkül nincs feloldás, ezért a heti keretet sem mutatjuk.
         binding.textUnlocksRemaining.visibility = if (hasHelper) android.view.View.VISIBLE else android.view.View.GONE
+        if (!ScheduleManager.UNLOCK_ENABLED) {
+            binding.buttonRequestUnlock.visibility = android.view.View.GONE
+            binding.textUnlocksRemaining.visibility = android.view.View.GONE
+        }
     }
 
-    // Letiltjuk a vissza gombot, hogy ne lehessen egyszerűen "átlapozni" a blokkolón
-    override fun onBackPressed() {
-        // szándékosan nem hívjuk a super-t
-    }
 
     /**
      * Adaptív ikonnál csak az előtér-réteget használjuk (a háttér, pl. fehér lap, elmarad),

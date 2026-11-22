@@ -12,10 +12,10 @@ import android.widget.TextView
 
 /** A létramenü (útmutató, működés, protokoll, adatvédelem, Kisegítő lehetőség) – fő- és tiltó képernyőn is. */
 object InfoMenu {
-    private val items = listOf(
+    private val items = listOfNotNull(
         R.string.info_install_title to R.string.info_install_body,
         R.string.info_howto_title to R.string.info_howto_body,
-        R.string.info_protocol_title to R.string.info_protocol_body,
+        if (ScheduleManager.UNLOCK_ENABLED) R.string.info_protocol_title to R.string.info_protocol_body else null,
         R.string.info_privacy_title to R.string.info_privacy_body,
         R.string.info_a11y_title to R.string.info_a11y_body
     )

@@ -216,6 +216,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cardHelper"
                 android:orientation="vertical"
                 android:background="@drawable/bg_card_neon"
                 android:padding="18dp"

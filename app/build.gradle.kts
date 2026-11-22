@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.example.socialblock"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.socialblock"
+        applicationId = "hu.eweb.socialock"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 28
-        versionName = "1.10-beta"
+        targetSdk = 36
+        versionCode = 29
+        versionName = "1.11-beta"
     }
 
     signingConfigs {

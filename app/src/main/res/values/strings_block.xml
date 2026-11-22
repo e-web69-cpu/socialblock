@@ -5,5 +5,5 @@
     <string name="block_status_active">AKTÍV</string>
     <string name="block_hint">Amit most írnál, a tiltás vége után is megvár.</string>
     <string name="schedule_locked">Az idősáv csak a lejárta után módosítható, vagyis a tiltási idősávon kívül. Ha még nincs idősávod, add meg a tiltás bekapcsolása előtt.</string>
-    <string name="settings_locked">A tiltási idősávban ez csak sikeres feloldás után módosítható.</string>
+    <string name="settings_locked">A tiltási idősávban ez nem módosítható, csak az idősáv vége után.</string>
 </resources>

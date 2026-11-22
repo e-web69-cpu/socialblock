@@ -64,5 +64,6 @@ class InfoActivity : AppCompatActivity() {
         root.addView(AnimatedBackgroundView(this))
         root.addView(scroll)
         setContentView(root)
+        EdgeToEdge.apply(this)
     }
 }

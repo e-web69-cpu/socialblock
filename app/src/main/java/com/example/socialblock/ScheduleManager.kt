@@ -58,6 +58,9 @@ object ScheduleManager {
     private const val KEY_FLOW_PIN_FAILS = "flow_pin_fails"
 
     const val UNLOCK_DURATION_MINUTES = 15
+    /** v1.11 (Play, ingyenes): nincs segítő és feloldás – a tiltást ki kell várni. A fizetős változat kapcsolja be. */
+    const val UNLOCK_ENABLED = false
+
     const val MAX_UNLOCKS_PER_WEEK = 3
     const val WAIT_MINUTES_DAY = 30
     const val WAIT_MINUTES_NIGHT = 60

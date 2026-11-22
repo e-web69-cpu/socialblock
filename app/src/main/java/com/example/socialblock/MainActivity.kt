@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        EdgeToEdge.apply(this)
 
         styleHero()
         playEntranceAnimation()
@@ -243,7 +244,8 @@ class MainActivity : AppCompatActivity() {
         var n = 1
         if (!allGranted) binding.badgePerm.text = (n++).toString()
         binding.badgeSchedule.text = (n++).toString()
-        binding.badgeHelper.text = (n++).toString()
+        binding.cardHelper.visibility = if (ScheduleManager.UNLOCK_ENABLED) android.view.View.VISIBLE else android.view.View.GONE
+        if (ScheduleManager.UNLOCK_ENABLED) binding.badgeHelper.text = (n++).toString()
         binding.badgeApps.text = (n).toString()
     }
 
