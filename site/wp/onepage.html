@@ -326,6 +326,19 @@ h2{letter-spacing:-.005em}
 .btn{font-weight:500;letter-spacing:.02em}
 .hero h1 .h1-q{display:block;font-size:.42em;font-weight:500;letter-spacing:.02em;color:#6B7280;margin-top:.35em}
 html[data-theme="dark"] .hero h1 .h1-q{color:#A5B4CF}
+
+/* Világos/sötét kapcsoló – a képernyő bal szélén rögzítve */
+.theme-switch{position:fixed;left:0;top:32vh;z-index:60;width:76px;height:44px;border-radius:0 999px 999px 0;border:2px solid #2D65F8;border-left:0;background:#F3F4F6;cursor:pointer;padding:0 8px 0 10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 18px rgba(17,24,39,.12)}
+.theme-switch .ts-ico{width:24px;height:24px;display:grid;place-items:center;position:relative;z-index:2}
+.theme-switch svg{width:20px;height:20px}
+.ts-sun svg{fill:#111827;stroke:#111827;stroke-width:1.6;stroke-linecap:round}
+.ts-moon svg{fill:#111827}
+.ts-knob{position:absolute;top:6px;left:8px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18);transition:transform .25s ease;z-index:1}
+html[data-theme="dark"] .theme-switch{background:#121C3D;border-color:#6EA0FF}
+html[data-theme="dark"] .ts-knob{transform:translateX(30px);background:#2D65F8}
+html[data-theme="dark"] .ts-moon svg{fill:#fff}
+html[data-theme="dark"] .ts-sun svg{fill:#94A3B8;stroke:#94A3B8}
+.theme-toggle{display:none}
 </style>
 <header class="top">
   <div class="wrap">
@@ -343,11 +356,15 @@ html[data-theme="dark"] .hero h1 .h1-q{color:#A5B4CF}
       <a href="#funkciok">Funkciók</a>
       <a href="#hol-tartunk">Hol tartunk</a>
       <a href="#gyik">GYIK</a>
-      <button class="theme-toggle" id="slk-theme" type="button" aria-label="Világos / sötét mód">🌙</button>
       <a class="btn btn-primary" href="#ertesites">Értesítést kérek</a>
     </nav>
   </div>
 </header>
+<button class="theme-switch" id="slk-theme" type="button" role="switch" aria-checked="false" aria-label="Sötét mód">
+        <span class="ts-ico ts-sun"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></span>
+        <span class="ts-ico ts-moon"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
+        <span class="ts-knob"></span>
+      </button>
 
 <section class="hero" id="top"><span class="blob b1"></span><span class="blob b2"></span>
   <div class="wrap">
@@ -568,7 +585,7 @@ if(q==='ok'){m.className='pr-msg ok';m.textContent='Köszönjük! Szólunk, amin
 <script>
 (function(){
 var root=document.documentElement,btn=document.getElementById('slk-theme');
-function setIcon(){if(btn)btn.textContent=root.getAttribute('data-theme')==='dark'?'☀️':'🌙';}
+function setIcon(){if(btn)btn.setAttribute('aria-checked',root.getAttribute('data-theme')==='dark'?'true':'false');}
 setIcon();
 if(btn)btn.addEventListener('click',function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('slk-theme',n)}catch(e){}setIcon();});
 var c=document.getElementById('slk-bg');if(!c||!c.getContext)return;var x=c.getContext('2d'),W,H,DPR=Math.min(2,window.devicePixelRatio||1),P=[],t0=performance.now();
