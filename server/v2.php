@@ -3,7 +3,7 @@
  * SociaLock szinkron API v2 – több felhasználós (fiókonkénti) változat.
  * A régi api.php (tulajdonosi, egy állapotos) érintetlen marad; ez külön végpont.
  *
- * Tárolás fájlokban (pdo_sqlite nincs a szerveren), a webgyökéren KÍVÜL: ../sb-private/v2/
+ * Tárolás fájlokban (pdo_sqlite nincs a szerveren), a webgyökéren KÍVÜL: ../socialock-private/v2/
  *   accounts/<id>.json   – az állapot (rules, created, updated)
  *   keys/<sha256>.json   – kulcs → {acct, role: master|read}  (a kulcs maga nincs tárolva, csak a hash)
  *   pair/<code>.json     – párosítókód → {acct, exp}
@@ -26,7 +26,7 @@ const MAX_WINDOW_MIN = 23 * 60;
 const PAIR_TTL = 600;
 const REG_PER_IP_DAY = 10;
 
-$DATA = dirname(__DIR__) . '/sb-private/v2';
+$DATA = dirname(__DIR__) . '/socialock-private/v2';
 foreach (['accounts', 'keys', 'pair', 'rl'] as $d) { if (!is_dir("$DATA/$d")) @mkdir("$DATA/$d", 0700, true); }
 
 function out(int $code, array $body): void { http_response_code($code); echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); exit; }
