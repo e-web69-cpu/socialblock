@@ -340,11 +340,14 @@ html[data-theme="dark"] .ts-moon svg{fill:#fff}
 html[data-theme="dark"] .ts-sun svg{fill:#94A3B8;stroke:#94A3B8}
 .theme-toggle{display:none}
 
-/* Nagyobb logó a fejlécben */
-.top .wrap{height:88px}
-.brand{font-size:30px;gap:12px}
-.brand .slk-logo{width:60px;height:60px}
-@media(max-width:560px){.top .wrap{height:74px}.brand{font-size:24px}.brand .slk-logo{width:46px;height:46px}}
+/* Nagy, a fejlécből kilógó logó */
+.top{overflow:visible}
+.top .wrap{height:76px;align-items:center}
+.brand{font-size:30px;gap:14px;align-self:flex-start;margin-top:12px;align-items:flex-start}
+.brand .slk-logo{width:124px;height:124px;flex:none;filter:drop-shadow(0 10px 24px rgba(45,101,248,.28))}
+.brand span{margin-top:16px}
+.hero{padding-top:120px}
+@media(max-width:560px){.brand{font-size:24px;margin-top:10px}.brand .slk-logo{width:84px;height:84px}.brand span{margin-top:10px}.hero{padding-top:84px}}
 </style>
 <header class="top">
   <div class="wrap">
