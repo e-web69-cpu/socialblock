@@ -500,6 +500,14 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
 .chat{grid-template-columns:310px minmax(0,780px)!important;gap:80px!important}
 .chat blockquote{max-width:780px!important}
 @media(max-width:860px){.chat{grid-template-columns:1fr!important;gap:40px!important}}
+/* Görgetéskor a fejléc kompakt lesz és hátteret kap, hogy ne lógjon rá a tartalomra */
+.top .brand,.top .slk-logo,.top .brand-name,.top .brand-ver,.top .brand-sub{transition:all .25s ease}
+html .top.is-scrolled,html[data-theme="light"] .top.is-scrolled{background:rgba(248,249,250,.88)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #E5E7EB!important}
+html[data-theme="dark"] .top.is-scrolled{background:rgba(17,24,39,.88)!important;border-bottom:1px solid rgba(229,231,235,.12)!important}
+.top.is-scrolled .slk-logo{width:52px!important;height:52px!important;margin-left:-1px}
+.top.is-scrolled .brand-ver,.top.is-scrolled .brand-sub{display:none}
+.top.is-scrolled .brand-name{font-size:28px}
+.top.is-scrolled .brand>.brand-txt{margin-top:0!important}
 </style>
 <header class="top">
   <div class="wrap">
@@ -794,3 +802,4 @@ var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
 <script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts?(document.fonts.ready||Promise.resolve()):Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
+<script>(function(){var t=document.querySelector('.top');if(!t)return;function u(){t.classList.toggle('is-scrolled',window.scrollY>40);}addEventListener('scroll',u,{passive:true});u();})();</script>
