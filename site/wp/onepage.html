@@ -304,8 +304,9 @@ html[data-theme="dark"] .timeline li::before{background:#0A1128}
 .ticker .chip{display:inline-flex;align-items:center;padding:9px 20px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.01em;text-transform:none;box-shadow:0 6px 16px rgba(17,24,39,.12);white-space:nowrap}
 .ticker .chip::before{content:none}
 .ticker:hover div{animation-play-state:paused}
-.ticker .chip{background:rgba(255,255,255,.55)!important;color:#6B7280!important;border:1px solid #D9DDE3;box-shadow:none;filter:none;opacity:1;font-weight:600}
-html[data-theme="dark"] .ticker .chip{background:rgba(255,255,255,.04)!important;color:#94A3B8!important;border-color:rgba(255,255,255,.14)}
+.ticker .chip{background:transparent!important;color:#6B7280!important;border:1px solid #D9DDE3;box-shadow:none;filter:none;opacity:1;font-weight:600}
+html[data-theme="dark"] .ticker .chip{background:transparent!important;color:#94A3B8!important;border-color:rgba(255,255,255,.14)}
+.ticker,html[data-theme="light"] .ticker,html[data-theme="dark"] .ticker{background:transparent!important}
 /* Külső márkás elemek: nem Oswald, a saját (semleges) betűjükkel */
 .btn-play,.btn-play *,.ticker .chip{font-family:"Roboto","Helvetica Neue",Arial,system-ui,sans-serif!important;letter-spacing:0!important}
 .theme-toggle{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:20px;line-height:1}
