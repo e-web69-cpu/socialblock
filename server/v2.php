@@ -83,10 +83,9 @@ function blockingNow(array $r, ?int $ts = null): bool {
     return false;
 }
 
-/** Tiltási időben csak szigorítani lehet: bekapcsolva marad, idősáv változatlan, appok/oldalak csak bővülhetnek. */
+/** Tiltási időben csak szigorítani lehet: bekapcsolva marad, appok/oldalak csak bővülhetnek. Az idősáv bármikor módosítható, azonnal szinkronba kerül. */
 function onlyTightens(array $old, array $new): bool {
     if (empty($new['enabled'])) return false;
-    if (json_encode($old['windows']) !== json_encode($new['windows'])) return false;
     if (array_diff($old['apps'], $new['apps'])) return false;
     if (array_diff($old['sites'], $new['sites'])) return false;
     return true;

@@ -136,7 +136,7 @@ object SyncManager {
     }
 
     /** Ha van kulcs és változott az állapot (vagy lejárt a frissítés), feltölti. Bármikor hívható, gyorsan visszatér. */
-    fun syncIfNeeded(ctx: Context) {
+    fun syncIfNeeded(ctx: Context, force: Boolean = false) {
         val key = p(ctx).getString(K_KEY, null)
         if (key.isNullOrBlank() || busy || !hasConsent(ctx)) return
         val body = buildBody(ctx)
@@ -145,9 +145,11 @@ object SyncManager {
         val changed = body != pr.getString(K_HASH, null)
         val sinceTry = now - pr.getLong(K_TRY_AT, 0L)
         val failedBefore = !pr.getString(K_ERR, null).isNullOrEmpty()
-        if (!changed && sinceTry < REFRESH_MS) return
-        if (changed && sinceTry < MIN_GAP_MS) return
-        if (changed && failedBefore && sinceTry < RETRY_MS) return
+        if (!force) {
+            if (!changed && sinceTry < REFRESH_MS) return
+            if (changed && sinceTry < MIN_GAP_MS) return
+            if (changed && failedBefore && sinceTry < RETRY_MS) return
+        }
         busy = true
         pr.edit().putLong(K_TRY_AT, now).apply()
         val app = ctx.applicationContext

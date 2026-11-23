@@ -353,6 +353,8 @@ class MainActivity : AppCompatActivity() {
                 ScheduleManager.setWindows(this, listOf(window))
                 binding.textSaveConfirmation.visibility = android.view.View.VISIBLE
                 refreshLockState()
+                // Mentés után azonnal felmegy a szerverre, a Windows-modul is ezt követi.
+                SyncManager.syncIfNeeded(this, force = true)
             }
             .setNegativeButton(R.string.schedule_confirm_no, null)
             .show()
