@@ -375,7 +375,7 @@ html[data-theme="dark"] .ts-sun svg{fill:#94A3B8;stroke:#94A3B8}
         <span class="ts-knob"></span>
       </button>
 
-<section class="hero" id="top"><span class="blob b1"></span><span class="blob b2"></span>
+<section class="hero" id="top">
   <div class="wrap">
     <div>
       <span class="eyebrow"><i></i> Android app · Hamarosan a Google Playen</span>
@@ -606,7 +606,7 @@ size();addEventListener('resize',size);
 function motif(cx,cy,sz,rot,mir,t,col){var s=(W*sz)/108*(1+.025*Math.sin(t*.35));x.save();x.translate(cx+10*Math.sin(t*.21),cy+14*Math.cos(t*.17));x.rotate((rot+4*Math.sin(t*.12))*Math.PI/180);if(mir)x.scale(-1,1);x.scale(s,s);x.translate(-54,-57);x.lineWidth=1/s;x.strokeStyle=col;x.stroke(bubble);x.stroke(lock);x.restore();}
 function frame(now){var t=(now-t0)/1000,dark=root.getAttribute('data-theme')==='dark';
 var g=x.createLinearGradient(0,0,0,H);if(dark){g.addColorStop(0,'#0A1128');g.addColorStop(1,'#0D1735');}else{g.addColorStop(0,'#FFFFFF');g.addColorStop(.5,'#FCFCFD');g.addColorStop(1,'#F8F9FA');}x.fillStyle=g;x.fillRect(0,0,W,H);
-var u=Math.min(W,H),orbs=[[ '45,101,248',dark?.22:.06,.9,.5,.08,.25,.06,.05,0],['110,231,183',dark?.14:.075,.65,.9,.92,.12,.06,.043,3.1]];
+var u=Math.max(W,H),pulse=0.75+0.25*Math.sin(t*0.9),orbs=[['45,101,248',(dark?.30:.14)*pulse,.75,.15,-.05,.25,.06,.05,0],['16,185,129',(dark?.20:.12)*(1.5-pulse),.7,.85,1.05,.15,.06,.043,3.1],['110,140,255',(dark?.14:.07)*pulse,.5,.05,.55,.08,.12,.035,1.7]];
 orbs.forEach(function(o){var px=(o[3]+o[5]*Math.sin(t*o[7]*6.283+o[8]))*W,py=(o[4]+o[6]*Math.cos(t*o[7]*5.1+o[8]))*H,r=u*o[2]*(1+.08*Math.sin(t*.6+o[8]));var rg=x.createRadialGradient(px,py,0,px,py,r);rg.addColorStop(0,'rgba('+o[0]+','+o[1]+')');rg.addColorStop(1,'rgba('+o[0]+',0)');x.fillStyle=rg;x.fillRect(px-r,py-r,2*r,2*r);});
 var mc=dark?'rgba(148,163,184,.16)':'rgba(156,163,175,.35)';
 motif(W*.66,H*.24,W<760?1.5:.62,16,true,t,mc);motif(W*.30,H*.84,W<760?1.8:.8,-12,false,t+2.1,mc);
