@@ -492,6 +492,10 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
 .chat blockquote span{padding-bottom:.14em;margin-bottom:-.14em}
 .brand .slk-logo{width:156px!important;height:156px!important;margin-left:-3px}
 @media(max-width:560px){.brand .slk-logo{width:108px!important;height:108px!important;margin-left:-2px}}
+/* Márkablokk: szabályos ritmus, a szövegblokk a logó optikai közepére igazítva */
+.brand .brand-txt{gap:10px}
+.brand .brand-ver,.brand .brand-name,.brand .brand-sub{line-height:1!important;margin:0!important}
+.brand>.brand-txt{margin-top:-3px!important}.brand .brand-sub{margin-top:1px!important}
 </style>
 <header class="top">
   <div class="wrap">
@@ -785,4 +789,4 @@ var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i
 }
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
-<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);})();</script>
+<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
