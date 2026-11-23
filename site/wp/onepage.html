@@ -178,6 +178,39 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
 .stat span{color:#A5B4FC;font-size:15px}
 @media(max-width:760px){.stats{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.hero .blob,.hero .phone,.ticker div,.hero h1 em{animation:none}}
+
+.uses{background:var(--bg)}
+.uses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+.use .ico{background:#E8EFFF}.use.g .ico{background:#DDF8EE}.use.b .ico{background:#FFF1D6}
+.how{background:#fff}
+@media(max-width:860px){.uses-grid{grid-template-columns:1fr}}
+.road{background:#fff}
+.timeline{list-style:none;margin:56px auto 0;padding:0;max-width:820px;position:relative}
+.timeline::before{content:"";position:absolute;left:15px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--green),var(--blue) 60%,#CBD5E1)}
+.timeline li{position:relative;padding:0 0 34px 56px}
+.timeline li::before{content:"";position:absolute;left:4px;top:2px;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid #CBD5E1}
+.timeline li.done::before{background:var(--green);border-color:var(--green);box-shadow:0 0 0 6px rgba(16,185,129,.15)}
+.timeline li.now::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 0 rgba(45,101,248,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 14px rgba(45,101,248,0)}100%{box-shadow:0 0 0 0 rgba(45,101,248,0)}}
+.timeline b{display:block;font-size:20px;margin-bottom:4px}
+.timeline li.now b{color:var(--blue)}
+.timeline span{color:var(--muted)}
+.who{max-width:820px;margin:10px auto 0;padding:22px 26px;border-radius:18px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.prereg{background:var(--navy);padding:90px 0}
+.pr-card{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;background:linear-gradient(135deg,rgba(45,101,248,.18),rgba(16,185,129,.12));border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:48px;color:#fff}
+.pr-card .sub{color:#C7D2FE}
+.pr-row{display:flex;gap:10px;flex-wrap:wrap}
+.pr-row input{flex:1 1 220px;min-width:0;padding:16px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:16px;outline:none}
+.pr-row input::placeholder{color:#94A3B8}
+.pr-row input:focus{border-color:var(--mint);box-shadow:0 0 0 4px rgba(110,231,183,.18)}
+.pr-consent{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13.5px;color:#A5B4FC;line-height:1.5}
+.pr-consent input{margin-top:3px;accent-color:var(--green);flex:none}
+.pr-consent a{color:var(--mint)}
+.pr-msg{margin:16px 0 0;padding:12px 16px;border-radius:14px;font-weight:600}
+.pr-msg.ok{background:rgba(16,185,129,.18);color:var(--mint)}
+.pr-msg.err{background:rgba(255,92,124,.18);color:#FFB4C4}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+@media(max-width:860px){.pr-card{grid-template-columns:1fr;padding:30px}}
 </style>
 <header class="top">
   <div class="wrap">
@@ -193,8 +226,9 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
     <nav class="nav">
       <a href="#hogyan">Hogyan működik</a>
       <a href="#funkciok">Funkciók</a>
+      <a href="#hol-tartunk">Hol tartunk</a>
       <a href="#gyik">GYIK</a>
-      <a class="btn btn-primary" href="#letoltes">Letöltés</a>
+      <a class="btn btn-primary" href="#ertesites">Értesítést kérek</a>
     </nav>
   </div>
 </header>
@@ -202,11 +236,11 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
 <section class="hero" id="top"><span class="blob b1"></span><span class="blob b2"></span>
   <div class="wrap">
     <div>
-      <span class="eyebrow"><i></i> Android app · ingyenes</span>
+      <span class="eyebrow"><i></i> Android app · Hamarosan a Google Playen</span>
       <h1>Amit este elküldenél, <em>reggel már bánnád.</em></h1>
-      <p class="lead">A SociaLock az általad megadott napi idősávban letiltja a közösségi és e-mail appokat. Így a fáradt, ideges vagy pár pohár utáni üzenetek el sem mennek.</p>
+      <p class="lead">A SociaLock az általad megadott napi idősávban letiltja a közösségi és e-mail appokat. Így a fáradt, ideges vagy pár pohár utáni üzenetek el sem mennek – és ugyanígy bármelyik appot korlátozhatod, amivel túl sok időt töltesz.</p>
       <div class="cta-row" id="letoltes">
-        <span class="btn btn-play soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.9 13.4 12l-9.8 10.1c-.4-.2-.6-.7-.6-1.2V3.1c0-.5.2-1 .6-1.2z"/><path fill="#FBBC04" d="m17 8.4-3.6 3.6 3.6 3.6 4.1-2.3c1.1-.6 1.1-2.1 0-2.7L17 8.4z"/><path fill="#EA4335" d="M13.4 12 3.6 22.1c.4.2.9.2 1.4-.1L17 15.6 13.4 12z"/><path fill="#4285F4" d="M13.4 12 17 8.4 5 2c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><div><small>Hamarosan a</small><span>Google Playen</span></div></span>        <a class="btn btn-ghost" href="#hogyan">Hogyan működik?</a>
+        <span class="btn btn-play soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.9 13.4 12l-9.8 10.1c-.4-.2-.6-.7-.6-1.2V3.1c0-.5.2-1 .6-1.2z"/><path fill="#FBBC04" d="m17 8.4-3.6 3.6 3.6 3.6 4.1-2.3c1.1-.6 1.1-2.1 0-2.7L17 8.4z"/><path fill="#EA4335" d="M13.4 12 3.6 22.1c.4.2.9.2 1.4-.1L17 15.6 13.4 12z"/><path fill="#4285F4" d="M13.4 12 17 8.4 5 2c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><div><small>Hamarosan a</small><span>Google Playen</span></div></span>        <a class="btn btn-ghost" href="#ertesites">🔔 Értesíts a megjelenéskor</a>
       </div>
       <p class="note">Android 8 vagy újabb · Fiók és regisztráció nélkül</p>
     </div>
@@ -217,7 +251,7 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
     </div>
   </div>
 </section>
-<div class="ticker" aria-hidden="true"><div><span>Messenger</span><span>WhatsApp</span><span>Instagram</span><span>Facebook</span><span>Gmail</span><span>TikTok</span><span>Viber</span><span>Telegram</span><span>Outlook</span><span>Snapchat</span><span>X</span><span>LinkedIn</span><span>Messenger</span><span>WhatsApp</span><span>Instagram</span><span>Facebook</span><span>Gmail</span><span>TikTok</span><span>Viber</span><span>Telegram</span><span>Outlook</span><span>Snapchat</span><span>X</span><span>LinkedIn</span></div></div>
+<div class="ticker" aria-hidden="true"><div><span>Messenger</span><span>WhatsApp</span><span>Instagram</span><span>Facebook</span><span>Gmail</span><span>TikTok</span><span>Viber</span><span>Telegram</span><span>Outlook</span><span>Snapchat</span><span>X</span><span>LinkedIn</span><span>YouTube</span><span>Netflix</span><span>Játékok</span><span>Messenger</span><span>WhatsApp</span><span>Instagram</span><span>Facebook</span><span>Gmail</span><span>TikTok</span><span>Viber</span><span>Telegram</span><span>Outlook</span><span>Snapchat</span><span>X</span><span>LinkedIn</span></div></div>
 <section class="pain">
   <div class="wrap">
     <div class="center rv">
@@ -239,6 +273,21 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
         <span class="bub seen">Látta: 23:48</span>
       </div>
       <blockquote class="rv">Az elküldött üzenetet nem lehet visszaszívni. <span>Az el nem küldöttet nem kell megbánni.</span></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="uses">
+  <div class="wrap">
+    <div class="center rv">
+      <div class="kicker">Nem csak az esti üzenetekre</div>
+      <h2>Bármelyik appra kiterjesztheted.</h2>
+      <p class="sub">A SociaLock nem egy-két közösségi oldalt ismer: a telefonodra telepített bármelyik alkalmazást felveheted a tiltólistára.</p>
+    </div>
+    <div class="uses-grid">
+      <div class="card use rv"><div class="ico">🌙</div><h3>Magadnak</h3><p>Messenger, WhatsApp, e-mail este 10 után? Az idősávban egyszerűen nem nyílnak meg – így nem küldesz olyat, amit reggel bánnál.</p></div>
+      <div class="card use g rv"><div class="ico">⏳</div><h3>Kevesebb képernyőidő</h3><p>TikTok, YouTube, Instagram, játékok: tedd tiltólistára, amivel észrevétlenül elmegy az estéd, és nyerd vissza az idődet az alvásra, a családra, magadra.</p></div>
+      <div class="card use b rv"><div class="ico">👨‍👩‍👧</div><h3>Szülőknek</h3><p>A gyerek telefonján is beállíthatod például az esti vagy a tanulási idősávot. Az idősávban a tiltás nem lazítható és nem kapcsolható ki – csak kivárható.</p></div>
     </div>
   </div>
 </section>
@@ -320,6 +369,42 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
   </div>
 </section>
 
+<section class="road" id="hol-tartunk">
+  <div class="wrap">
+    <div class="center rv">
+      <div class="kicker">Hol tartunk</div>
+      <h2>Nyíltan arról, ahol most járunk.</h2>
+      <p class="sub">A SociaLock egy valós, saját igényből született. Nem egy kész óriáscég terméke: lépésről lépésre építjük, a tesztelők visszajelzései alapján.</p>
+    </div>
+    <ol class="timeline">
+      <li class="done rv"><b>Az ötlet</b><span>Saját tapasztalatból: az esti, meggondolatlan üzenetek ára másnap reggel jön. Kellett egy eszköz, ami este is tartja magát a nappali döntéshez.</span></li>
+      <li class="done rv"><b>Zárt béta</b><span>Az app elkészült, és tesztelők napi szinten használták. Az ő visszajelzéseik alapján finomítottuk a tiltást, a blokkoló képernyőt és a beállításokat.</span></li>
+      <li class="now rv"><b>Google Play – folyamatban</b><span>Most készítjük elő a megjelenést a Google Play Áruházban, hogy bárki egy koppintással, biztonságosan telepíthesse.</span></li>
+      <li class="next rv"><b>Következő lépések</b><span>További funkciók a felhasználók igényei szerint. Ha értesülni szeretnél, iratkozz fel lent.</span></li>
+    </ol>
+    <p class="who rv">A SociaLockot az <b>E-WEB Consulting Kft.</b> (Debrecen) fejleszti. Kérdésed van? Írj nekünk: <a href="mailto:ewebconsultingkft@gmail.com">ewebconsultingkft@gmail.com</a></p>
+  </div>
+</section>
+
+<section class="prereg" id="ertesites">
+  <div class="wrap">
+    <div class="pr-card rv">
+      <div>
+        <div class="kicker" style="color:var(--mint)">Előregisztráció</div>
+        <h2>Szólunk, amint letölthető.</h2>
+        <p class="sub">Add meg az e-mail-címed, és egyetlen levelet küldünk, amikor a SociaLock megjelenik a Google Playen. Semmi spam, és bármikor leiratkozhatsz.</p>
+      </div>
+      <form class="pr-form" method="post" action="https://socialock.hu/wp-admin/admin-post.php">
+        <input type="hidden" name="action" value="sl_prereg">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+        <div class="pr-row"><input type="email" name="email" required placeholder="E-mail-címed" aria-label="E-mail-cím"><button class="btn btn-primary" type="submit">Értesítést kérek</button></div>
+        <label class="pr-consent"><input type="checkbox" name="consent" value="1" required><span>Hozzájárulok, hogy az E-WEB Consulting Kft. a megadott címre értesítést küldjön a SociaLock megjelenéséről. Részletek: <a href="https://socialock.hu/?page_id=12">Adatvédelmi tájékoztató</a>.</span></label>
+        <p class="pr-msg" id="pr-msg" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <section class="faq" id="gyik">
   <div class="wrap">
     <div class="center rv">
@@ -332,7 +417,10 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
       <details class="rv"><summary>Fel lehet oldani a tiltást, ha nagyon kell?</summary><p>Ebben a változatban nem: az idősávban a tiltás tart, ki kell várni. Ezért érdemes reális idősávot választani. Az idősávon kívül bármit módosíthatsz.</p></details>
       <details class="rv"><summary>Mi történik az üzenetekkel, amiket közben kapok?</summary><p>Semmi különös: megérkeznek, csak a tiltás alatt nem nyithatod meg az appot. A tiltás vége után minden ott lesz.</p></details>
       <details class="rv"><summary>Kell hozzá fiók vagy regisztráció?</summary><p>Nem. A számítógépes szinkronhoz az app egy névtelen azonosítót hoz létre; ehhez sem név, sem e-mail, sem telefonszám nem kell. A szinkron bármikor kikapcsolható, ilyenkor a szerverről is törlődik.</p></details>
-      <details class="rv"><summary>Mennyibe kerül?</summary><p>A SociaLock ingyenes.</p></details>
+      <details class="rv"><summary>Csak közösségi és e-mail appokat lehet tiltani?</summary><p>Nem. A telefonodra telepített bármelyik alkalmazást felveheted a listára: videó- és streamingappokat, játékokat, böngészőt is.</p></details>
+      <details class="rv"><summary>Használhatom a gyerekem telefonján?</summary><p>Igen. A szülő beállíthatja a gyerek telefonján a tiltási idősávot és az appokat. Az idősávban a tiltás nem lazítható és nem kapcsolható ki, az eszközkezelő funkció pedig megnehezíti az app eltávolítását.</p></details>
+      <details class="rv"><summary>Mennyibe kerül?</summary><p>Az alap tiltás ingyenes.</p></details>
+      <details class="rv"><summary>Mikor lesz letölthető?</summary><p>Most készítjük elő a Google Play-megjelenést. Iratkozz fel az előregisztrációra, és szólunk, amint elérhető.</p></details>
     </div>
   </div>
 </section>
@@ -341,14 +429,14 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
   <div class="wrap">
     <h2 class="rv">Legyél ma este is az, aki holnap reggel szeretnél lenni.</h2>
     <p class="sub rv" style="margin:0 auto">Töltsd le, állítsd be két perc alatt, és hagyd, hogy a SociaLock vigyázzon rád, amikor te már nem tudsz.</p>
-    <div class="cta-row rv"><span class="btn btn-play soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.9 13.4 12l-9.8 10.1c-.4-.2-.6-.7-.6-1.2V3.1c0-.5.2-1 .6-1.2z"/><path fill="#FBBC04" d="m17 8.4-3.6 3.6 3.6 3.6 4.1-2.3c1.1-.6 1.1-2.1 0-2.7L17 8.4z"/><path fill="#EA4335" d="M13.4 12 3.6 22.1c.4.2.9.2 1.4-.1L17 15.6 13.4 12z"/><path fill="#4285F4" d="M13.4 12 17 8.4 5 2c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><div><small>Hamarosan a</small><span>Google Playen</span></div></span></div>
+    <div class="cta-row rv"><a class="btn btn-primary" href="#ertesites">🔔 Értesíts a megjelenéskor</a><span class="btn btn-play soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.9 13.4 12l-9.8 10.1c-.4-.2-.6-.7-.6-1.2V3.1c0-.5.2-1 .6-1.2z"/><path fill="#FBBC04" d="m17 8.4-3.6 3.6 3.6 3.6 4.1-2.3c1.1-.6 1.1-2.1 0-2.7L17 8.4z"/><path fill="#EA4335" d="M13.4 12 3.6 22.1c.4.2.9.2 1.4-.1L17 15.6 13.4 12z"/><path fill="#4285F4" d="M13.4 12 17 8.4 5 2c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><div><small>Hamarosan a</small><span>Google Playen</span></div></span></div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="wrap">
     <div>
-      <a href="/adatvedelem/">Adatvédelmi tájékoztató</a>
+      <a href="https://socialock.hu/?page_id=12">Adatvédelmi tájékoztató</a>
             <a href="#gyik">GYIK</a>
     </div>
     <div>© 2026 E-WEB Consulting Kft. · All Rights Reserved</div>
@@ -357,4 +445,8 @@ h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;margin
 <script>
 (function(){var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12}):null;
 document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in');});})();
+</script>
+<script>
+(function(){var q=new URLSearchParams(location.search).get('ertesites');var m=document.getElementById('pr-msg');if(!q||!m)return;m.hidden=false;
+if(q==='ok'){m.className='pr-msg ok';m.textContent='Köszönjük! Szólunk, amint a SociaLock letölthető.';}else{m.className='pr-msg err';m.textContent='Kérjük, adj meg érvényes e-mail-címet, és fogadd el a hozzájárulást.';}})();
 </script>
