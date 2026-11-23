@@ -497,6 +497,9 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
 .brand .brand-ver,.brand .brand-name,.brand .brand-sub{line-height:1!important;margin:0!important}
 .brand>.brand-txt{margin-top:-3px!important}.brand .brand-sub{margin-top:1px!important}
 .hero h1 .h1-a{white-space:nowrap}
+.chat{grid-template-columns:310px minmax(0,780px)!important;gap:80px!important}
+.chat blockquote{max-width:780px!important}
+@media(max-width:860px){.chat{grid-template-columns:1fr!important;gap:40px!important}}
 </style>
 <header class="top">
   <div class="wrap">
@@ -567,7 +570,7 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
           <div class="cp-input"><span>Üzenet…</span><i></i></div>
         </div>
       </div>
-      <blockquote class="rv">Az elküldött üzenetet nem lehet visszaszívni. <span>Az el nem küldöttet nem kell megbánni.</span></blockquote>
+      <blockquote class="rv">Az elküldött üzenetet<br>nem lehet visszaszívni. <span>Az el nem küldöttet<br>nem kell megbánni.</span></blockquote>
     </div>
   </div>
 </section>
@@ -758,7 +761,7 @@ function setIcon(){if(btn)btn.setAttribute('aria-checked',root.getAttribute('dat
 setIcon();
 if(btn)btn.addEventListener('click',function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('slk-theme',n)}catch(e){}setIcon();});
 var c=document.getElementById('slk-bg');if(!c||!c.getContext)return;var x=c.getContext('2d'),W,H,DPR=Math.min(2,window.devicePixelRatio||1),P=[],t0=performance.now();
-var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var reduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)').matches:false;
 var bubble=new Path2D('M40 32H68A12 12 0 0 1 80 44V58A12 12 0 0 1 68 70H46L32 82L34.4 69.4Q28 66 28 58V44A12 12 0 0 1 40 32Z M38.1 41H67.9A2.1 2.1 0 0 1 67.9 45.2H38.1A2.1 2.1 0 0 1 38.1 41Z M38.1 49H59.9A2.1 2.1 0 0 1 59.9 53.2H38.1A2.1 2.1 0 0 1 38.1 49Z M38.1 57H51.9A2.1 2.1 0 0 1 51.9 61.2H38.1A2.1 2.1 0 0 1 38.1 57Z M58.1 48A4.1 4.1 0 1 1 49.9 48A4.1 4.1 0 1 1 58.1 48Z');
 var lock=new Path2D('M59.2 67.2V62.4A7.2 7.2 0 0 1 73.6 62.4V67.2 M58.4 65.6H76A4 4 0 0 1 80 69.6V84A4 4 0 0 1 76 88H58.4A4 4 0 0 1 54.4 84V69.6A4 4 0 0 1 58.4 65.6Z');
 function size(){W=innerWidth;H=innerHeight;c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);P=[];var n=Math.round(Math.min(46,W*H/26000));for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-(.08+Math.random()*.25),r:1.2+Math.random()*1.8});}
@@ -784,10 +787,10 @@ var typing=document.createElement('span');typing.className='bub typing hid';typi
 var last=-1;function upd(){var r=ph.getBoundingClientRect(),vh=innerHeight;var p=(vh-r.top)/(vh+r.height*0.4);p=Math.max(0,Math.min(1,p));
 var n=Math.round(p*(items.length+1));if(n===last)return;last=n;
 items.forEach(function(el,i){el.classList.toggle('hid',i>=n);});
-var next=items[n];typing.classList.toggle('hid',!(next&&next.classList.contains('them')&&n>0));
+var next=items[n];typing.classList.toggle('hid',!(next?(next.classList.contains('them')?n>0:false):false));
 if(!typing.classList.contains('hid'))box.appendChild(typing);
-var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i<n&&el.dataset.t;});if(clock)clock.textContent=vis.length?vis[vis.length-1].dataset.t:'23:47';
+var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i<n?!!el.dataset.t:false;});if(clock)clock.textContent=vis.length?vis[vis.length-1].dataset.t:'23:47';
 }
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
-<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
+<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts?(document.fonts.ready||Promise.resolve()):Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
