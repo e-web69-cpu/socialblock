@@ -477,7 +477,7 @@ html[data-theme="dark"] .sync-steps b{color:#FFFFFF}
 html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand-sub{color:#fff}
 @media(max-width:560px){.brand .brand-name{font-size:40px}.brand .brand-sub{font-size:15px}}
 .brand{align-items:center!important}.brand>.brand-txt{margin-top:0!important}
-.brand .brand-ver{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace;font-size:20px;line-height:1.2;letter-spacing:.25em;color:#10B981;margin-bottom:2px;white-space:nowrap}
+.brand .brand-ver{font-family:"Roboto Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:300;font-size:20px;line-height:1.2;letter-spacing:.25em;color:#10B981;opacity:.9;margin-bottom:4px;white-space:nowrap}
 @media(max-width:560px){.brand .brand-ver{font-size:14px}}
 
 /* Chat-telefon: valós mobilarány (Samsung S21, 20:9 kijelző) */
@@ -490,6 +490,8 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
 .chatphone .bub small,.chatphone .bub .t{font-size:9.5px!important}
 .chatphone .bub.hid{padding-top:0!important;padding-bottom:0!important}
 .chat blockquote span{padding-bottom:.14em;margin-bottom:-.14em}
+.brand .slk-logo{width:156px!important;height:156px!important}
+@media(max-width:560px){.brand .slk-logo{width:108px!important;height:108px!important}}
 </style>
 <header class="top">
   <div class="wrap">
@@ -783,4 +785,4 @@ var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i
 }
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
-<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name'),u=b.querySelector('.brand-sub');if(!n||!u)return;u.style.letterSpacing='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});}(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);})();</script>
+<script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);})();</script>
