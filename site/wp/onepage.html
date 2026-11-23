@@ -431,6 +431,13 @@ html[data-theme="dark"] .theme-switch,html[data-theme="dark"] .theme-switch:hove
 .theme-switch:focus-visible{box-shadow:0 0 0 3px rgba(45,101,248,.35)!important}
 .pr-form button.btn,.pr-form button.btn:hover,.pr-form button.btn:focus{background:linear-gradient(135deg,#2D65F8,#1F4FD6)!important;color:#fff!important;border:0!important}
 a,a:hover,a:focus{text-decoration-color:currentColor}
+
+/* Chat-blokk arányai: telefon és idézet függőlegesen középre, nagyobb idézet */
+.chat{grid-template-columns:minmax(280px,360px) 1fr;gap:70px;align-items:center;justify-content:center;margin-top:70px}
+.chat .chatphone{width:min(310px,86vw);justify-self:end}
+.chat blockquote{font-size:clamp(30px,3.3vw,46px);line-height:1.12;max-width:560px;align-self:center}
+.chatphone .bubbles{height:340px}
+@media(max-width:860px){.chat{grid-template-columns:1fr;gap:40px}.chat .chatphone{justify-self:center}.chat blockquote{text-align:center;margin:0 auto}}
 </style>
 <header class="top">
   <div class="wrap">
