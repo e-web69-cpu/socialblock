@@ -5,7 +5,7 @@ Telepítés:
 2. Kattints jobb gombbal az install.bat fájlra → Futtatás rendszergazdaként, és fogadd el a kérést.
 3. Add meg a telefonos appban kapott 8 karakteres párosítókódot (☰ → Számítógép (Windows) → Párosítókód). 10 percig érvényes.
 
-Mit csinál: percenként olvassa a szerver (sb.trendz.hu) állapotát. A tiltási időszakban a telefonos appban felvett tiltott weboldalakat minden böngészőben blokkolja (hosts fájl). Ha nincs net, az utolsó ismert állapottal dolgozik tovább.
+Mit csinál: percenként olvassa a SociaLock szerver állapotát. A tiltási időszakban a telefonos appban felvett tiltott weboldalakat minden böngészőben blokkolja (hosts fájl). Ha nincs net, az utolsó ismert állapottal dolgozik tovább.
 
 Eltávolítás: uninstall.bat. Szándékosan körülményes: tiltási időszakban nem megy, be kell gépelni egy mondatot, és 10 percet kell várni.
 

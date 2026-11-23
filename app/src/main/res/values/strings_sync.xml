@@ -2,7 +2,7 @@
 <resources>
     <string name="sync_menu_title">Szinkron (szerver)</string>
     <string name="sync_dialog_title">Szinkron a szerverrel</string>
-    <string name="sync_info">Ha bekapcsolod, az app feltölti az idősávot, a tiltott appok csomagneveit, a tiltott weboldalakat és az AKTÍV/INAKTÍV állapotot a sb.trendz.hu szerverre, hogy a számítógéped is kövesse a tiltást. A segítő száma és a feloldási események nem kerülnek fel. Fiók és bejelentkezés nem kell: elfogadás után az app magától létrehoz egy névtelen fiókot, aminek a kulcsa csak ezen a telefonon van. A „Kikapcsolás” a szerverről is törli az adataidat. A kulcs mezőt hagyd üresen (csak az üzemeltetőnek kell).</string>
+    <string name="sync_info">Ha bekapcsolod, az app feltölti az idősávot, a tiltott appok csomagneveit, a tiltott weboldalakat és az AKTÍV/INAKTÍV állapotot a SociaLock szerverére, hogy a számítógéped is kövesse a tiltást. Fiók és bejelentkezés nem kell: elfogadás után az app magától létrehoz egy névtelen fiókot, aminek a kulcsa csak ezen a telefonon van. A „Kikapcsolás” a szerverről is törli az adataidat. A kulcs mezőt hagyd üresen (csak az üzemeltetőnek kell).</string>
     <string name="sync_key_hint">Kulcs</string>
     <string name="sync_save">Mentés</string>
     <string name="sync_clear">Kikapcsolás</string>

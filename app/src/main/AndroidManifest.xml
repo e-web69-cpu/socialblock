@@ -9,7 +9,7 @@
     <!-- Kell: a blokkoló képernyő más appok fölé rajzolásához -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <!-- v1.6: opcionális szinkron a sb.trendz.hu szerverrel (csak kulcs megadása után használja) -->
+    <!-- v1.6: opcionális szinkron a SociaLock szerverrel (csak kulcs megadása után használja) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />

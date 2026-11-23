@@ -13,8 +13,8 @@ if (-not $in) { Write-Host 'Nincs kód.'; Read-Host 'Enter'; exit 1 }
 $code = ($in -replace '[^A-Za-z0-9]', '').ToUpper()
 if ($code.Length -eq 8) {
   try {
-    $res = Invoke-RestMethod -Method Post -Uri 'https://sb.trendz.hu/v2.php?r=claim' -ContentType 'application/json' -Body (@{ code = $code } | ConvertTo-Json) -TimeoutSec 15
-    $key = $res.read; $endpoint = 'https://sb.trendz.hu/v2.php'
+    $res = Invoke-RestMethod -Method Post -Uri 'https://app.socialock.hu/v2.php?r=claim' -ContentType 'application/json' -Body (@{ code = $code } | ConvertTo-Json) -TimeoutSec 15
+    $key = $res.read; $endpoint = 'https://app.socialock.hu/v2.php'
   } catch { Write-Host 'A kód lejárt, hibás, vagy a szerver nem érhető el. Kérj új kódot a telefonon.' -ForegroundColor Red; Read-Host 'Enter'; exit 1 }
 } else {
   $key = $in; $endpoint = 'https://sb.trendz.hu/api.php'

@@ -19,7 +19,7 @@ import kotlin.concurrent.thread
 object SyncManager {
     private const val PREFS = "socialblock_sync"
     private const val BASE_LEGACY = "https://sb.trendz.hu/api.php"
-    private const val BASE_V2 = "https://sb.trendz.hu/v2.php"
+    private const val BASE_V2 = "https://app.socialock.hu/v2.php"
     private const val K_BASE = "base"
     private const val K_KEY = "master_key"
     private const val K_HASH = "last_hash"

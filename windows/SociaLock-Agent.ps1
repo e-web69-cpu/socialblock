@@ -31,7 +31,7 @@ $st = $null
 try {
   $ep = 'https://sb.trendz.hu/api.php'
   $epFile = Join-Path $dir 'endpoint.txt'
-  if (Test-Path $epFile) { $x = (Get-Content $epFile -Raw).Trim(); if ($x -like 'https://sb.trendz.hu/*') { $ep = $x } }
+  if (Test-Path $epFile) { $x = (Get-Content $epFile -Raw).Trim(); if ($x -like 'https://sb.trendz.hu/*' -or $x -like 'https://app.socialock.hu/*') { $ep = $x } }
   $st = Invoke-RestMethod -Uri ($ep + '?r=state') -Headers @{ 'X-Key' = (Get-Key) } -TimeoutSec 15
   $st | ConvertTo-Json -Depth 10 | Set-Content -Path $stateFile -Encoding UTF8
 } catch {
