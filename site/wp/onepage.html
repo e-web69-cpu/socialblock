@@ -475,7 +475,7 @@ html[data-theme="dark"] .sync-steps b{color:#FFFFFF}
 .brand .brand-name i{font-style:normal}.brand .bs{color:#3A6EF8}.brand .bl{color:#10B981}
 .brand .brand-sub{font-family:Roboto,"Segoe UI",Arial,sans-serif;font-weight:400;font-size:22px;color:#111827;opacity:.85;margin-top:4px;white-space:nowrap}
 html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand-sub{color:#fff}
-@media(max-width:560px){.brand .brand-name{font-size:40px}.brand .brand-sub{font-size:15px}}
+@media(max-width:560px){.brand .brand-name{font-size:36px}.brand .brand-sub{font-size:14px}}
 .brand{align-items:center!important}.brand>.brand-txt{margin-top:0!important}
 .brand .brand-ver{font-family:"Roboto Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:300;font-size:20px;line-height:1.2;letter-spacing:.25em;color:#10B981;opacity:.9;margin-bottom:4px;white-space:nowrap}
 @media(max-width:560px){.brand .brand-ver{font-size:14px}}
@@ -508,6 +508,29 @@ html[data-theme="dark"] .top.is-scrolled{background:rgba(17,24,39,.88)!important
 .top.is-scrolled .brand-ver,.top.is-scrolled .brand-sub{display:none}
 .top.is-scrolled .brand-name{font-size:28px}
 .top.is-scrolled .brand>.brand-txt{margin-top:0!important}
+/* Mobil finomhangolás */
+@media(max-width:560px){
+ .theme-switch{top:17px!important;bottom:auto!important;left:auto!important;right:14px;width:64px;height:36px;border-radius:999px!important;border-left:2px solid #2D65F8!important}
+ .chat blockquote{font-size:32px!important;padding-left:18px!important;border-left-width:4px!important}
+ .hero .eyebrow{font-size:10.5px!important;letter-spacing:.06em!important;padding:6px 10px!important;gap:6px!important;white-space:nowrap;max-width:100%}
+ .hero .eyebrow b,.hero .eyebrow .b{padding:2px 6px}
+ .hero p.lead,.hero .lead{font-size:17px!important;line-height:1.6!important}
+}
+@media(max-width:560px){
+ .brand .slk-logo{width:84px!important;height:84px!important}
+ .top:not(.is-scrolled) .brand .brand-name{font-size:30px}
+ .top:not(.is-scrolled) .brand .brand-sub{font-size:12px}
+ .top:not(.is-scrolled) .brand .brand-ver{font-size:11px}
+ .brand .brand-txt{gap:7px}
+ .top.is-scrolled .slk-logo{width:44px!important;height:44px!important}
+ .top.is-scrolled .brand-name{font-size:24px}
+}
+@media(max-width:560px){
+ .hero *{min-width:0}
+ .hero h1{font-size:min(38px,9.4vw)!important}
+ .hero .eyebrow{font-size:min(10.5px,2.75vw)!important;letter-spacing:.04em!important;padding:6px 9px!important}
+ .hero{padding-top:28px!important}
+}
 </style>
 <header class="top">
   <div class="wrap">
