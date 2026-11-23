@@ -1,6 +1,9 @@
 <script>(function(){var t='light';try{t=localStorage.getItem('slk-theme')||'light'}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <canvas id="slk-bg" aria-hidden="true"></canvas>
 <style>
+@font-face{font-family:"Oswald";font-style:normal;font-display:swap;font-weight:200 700;src:url(https://socialock.hu/wp-content/uploads/fonts/oswald-latin-ext-wght-normal.woff2) format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Oswald";font-style:normal;font-display:swap;font-weight:200 700;src:url(https://socialock.hu/wp-content/uploads/fonts/oswald-latin-wght-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 
 :root{
   --blue:#2D65F8; --blue-d:#1F4FD6; --green:#10B981; --mint:#6EE7B7;
@@ -9,7 +12,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:"Oswald","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:var(--blue)}
 .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
@@ -301,6 +304,16 @@ html[data-theme="dark"] .timeline li::before{background:#0A1128}
 .ticker .chip{display:inline-flex;align-items:center;padding:9px 20px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.01em;text-transform:none;box-shadow:0 6px 16px rgba(17,24,39,.12);white-space:nowrap}
 .ticker .chip::before{content:none}
 .ticker:hover div{animation-play-state:paused}
+
+/* Oswald mint elsődleges betűcsalád */
+body,button,input{font-family:"Oswald","Inter",system-ui,sans-serif}
+body{font-weight:400;letter-spacing:.005em}
+h1,h2,h3,.brand{font-weight:600;letter-spacing:-.005em}
+.hero h1{letter-spacing:-.01em;line-height:1.05}
+h2{letter-spacing:-.005em}
+.kicker,.eyebrow{letter-spacing:.12em}
+.sub,.card p,.hero p.lead,.faq details p,.timeline span{font-weight:300;letter-spacing:.01em}
+.btn{font-weight:500;letter-spacing:.02em}
 </style>
 <header class="top">
   <div class="wrap">
