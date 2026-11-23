@@ -483,6 +483,13 @@ html[data-theme="dark"] .brand .brand-name,html[data-theme="dark"] .brand .brand
 /* Chat-telefon: valós mobilarány (Samsung S21, 20:9 kijelző) */
 .chatphone .cp-screen{aspect-ratio:9/20;min-height:0;height:auto}
 .chatphone .bubbles,.chat .chatphone .bubbles{flex:1 1 0!important;height:auto!important;min-height:0;overflow:hidden}
+/* Chat: valós telefonos betűméret (360dp → 288px, ~0,8×), hogy minden üzenet beférjen */
+.chatphone .bubbles{gap:6px!important;padding:12px 10px!important}
+.chatphone .bub{font-size:12.5px!important;line-height:1.3!important;padding:7px 11px!important;border-radius:16px;max-width:80%}
+.chatphone .bub.time{font-size:10px!important;padding:2px 0!important}
+.chatphone .bub small,.chatphone .bub .t{font-size:9.5px!important}
+.chatphone .bub.hid{padding-top:0!important;padding-bottom:0!important}
+.chat blockquote span{padding-bottom:.14em;margin-bottom:-.14em}
 </style>
 <header class="top">
   <div class="wrap">
