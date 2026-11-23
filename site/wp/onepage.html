@@ -397,6 +397,10 @@ html[data-theme="dark"] .bub.them{background:rgba(255,255,255,.08);color:#FFFFFF
 @keyframes tdot{50%{opacity:1;transform:translateY(-3px)}}
 html[data-theme="dark"] .chatphone .bub.typing{background:rgba(255,255,255,.08);border-color:rgba(229,231,235,.12)}
 html[data-theme="dark"] .chatphone .bub.typing i{background:#FFFFFF}
+
+.chatphone .bub em{display:block;font-style:normal;font-size:10.5px;opacity:.7;margin-top:3px;text-align:right}
+.chatphone .bub.them em{text-align:left}
+.chatphone .bub.time{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 0}
 </style>
 <header class="top">
   <div class="wrap">
@@ -457,16 +461,18 @@ html[data-theme="dark"] .chatphone .bub.typing i{background:#FFFFFF}
     <div class="chat">
       <div class="chatphone rv" aria-hidden="true">
         <div class="cp-screen">
-          <div class="cp-status"><span>23:48</span><span class="cp-sig"></span></div>
+          <div class="cp-status"><span class="cp-clock">23:47</span><span class="cp-sig"></span></div>
           <div class="cp-head"><span class="cp-back">‹</span><span class="cp-av">Á</span><div><b>Ádám</b><small>online</small></div></div>
           <div class="bubbles">
-            <span class="bub time">23:47</span>
-            <span class="bub me">Csak azt akarom mondani, hogy…</span>
-            <span class="bub them">????</span>
-            <span class="bub me">Tudod mit, mindegy. Igazából mindig is…</span>
-            <span class="bub them">Mit szeretnél tulajdonképpen?</span>
-            <span class="bub me">És még valami!!!</span>
-            <span class="bub them">Szerintem ezt most hagyjuk.</span>
+            <span class="bub time">Tegnap</span>
+            <span class="bub me" data-t="23:47">Csak azt akarom mondani, hogy…<em>23:47</em></span>
+            <span class="bub them" data-t="23:48">????<em>23:48</em></span>
+            <span class="bub me" data-t="23:51">Tudod mit, mindegy. Igazából mindig is…<em>23:51</em></span>
+            <span class="bub them" data-t="23:52">Mit szeretnél tulajdonképpen?<em>23:52</em></span>
+            <span class="bub me" data-t="23:58">És még valami!!!<em>23:58</em></span>
+            <span class="bub them" data-t="00:04">Szerintem ezt most hagyjuk.<em>00:04</em></span>
+            <span class="bub time">Ma</span>
+            <span class="bub me" data-t="07:42">Bocsánat, nagyon sajnálom.<em>07:42</em></span>
           </div>
           <div class="cp-input"><span>Üzenet…</span><i></i></div>
         </div>
@@ -684,6 +690,7 @@ var n=Math.round(p*(items.length+1));if(n===last)return;last=n;
 items.forEach(function(el,i){el.classList.toggle('hid',i>=n);});
 var next=items[n];typing.classList.toggle('hid',!(next&&next.classList.contains('them')&&n>0));
 if(!typing.classList.contains('hid'))box.appendChild(typing);
+var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i<n&&el.dataset.t;});if(clock)clock.textContent=vis.length?vis[vis.length-1].dataset.t:'23:47';
 }
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
