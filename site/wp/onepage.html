@@ -444,6 +444,30 @@ a,a:hover,a:focus{text-decoration-color:currentColor}
 
 .chat blockquote span{display:block;margin-top:.25em;background:linear-gradient(90deg,#2D65F8,#10B981);-webkit-background-clip:text;background-clip:text;color:transparent!important}
 @media(max-width:860px){.chat blockquote{padding-left:22px;text-align:left}}
+
+/* Szinkron-szekció */
+.sync{position:relative}
+.sync-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;margin-top:54px}
+.sync-art{background:rgba(255,255,255,.78);border:1px solid #E5E7EB;border-radius:28px;padding:30px;box-shadow:0 30px 70px rgba(45,101,248,.12)}
+.sync-art svg{width:100%;height:auto;display:block}
+.sa-dev{fill:#111827}.sa-scr{fill:#F8F9FA}.sa-block{fill:#FFFFFF;stroke:#E5E7EB;stroke-width:2}
+.sa-lock{fill:none;stroke:#10B981;stroke-width:5;stroke-linecap:round}.sa-lockb{fill:#6EE7B7}
+.sa-arrow{fill:none;stroke:#2D65F8;stroke-width:3;stroke-dasharray:6 7;animation:dash 1.2s linear infinite}
+.sa-sync{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
+@keyframes dash{to{stroke-dashoffset:-26}}
+.sync-steps{list-style:none;margin:0;padding:0;counter-reset:ss;display:grid;gap:22px}
+.sync-steps li{position:relative;padding-left:62px}
+.sync-steps li::before{counter-increment:ss;content:counter(ss);position:absolute;left:0;top:0;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#2D65F8,#1F4FD6);color:#fff;font-weight:700;display:grid;place-items:center;font-size:18px;box-shadow:0 10px 24px rgba(45,101,248,.3)}
+.sync-steps b{display:block;font-size:21px;margin-bottom:2px}
+.sync-steps span{color:#374151;font-weight:300}
+.sync-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:32px}
+.sync-cta span{color:#374151;font-size:14px}
+html[data-theme="dark"] .sync-art{background:rgba(17,24,39,.72);border-color:rgba(229,231,235,.12)}
+html[data-theme="dark"] .sa-scr{fill:#1F4FD6;opacity:.25}
+html[data-theme="dark"] .sync-steps span,html[data-theme="dark"] .sync-cta span{color:#E5E7EB}
+html[data-theme="dark"] .sync-steps b{color:#FFFFFF}
+@media(prefers-reduced-motion:reduce){.sa-arrow{animation:none}}
+@media(max-width:900px){.sync-grid{grid-template-columns:1fr;gap:36px}}
 </style>
 <header class="top">
   <div class="wrap">
@@ -452,6 +476,7 @@ a,a:hover,a:focus{text-decoration-color:currentColor}
     <nav class="nav">
       <a href="#hogyan">Hogyan működik</a>
       <a href="#funkciok">Funkciók</a>
+      <a href="#szinkron">Számítógépen is</a>
       <a href="#gyik">GYIK</a>
       <a class="btn btn-primary" href="#ertesites">Értesítést kérek</a>
     </nav>
@@ -597,15 +622,38 @@ a,a:hover,a:focus{text-decoration-color:currentColor}
   </div>
 </section>
 
-<section class="pc">
+<section class="sync" id="szinkron">
   <div class="wrap">
-    <div class="card rv">
-      <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16.5V20"/></svg></div>
-      <div>
-        <h3 style="font-size:24px;margin:0 0 6px">Windows-modul</h3>
-        <p>A telefonos appban bekapcsolt szinkron után a számítógéped is követi a tiltást: az idősávban a megadott weboldalak minden böngészőben elérhetetlenek. A telepítéshez az app <b>Számítógép</b> menüjében kapott párosítókód kell.</p>
+    <div class="center rv">
+      <div class="kicker">Telefon + számítógép</div>
+      <h2>Ne a gépről küldd el, amit a telefon megállított.</h2>
+      <p class="sub">A tiltás nem ér véget a telefonnál. Kapcsold be a szinkront, és a számítógéped ugyanabban az idősávban a böngészőben is letiltja a megadott oldalakat – Facebookot, Gmailt, bármit.</p>
+    </div>
+    <div class="sync-grid">
+      <div class="sync-art rv" aria-hidden="true">
+        <svg viewBox="0 0 520 300">
+          <defs><linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="#2D65F8"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs>
+          <rect x="40" y="60" width="300" height="190" rx="14" class="sa-dev"/>
+          <rect x="56" y="76" width="268" height="158" rx="6" class="sa-scr"/>
+          <rect x="10" y="250" width="360" height="16" rx="8" class="sa-dev"/>
+          <rect x="120" y="120" width="140" height="70" rx="12" class="sa-block"/>
+          <path d="M175 150v-8a15 15 0 0 1 30 0v8" class="sa-lock"/><rect x="168" y="150" width="44" height="30" rx="7" class="sa-lockb"/>
+          <rect x="400" y="40" width="100" height="200" rx="18" class="sa-dev"/>
+          <rect x="410" y="54" width="80" height="172" rx="10" class="sa-scr"/>
+          <rect x="425" y="110" width="50" height="40" rx="9" class="sa-block"/>
+          <path d="M441 128v-4a9 9 0 0 1 18 0v4" class="sa-lock"/><rect x="437" y="128" width="26" height="18" rx="4" class="sa-lockb"/>
+          <path d="M355 120 C375 100, 380 100, 392 110" class="sa-arrow"/><path d="M392 175 C380 190, 372 192, 355 182" class="sa-arrow"/>
+          <circle cx="373" cy="146" r="16" fill="url(#sg)"/><path d="M366 146a7 7 0 0 1 12-5M380 146a7 7 0 0 1-12 5" class="sa-sync"/>
+        </svg>
       </div>
-      <a class="btn btn-primary" href="{{ZIP}}" download>Letöltés (ZIP)</a>
+      <div class="rv">
+        <ol class="sync-steps">
+          <li><b>Kapcsold be a szinkront</b><span>Az app menüjében, egy koppintással. Nem kell fiók, név vagy e-mail.</span></li>
+          <li><b>Kérj párosítókódot</b><span>A Számítógép menüben kapsz egy 8 karakteres, 10 percig érvényes, egyszer használható kódot.</span></li>
+          <li><b>Telepítsd a Windows-modult</b><span>A telepítő elkéri a kódot, és onnantól a géped követi a telefonon beállított idősávot.</span></li>
+        </ol>
+        <div class="sync-cta"><a class="btn btn-primary" href="{{ZIP}}" download>Windows-modul letöltése (ZIP)</a><span>Ingyenes · Windows 10/11</span></div>
+      </div>
     </div>
   </div>
 </section>
