@@ -386,6 +386,17 @@ html[data-theme="dark"] .chatphone{box-shadow:0 0 0 2px rgba(229,231,235,.12),0 
 .bub.them{align-self:flex-start;background:#FFFFFF;color:#111827;border:1px solid #E5E7EB;border-bottom-left-radius:6px}
 html[data-theme="dark"] .bub.them{background:rgba(255,255,255,.08);color:#FFFFFF;border-color:rgba(229,231,235,.12)}
 .chatphone .bubbles{gap:9px}
+
+/* Görgetésre megjelenő üzenetek */
+.chatphone .bubbles{height:380px;overflow:hidden;flex:none}
+.chatphone .bub{transition:opacity .35s ease,transform .35s ease,max-height .35s ease,margin .35s ease,padding .35s ease}
+.chatphone .bub.hid{opacity:0;transform:translateY(14px) scale(.96);max-height:0;padding-top:0;padding-bottom:0;margin:0;overflow:hidden}
+.chatphone .bub.typing{align-self:flex-start;background:#FFFFFF;border:1px solid #E5E7EB;padding:12px 16px;border-bottom-left-radius:6px;display:inline-flex;gap:4px}
+.chatphone .bub.typing i{width:7px;height:7px;border-radius:50%;background:#374151;opacity:.4;animation:tdot 1s infinite}
+.chatphone .bub.typing i:nth-child(2){animation-delay:.15s}.chatphone .bub.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{50%{opacity:1;transform:translateY(-3px)}}
+html[data-theme="dark"] .chatphone .bub.typing{background:rgba(255,255,255,.08);border-color:rgba(229,231,235,.12)}
+html[data-theme="dark"] .chatphone .bub.typing i{background:#FFFFFF}
 </style>
 <header class="top">
   <div class="wrap">
@@ -664,4 +675,15 @@ x.fillStyle='rgba('+dc+','+(dark?.5:.45)+')';x.beginPath();x.arc(p.x,p.y,p.r,0,6
 if(!reduce)requestAnimationFrame(frame);}
 requestAnimationFrame(frame);
 })();
+</script>
+<script>
+(function(){var ph=document.querySelector('.chatphone');if(!ph)return;var box=ph.querySelector('.bubbles');var items=[].slice.call(box.querySelectorAll('.bub'));
+var typing=document.createElement('span');typing.className='bub typing hid';typing.innerHTML='<i></i><i></i><i></i>';box.appendChild(typing);
+var last=-1;function upd(){var r=ph.getBoundingClientRect(),vh=innerHeight;var p=(vh-r.top)/(vh+r.height*0.4);p=Math.max(0,Math.min(1,p));
+var n=Math.round(p*(items.length+1));if(n===last)return;last=n;
+items.forEach(function(el,i){el.classList.toggle('hid',i>=n);});
+var next=items[n];typing.classList.toggle('hid',!(next&&next.classList.contains('them')&&n>0));
+if(!typing.classList.contains('hid'))box.appendChild(typing);
+}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
