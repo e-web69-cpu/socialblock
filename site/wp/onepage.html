@@ -532,6 +532,13 @@ html[data-theme="dark"] .top.is-scrolled{background:rgba(17,24,39,.88)!important
  .hero{padding-top:28px!important}
 }
 @media(min-width:561px){.hero{padding-top:132px!important}}
+/* Témaváltó: nincs háttér, az aktív ikont csak a szín jelzi */
+.theme-switch,.theme-switch:hover,.theme-switch:focus,.theme-switch:active,html[data-theme="dark"] .theme-switch,html[data-theme="dark"] .theme-switch:hover,html[data-theme="dark"] .theme-switch:focus,html[data-theme="dark"] .theme-switch:active{background:transparent!important;box-shadow:none!important}
+.ts-knob{display:none!important}
+.ts-sun svg{fill:#2D65F8;stroke:#2D65F8}.ts-moon svg{fill:#9CA3AF}
+html[data-theme="dark"] .ts-sun svg{fill:#9CA3AF;stroke:#9CA3AF}html[data-theme="dark"] .ts-moon svg{fill:#FFFFFF}
+html[data-theme="dark"] .foot,html[data-theme="dark"] .foot div{color:#E5E7EB!important}
+html[data-theme="dark"] .foot a{color:#FFFFFF!important}
 </style>
 <header class="top">
   <div class="wrap">
