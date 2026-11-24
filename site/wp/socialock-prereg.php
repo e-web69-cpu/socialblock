@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SociaLock előregisztráció
  * Description: Értesítési feliratkozás az app megjelenéséről (e-mail + hozzájárulás). Lista és CSV-export: Eszközök → SociaLock előregisztrációk.
- * Author: E-WEB Consulting Kft.
+ * Author: SociaLock
  */
 if (!defined('ABSPATH')) exit;
 

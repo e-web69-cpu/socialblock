@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SociaLock – süti-hozzájárulás + GA4
  * Description: Saját süti-sáv (Elfogadom / Csak a szükségesek). A Google Analytics 4 (G-LJQVZMRECB) csak elfogadás után töltődik be (Consent Mode v2, alapból minden megtagadva). Előregisztrációnál generate_lead esemény.
- * Author: E-WEB Consulting Kft.
+ * Author: SociaLock
  */
 if (!defined('ABSPATH')) exit;
 const SLK_GA_ID = 'G-LJQVZMRECB';

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SociaLock SEO + AI
  * Description: Cím, meta leírás, megosztási kártya (Open Graph / X) és strukturált adat (JSON-LD) a socialock.hu oldalhoz. Az indexelést (noindex) NEM állítja: azt a WordPress „Olvasás” beállítása vezérli.
- * Author: E-WEB Consulting Kft.
+ * Author: SociaLock
  */
 if (!defined('ABSPATH')) exit;
 
@@ -42,11 +42,9 @@ add_action('wp_head', function () {
     echo '<meta name="twitter:image" content="' . SLK_SEO_IMG . "\">\n";
     echo '<link rel="alternate" type="text/plain" title="llms.txt" href="https://socialock.hu/llms.txt">' . "\n";
 
-    // A cég csak kiadóként szerepel, minimálisan: az oldal az appról szól.
-    $org = ['@type' => 'Organization', '@id' => 'https://socialock.hu/#publisher', 'name' => 'E-WEB Consulting Kft.'];
-    $graph = [$org, [
+    $graph = [[
         '@type' => 'WebSite', '@id' => 'https://socialock.hu/#website', 'url' => 'https://socialock.hu/',
-        'name' => 'SociaLock', 'inLanguage' => 'hu-HU', 'publisher' => ['@id' => 'https://socialock.hu/#publisher'],
+        'name' => 'SociaLock', 'inLanguage' => 'hu-HU',
     ]];
     if ($home) {
         $graph[] = [
@@ -62,7 +60,6 @@ add_action('wp_head', function () {
             'applicationCategory' => 'LifestyleApplication', 'softwareVersion' => '1.12 beta',
             'inLanguage' => 'hu', 'image' => SLK_SEO_IMG, 'url' => 'https://socialock.hu/',
             'offers' => ['@type' => 'Offer', 'price' => '0', 'priceCurrency' => 'HUF', 'description' => 'Az alap tiltás ingyenes.'],
-            'publisher' => ['@id' => 'https://socialock.hu/#publisher'],
             'featureList' => [
                 'Napi tiltási idősáv, legfeljebb 23 óra',
                 'Bármelyik telepített alkalmazás tiltható (közösségi, e-mail, videó, játék, böngésző)',

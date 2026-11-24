@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SociaLock – sütimentes oldalmegtekintés-számláló
  * Description: Hozzájárulástól függetlenül számolja az oldalmegtekintéseket, süti és személyes adat nélkül (nem tárol IP-t, azonosítót). Csak összesített napi számokat ment: oldal, forrás-domain, eszköztípus. Admin: Eszközök → SociaLock látogatás.
- * Author: E-WEB Consulting Kft.
+ * Author: SociaLock
  */
 if (!defined('ABSPATH')) exit;
 
