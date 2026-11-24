@@ -539,11 +539,19 @@ html[data-theme="dark"] .top.is-scrolled{background:rgba(17,24,39,.88)!important
 html[data-theme="dark"] .ts-sun svg{fill:#9CA3AF;stroke:#9CA3AF}html[data-theme="dark"] .ts-moon svg{fill:#FFFFFF}
 html[data-theme="dark"] .foot,html[data-theme="dark"] .foot div{color:#E5E7EB!important}
 html[data-theme="dark"] .foot a{color:#FFFFFF!important}
+/* Márkablokk képként: minden gépen és böngészőben pixelre ugyanúgy néz ki */
+.brand .brand-img{display:block;width:290px;height:auto;margin:-1px 0 0 -1px}
+.brand .bi-d{display:none}
+html[data-theme="dark"] .brand .bi-l{display:none}html[data-theme="dark"] .brand .bi-d{display:block}
+.brand .brand-compact{display:none!important}
+.top.is-scrolled .brand .brand-img{display:none!important}
+.top.is-scrolled .brand .brand-compact{display:inline!important}
+@media(max-width:560px){.brand .brand-img{width:168px}}
 </style>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top"><img class="slk-logo" src="{{LOGO}}" alt="SociaLock logó" width="124" height="124">
-<span class="brand-txt"><span class="brand-ver">v1.12 BETA</span><span class="brand-name"><i class="bs">S</i>ocia<i class="bl">L</i>ock</span><span class="brand-sub">Önkorlátozás józan ésszel</span></span></a>
+<span class="brand-txt"><img class="brand-img bi-l" src="{{BRAND_L}}" alt="SociaLock v1.12 BETA – Önkorlátozás józan ésszel" width="290" height="125"><img class="brand-img bi-d" src="{{BRAND_D}}" alt="" aria-hidden="true" width="290" height="125"><span class="brand-name brand-compact"><i class="bs">S</i>ocia<i class="bl">L</i>ock</span></span></a>
     <nav class="nav">
       <a href="#hogyan">Hogyan működik</a>
       <a href="#funkciok">Funkciók</a>
