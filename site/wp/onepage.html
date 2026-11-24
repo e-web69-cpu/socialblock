@@ -618,6 +618,21 @@ html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
  .cta-row .btn-ghost svg,.cta-row .btn-primary svg{flex:none;width:18px!important;height:18px!important}
 }
 .btn-play svg{width:34px!important;height:34px!important;flex:none}
+
+/* ikon mellett a cím + egysoros e-mail mobilon */
+@media(max-width:560px){
+ .card:has(>.ico+h3){display:grid!important;grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+ .card:has(>.ico+h3)>.ico{margin:0!important;width:44px;height:44px;border-radius:13px}
+ .card:has(>.ico+h3)>h3{margin:0!important}
+ .card:has(>.ico+h3)>:not(.ico):not(h3){grid-column:1/-1;margin-top:12px}
+ .pr-row{flex-wrap:nowrap!important;gap:8px!important}
+ .pr-card>*{min-width:0}
+ .pr-card{padding:28px 20px!important}
+ .pr-row input{flex:1 1 0!important;width:0;padding:13px 14px!important;font-size:15px!important}
+ .pr-row .btn{flex:none;padding:13px 14px!important;font-size:14px!important;white-space:nowrap}
+}
+html[data-theme="dark"] .pr-row input::placeholder,.pr-row input::placeholder{color:rgba(255,255,255,.6)}
+html[data-theme="light"] .pr-row input::placeholder{color:#6B7280}
 </style>
 <header class="top">
   <div class="wrap">
