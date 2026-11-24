@@ -562,7 +562,7 @@ html .top.is-scrolled,html[data-theme="light"] .top.is-scrolled{background:rgba(
  .top .nav{margin-right:76px}
 }
 @media(max-width:1000px){.top .nav a:not(.btn){display:none!important}}
-.gp-soon{font-size:15px!important;font-weight:800!important;letter-spacing:.04em!important;line-height:1.05!important;text-transform:none!important}
+.gp-soon{font-size:15px;font-weight:800!important;letter-spacing:0!important;line-height:1.05!important;text-transform:none!important}
 </style>
 <header class="top">
   <div class="wrap">
@@ -850,3 +850,5 @@ requestAnimationFrame(frame);
 
 <script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts?(document.fonts.ready||Promise.resolve()):Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
 <script>(function(){var t=document.querySelector('.top');if(!t)return;function u(){t.classList.toggle('is-scrolled',window.scrollY>40);}addEventListener('scroll',u,{passive:true});u();})();</script>
+<script>(function(){function fit(){document.querySelectorAll('.gp-soon').forEach(function(a){var b=a.nextElementSibling;if(!b)return;a.style.letterSpacing='0px';a.style.display='block';a.style.whiteSpace='nowrap';a.style.fontSize='15px';var r=document.createRange();r.selectNodeContents(b);var wb=r.getBoundingClientRect().width;r.selectNodeContents(a);var wa=r.getBoundingClientRect().width;if(wa>0){a.style.setProperty('font-size',(15*wb/wa).toFixed(2)+'px','important');}});}
+fit();if(document.fonts){document.fonts.ready.then(fit);document.fonts.addEventListener('loadingdone',fit);}window.addEventListener('load',fit);window.addEventListener('resize',fit);setTimeout(fit,600);setTimeout(fit,1800);})();</script>
