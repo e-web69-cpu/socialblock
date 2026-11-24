@@ -587,6 +587,26 @@ html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
  .step .card{padding-top:14px!important}
  .show .phone{max-width:200px}
 }
+/* Mobil/tablet menü */
+.mnav-btn,.mnav{display:none}
+@media(max-width:1000px){
+ .mnav-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;position:fixed;top:14px;right:14px;z-index:1002;width:46px;height:46px;border-radius:14px;border:2px solid #2D65F8!important;background:#FFFFFF!important;padding:0 11px;cursor:pointer;box-shadow:0 8px 20px rgba(45,101,248,.18)}
+ .mnav-btn span{display:block;height:2px;border-radius:2px;background:#2D65F8;transition:transform .2s,opacity .2s}
+ html.menu-open .mnav-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+ html.menu-open .mnav-btn span:nth-child(2){opacity:0}
+ html.menu-open .mnav-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+ html.menu-open .mnav{display:flex}
+ .mnav{position:fixed;inset:0 0 auto 0;z-index:1001;flex-direction:column;gap:4px;padding:84px 24px 28px;background:rgba(248,249,250,.98);border-bottom:1px solid #E5E7EB;box-shadow:0 24px 60px rgba(17,24,39,.18)}
+ .mnav a{font-family:Roboto,system-ui,sans-serif;font-size:20px;font-weight:600;color:#111827;text-decoration:none;padding:12px 4px;border-bottom:1px solid #E5E7EB}
+ .mnav a.btn{margin-top:16px;border:0;text-align:center;color:#FFFFFF;padding:14px 20px;border-radius:999px}
+ html[data-theme="dark"] .mnav{background:rgba(17,24,39,.98);border-color:rgba(229,231,235,.12)}
+ html[data-theme="dark"] .mnav a{color:#FFFFFF;border-color:rgba(229,231,235,.12)}
+ html[data-theme="dark"] .mnav-btn{background:#111827!important}
+ .theme-switch{display:none!important}
+ html.menu-open .theme-switch{display:flex!important;position:fixed!important;top:19px!important;right:72px!important;left:auto!important;bottom:auto!important;z-index:1003}
+ .top .nav{display:none!important}
+}
+.hero .eyebrow b,.hero .eyebrow i{flex-shrink:0}
 </style>
 <header class="top">
   <div class="wrap">
@@ -601,6 +621,16 @@ html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
     </nav>
   </div>
 </header>
+<button class="mnav-btn" type="button" aria-label="Menü" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+<div class="mnav" id="mnav" hidden>
+  <a href="#hogyan">Hogyan működik</a>
+  <a href="#funkciok">Funkciók</a>
+  <a href="#szinkron">Összes eszköz</a>
+  <a href="#segito">Segítő kérés</a>
+  <a href="#gyik">GYIK</a>
+  <a class="btn btn-primary" href="#ertesites">Értesítést kérek</a>
+</div>
+
 <button class="theme-switch" id="slk-theme" type="button" role="switch" aria-checked="false" aria-label="Sötét mód">
         <span class="ts-ico ts-sun"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></span>
         <span class="ts-ico ts-moon"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
@@ -893,3 +923,5 @@ requestAnimationFrame(frame);
 <script>(function(){function fit(){document.querySelectorAll('.gp-soon').forEach(function(a){var b=a.nextElementSibling;if(!b)return;a.style.letterSpacing='0px';a.style.display='block';a.style.whiteSpace='nowrap';a.style.fontSize='15px';var r=document.createRange();r.selectNodeContents(b);var wb=r.getBoundingClientRect().width;r.selectNodeContents(a);var wa=r.getBoundingClientRect().width;if(wa>0){a.style.setProperty('font-size',(15*wb/wa).toFixed(2)+'px','important');}});}
 fit();if(document.fonts){document.fonts.ready.then(fit);document.fonts.addEventListener('loadingdone',fit);}window.addEventListener('load',fit);window.addEventListener('resize',fit);setTimeout(fit,600);setTimeout(fit,1800);})();</script>
 <script>(function(){var mq=window.matchMedia?matchMedia('(max-width:560px)'):null;document.addEventListener('click',function(e){if(!mq)return;if(!mq.matches)return;var h=e.target.closest('.card h3, .sync-steps li b');if(!h)return;var box=h.closest('.card, .sync-steps li');if(box)box.classList.toggle('open');});})();</script>
+<script>(function(){var b=document.querySelector('.mnav-btn'),m=document.getElementById('mnav');if(!b)return;if(!m)return;function set(o){document.documentElement.classList.toggle('menu-open',o);m.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false');}
+b.addEventListener('click',function(){set(!document.documentElement.classList.contains('menu-open'));});m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();</script>
