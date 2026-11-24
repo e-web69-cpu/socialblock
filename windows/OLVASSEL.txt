@@ -1,4 +1,4 @@
-﻿SociaLock – Windows-modul v0.3
+﻿SociaLock – Windows-modul v0.4
 
 Telepítés:
 1. Csomagold ki a zip tartalmát egy mappába.

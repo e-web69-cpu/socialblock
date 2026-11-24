@@ -68,6 +68,33 @@ if ($new.TrimEnd() -ne $old.TrimEnd()) {
   & ipconfig /flushdns | Out-Null
 }
 
+# ---- Böngészőben már nyitott oldalak (pl. Messenger-fül): IP-alapú tűzfalszabály ----
+# A hosts-tiltás csak az új kapcsolatokat fogja meg; a már nyitott, élő kapcsolatot (chat) ez a szabály vágja el.
+try {
+  $SR = 'SociaLock-sites'
+  $ips = New-Object Collections.Generic.SortedSet[string]
+  if ($blocking) {
+    foreach ($d in $sites) {
+      foreach ($p in @('', 'www.', 'm.', 'web.', 'edge-chat.', 'gateway.', 'star-mini.c10r.', 'chat-e2ee.')) {
+        foreach ($t in @('A', 'AAAA')) {
+          foreach ($r in @(Resolve-DnsName -Name "$p$d" -Type $t -Server 1.1.1.1 -DnsOnly -QuickTimeout -ErrorAction SilentlyContinue)) {
+            if ($r.IP4Address) { $o = $r.IP4Address.Split('.'); [void]$ips.Add("$($o[0]).$($o[1]).$($o[2]).0/24") }
+            elseif ($r.IP6Address) { $g = ([Net.IPAddress]::Parse($r.IP6Address)).GetAddressBytes(); [void]$ips.Add((([Net.IPAddress]::new([byte[]]($g[0..5] + (,0 * 10)))).ToString()) + '/48') }
+          }
+        }
+      }
+    }
+  }
+  $cur = Get-NetFirewallRule -Name $SR -ErrorAction SilentlyContinue
+  $sig = ($ips -join ',')
+  if ($ips.Count -eq 0) {
+    if ($cur) { Remove-NetFirewallRule -Name $SR -ErrorAction SilentlyContinue }
+  } elseif (-not $cur -or $cur.Description -ne $sig) {
+    if ($cur) { Remove-NetFirewallRule -Name $SR -ErrorAction SilentlyContinue }
+    New-NetFirewallRule -Name $SR -DisplayName 'SociaLock – tiltott oldalak' -Description $sig -Group 'SociaLock' -Direction Outbound -Action Block -RemoteAddress @($ips) -Profile Any | Out-Null
+  }
+} catch { }
+
 # ---- Asztali alkalmazások: tűzfalszabály (csak kimenő forgalom tiltása) a tiltási időszakban ----
 # A telefonon tiltott appok (Android csomagnév) és oldalak alapján dől el, melyik asztali programot zárjuk el.
 try {
@@ -130,7 +157,7 @@ public static class SlkSid {
   $have = @{}
   foreach ($r in @(Get-NetFirewallRule -Group $G -ErrorAction SilentlyContinue)) { $have[$r.Name] = $r }
   # Ami már nem kell (tiltás vége, vagy app lekerült a listáról): törlés.
-  foreach ($n in @($have.Keys)) { if (-not $want.ContainsKey($n)) { Remove-NetFirewallRule -Name $n -ErrorAction SilentlyContinue } }
+  foreach ($n in @($have.Keys)) { if ($n -ne 'SociaLock-sites' -and -not $want.ContainsKey($n)) { Remove-NetFirewallRule -Name $n -ErrorAction SilentlyContinue } }
   # Ami hiányzik: létrehozás, és az épp futó példány egyszeri bezárása, hogy a meglévő kapcsolata is megszakadjon.
   foreach ($n in @($want.Keys)) {
     if ($have.ContainsKey($n)) { continue }
