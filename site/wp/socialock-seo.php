@@ -7,7 +7,7 @@
 if (!defined('ABSPATH')) exit;
 
 const SLK_SEO_DESC  = 'A SociaLock a megadott napi idősávban letiltja a közösségi, e-mail és bármely más appot Androidon – és a számítógépen is. Fiók nélkül, ingyenes alap tiltással.';
-const SLK_SEO_TITLE = 'SociaLock – Androidos app-tiltó idősávra | Önkorlátozás józan ésszel';
+const SLK_SEO_TITLE = 'SociaLock | Önkorlátozás józan ésszel az online térben';
 const SLK_SEO_IMG   = 'https://socialock.hu/wp-content/uploads/2026/11/socialock-og.jpg';
 
 function slk_seo_is_home(): bool { return is_front_page() || is_home(); }
