@@ -17,7 +17,7 @@
 - Ár: az alap tiltás ingyenes.
 - Fiók és regisztráció nem kell. A számítógépes szinkronhoz az app névtelen azonosítót használ; a szinkron kikapcsolásakor az adat a szerverről is törlődik.
 - Adatvédelem: az app nem olvassa az üzeneteket és a képernyő tartalmát; csak azt figyeli, melyik app kerül előtérbe.
-- Kisegítő lehetőség engedélyt kér: ebből tudja, melyik alkalmazás van előtérben.
+- Kisegítő lehetőség engedélyt kér: ebből látja, melyik alkalmazást nyitja meg a felhasználó; ha tiltott, a saját képernyőjét mutatja helyette.
 - Eltávolítás elleni védelem: eszközkezelő funkció.
 - Számítógép: ingyenes Windows-modul (Windows 10/11), 8 karakteres, 10 percig érvényes, egyszer használható párosítókóddal.
 - A Windows-modul a böngészőben tiltja a megadott oldalakat (minden böngészőben), így a közösségi és e-mail fiókok a gépen sem használhatók az idősávban. A telefonon tiltott appok asztali változatát (pl. Messenger, WhatsApp, Outlook) tűzfalszabállyal elzárja az internettől.
