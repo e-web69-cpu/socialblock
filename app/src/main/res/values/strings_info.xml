@@ -77,7 +77,7 @@ Ha minden engedély megvan, a jogosultság-kártya eltűnik.</p>
 ]]></string>
 
     <string name="info_privacy_body"><![CDATA[
-<p><b>Adatkezelő:</b> E-WEB Consulting Kft. – [székhely] – [kapcsolati e-mail]</p>
+<p><b>Adatkezelő és elérhetőség:</b> https://socialock.hu/?page_id=12</p>
 <p>A SociaLock önkorlátozó alkalmazás. Az adatokat alapból kizárólag a telefonodon kezeli. Szerverre csak akkor küld adatot, ha a menüben a „Szinkron (szerver)” alatt bekapcsolod és elfogadod; enélkül semmit nem küld.</p>
 <h3>Milyen adatokat kezel az app</h3>
 <p>• <b>Beállítások:</b> tiltási idősáv és tiltott appok listája – a telefonon tárolva.<br>

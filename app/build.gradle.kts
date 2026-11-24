@@ -11,8 +11,8 @@ android {
         applicationId = "hu.eweb.socialock"
         minSdk = 26
         targetSdk = 36
-        versionCode = 30
-        versionName = "1.12-beta"
+        versionCode = 31
+        versionName = "1.12.1-beta"
     }
 
     signingConfigs {
