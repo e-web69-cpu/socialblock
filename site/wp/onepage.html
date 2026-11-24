@@ -531,7 +531,7 @@ html[data-theme="dark"] .top.is-scrolled{background:rgba(17,24,39,.88)!important
  .hero .eyebrow{font-size:min(10.5px,2.75vw)!important;letter-spacing:.04em!important;padding:6px 9px!important}
  .hero{padding-top:28px!important}
 }
-@media(min-width:561px){.hero{padding-top:132px!important}}
+@media(min-width:561px){.hero{padding-top:132px!important}.hero .wrap>div:first-child{margin-top:44px}}
 /* Témaváltó: nincs háttér, az aktív ikont csak a szín jelzi */
 .theme-switch,.theme-switch:hover,.theme-switch:focus,.theme-switch:active,html[data-theme="dark"] .theme-switch,html[data-theme="dark"] .theme-switch:hover,html[data-theme="dark"] .theme-switch:focus,html[data-theme="dark"] .theme-switch:active{background:transparent!important;box-shadow:none!important}
 .ts-knob{display:none!important}
@@ -547,6 +547,11 @@ html[data-theme="dark"] .brand .bi-l{display:none}html[data-theme="dark"] .brand
 .top.is-scrolled .brand .brand-img{display:none!important}
 .top.is-scrolled .brand .brand-compact{display:inline!important}
 @media(max-width:560px){.brand .brand-img{width:168px}}
+.chatphone .bubbles{gap:4px!important;padding:8px 10px!important;justify-content:flex-start!important}
+.chatphone .bub{font-size:12px!important;line-height:1.25!important;padding:5px 10px!important}
+.chatphone .bub{max-width:86%!important}
+.chatphone .typing{display:inline-flex!important;padding:8px 12px!important;flex:none}
+.chatphone .typing i{width:6px;height:6px}
 </style>
 <header class="top">
   <div class="wrap">
@@ -600,7 +605,7 @@ html[data-theme="dark"] .brand .bi-l{display:none}html[data-theme="dark"] .brand
     <div class="chat">
       <div class="chatphone rv" aria-hidden="true">
         <div class="cp-screen">
-          <div class="cp-status"><span class="cp-clock">23:47</span><span class="cp-sig"></span></div>
+          <div class="cp-status"><span class="cp-clock">07:56</span><span class="cp-sig"></span></div>
           <div class="cp-head"><span class="cp-back">‹</span><span class="cp-av">Á</span><div><b>Ádám</b><small>online</small></div></div>
           <div class="bubbles">
             <span class="bub time">Tegnap</span>
@@ -613,6 +618,7 @@ html[data-theme="dark"] .brand .bi-l{display:none}html[data-theme="dark"] .brand
             <span class="bub time">Ma</span>
             <span class="bub me" data-t="07:42">Bocsánat, nagyon sajnálom.<em>07:42</em></span>
             <span class="bub them" data-t="07:56">OK, de szerintem legközelebb tiltalak.<em>07:56</em></span>
+            <span class="bub them typing" aria-hidden="true"><i></i><i></i><i></i></span>
           </div>
           <div class="cp-input"><span>Üzenet…</span><i></i></div>
         </div>
@@ -828,17 +834,6 @@ if(!reduce)requestAnimationFrame(frame);}
 requestAnimationFrame(frame);
 })();
 </script>
-<script>
-(function(){var ph=document.querySelector('.chatphone');if(!ph)return;var box=ph.querySelector('.bubbles');var items=[].slice.call(box.querySelectorAll('.bub'));
-var typing=document.createElement('span');typing.className='bub typing hid';typing.innerHTML='<i></i><i></i><i></i>';box.appendChild(typing);
-var last=-1;function upd(){var r=ph.getBoundingClientRect(),vh=innerHeight;var p=(vh-r.top)/(vh+r.height*0.4);p=Math.max(0,Math.min(1,p));
-var n=Math.round(p*(items.length+1));if(n===last)return;last=n;
-items.forEach(function(el,i){el.classList.toggle('hid',i>=n);});
-var next=items[n];typing.classList.toggle('hid',!(next?(next.classList.contains('them')?n>0:false):false));
-if(!typing.classList.contains('hid'))box.appendChild(typing);
-var clock=ph.querySelector('.cp-clock'),vis=items.filter(function(el,i){return i<n?!!el.dataset.t:false;});if(clock)clock.textContent=vis.length?vis[vis.length-1].dataset.t:'23:47';
-}
-addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
-</script>
+
 <script>(function(){function fit(){document.querySelectorAll('.brand-txt').forEach(function(b){var n=b.querySelector('.brand-name');if(!n)return;b.querySelectorAll('.brand-sub,.brand-ver').forEach(function(u){u.style.letterSpacing='0px';u.style.marginRight='0px';var t=u.textContent.length;if(t<2)return;var ex=(n.getBoundingClientRect().width-u.getBoundingClientRect().width)/(t-1);u.style.letterSpacing=ex+'px';u.style.marginRight=(-ex)+'px';});});}(document.fonts?(document.fonts.ready||Promise.resolve()):Promise.resolve()).then(fit);window.addEventListener('load',fit);setTimeout(fit,300);setTimeout(fit,1200);window.addEventListener('resize',fit);})();</script>
 <script>(function(){var t=document.querySelector('.top');if(!t)return;function u(){t.classList.toggle('is-scrolled',window.scrollY>40);}addEventListener('scroll',u,{passive:true});u();})();</script>
