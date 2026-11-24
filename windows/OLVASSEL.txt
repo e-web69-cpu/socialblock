@@ -1,12 +1,12 @@
-﻿SociaLock – Windows-modul v0.2
+﻿SociaLock – Windows-modul v0.3
 
 Telepítés:
 1. Csomagold ki a zip tartalmát egy mappába.
 2. Kattints jobb gombbal az install.bat fájlra → Futtatás rendszergazdaként, és fogadd el a kérést.
 3. Add meg a telefonos appban kapott 8 karakteres párosítókódot (☰ → Számítógép (Windows) → Párosítókód). 10 percig érvényes.
 
-Mit csinál: percenként olvassa a SociaLock szerver állapotát. A tiltási időszakban a telefonos appban felvett tiltott weboldalakat minden böngészőben blokkolja (hosts fájl). Ha nincs net, az utolsó ismert állapottal dolgozik tovább.
+Mit csinál: percenként olvassa a SociaLock szerver állapotát. A tiltási időszakban a telefonos appban felvett tiltott weboldalakat minden böngészőben blokkolja (hosts fájl), a telefonon tiltott appok asztali változatát (pl. Messenger, WhatsApp, Instagram, TikTok, X, Telegram, Discord, Viber, illetve e-mail tiltásnál az Outlook, a Posta és a Thunderbird) pedig tűzfalszabállyal elzárja az internettől. Ha egy ilyen program épp fut, a tiltás kezdetén egyszer bezárja, hogy a meglévő kapcsolata is megszakadjon. Ha nincs net, az utolsó ismert állapottal dolgozik tovább.
 
 Eltávolítás: uninstall.bat. Szándékosan körülményes: tiltási időszakban nem megy, be kell gépelni egy mondatot, és 10 percet kell várni.
 
-Tudnivalók: a modul csak a megadott oldalakat és azok www./m./mobile./web. változatát blokkolja. Rendszergazda a saját gépén ki tudja kapcsolni, ezt nem lehet teljesen megakadályozni.
+Tudnivalók: a Windows tűzfalnak bekapcsolva kell lennie, különben az asztali programokat nem tudja elzárni. A böngészőben a modul csak a megadott oldalakat és azok www./m./mobile./web. változatát blokkolja. Rendszergazda a saját gépén ki tudja kapcsolni, ezt nem lehet teljesen megakadályozni.
