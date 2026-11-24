@@ -6,7 +6,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-const SLK_SEO_DESC  = 'A SociaLock a megadott napi idősávban letiltja a közösségi, e-mail és bármely más appot Androidon – és a számítógépen is. Fiók nélkül, ingyenes alap tiltással.';
+const SLK_SEO_DESC  = 'Ne küldd el, amit reggel megbánnál: a SociaLock idősávban tiltja a Messengert, Facebookot, Instagramot, TikTokot, e-mailt. Kevesebb képernyőidő, szülői felügyelet, Android + Windows. Ingyenes.';
 const SLK_SEO_TITLE = 'SociaLock | Önkorlátozás józan ésszel az online térben';
 const SLK_SEO_IMG   = 'https://socialock.hu/wp-content/uploads/2026/11/socialock-og.jpg';
 
