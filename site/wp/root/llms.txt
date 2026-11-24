@@ -20,6 +20,7 @@
 - Kisegítő lehetőség engedélyt kér: ebből tudja, melyik alkalmazás van előtérben.
 - Eltávolítás elleni védelem: eszközkezelő funkció.
 - Számítógép: ingyenes Windows-modul (Windows 10/11), 8 karakteres, 10 percig érvényes, egyszer használható párosítókóddal.
+- A Windows-modul a böngészőben tiltja a megadott oldalakat (minden böngészőben), így a közösségi és e-mail fiókok a gépen sem használhatók az idősávban. Az asztali alkalmazásokra (pl. Messenger, WhatsApp asztali változat, Outlook) a tiltás jelenleg nem vonatkozik.
 - Feloldás: ebben a változatban a tiltás az idősávban nem oldható fel, ki kell várni.
 
 ## Oldalak
