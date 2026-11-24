@@ -1,6 +1,6 @@
 # SociaLock
 
-> A SociaLock egy androidos alkalmazás, amely a felhasználó által megadott napi idősávban (legfeljebb 23 óra) letiltja a kiválasztott appokat – közösségi és e-mail appokat, de bármely más telepített alkalmazást is. Egy ingyenes Windows-modullal a számítógép böngészőjében is tiltja a megadott oldalakat ugyanabban az idősávban. Fejlesztő: E-WEB Consulting Kft. (Debrecen). Állapot: BETA, a Google Play-megjelenés előkészítés alatt.
+> A SociaLock egy androidos alkalmazás, amely a felhasználó által megadott napi idősávban (legfeljebb 23 óra) letiltja a kiválasztott appokat – közösségi és e-mail appokat, de bármely más telepített alkalmazást is. Egy ingyenes Windows-modullal a számítógép böngészőjében is tiltja a megadott oldalakat ugyanabban az idősávban. Állapot: BETA, a Google Play-megjelenés előkészítés alatt.
 
 ## Mire való
 - Megakadályozza, hogy rossz pillanatban vagy rossz állapotban megírt üzenetek elmenjenek (például késő este, pár pohár után).
@@ -25,7 +25,3 @@
 ## Oldalak
 - [Főoldal](https://socialock.hu/): bemutató, funkciók, GYIK, előregisztráció
 - [Adatvédelmi tájékoztató](https://socialock.hu/?page_id=12)
-
-## Kapcsolat
-- E-WEB Consulting Kft., 4032 Debrecen, Egyetem sgrt. 46. 3/13
-- E-mail: ewebconsultingkft@gmail.com

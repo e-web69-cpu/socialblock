@@ -22,7 +22,7 @@ add_action('wp_head', function () {
     $home = slk_seo_is_home();
     $url  = $home ? home_url('/') : get_permalink();
     $title = $home ? SLK_SEO_TITLE : (single_post_title('', false) . ' | SociaLock');
-    $desc = $home ? SLK_SEO_DESC : 'A SociaLock (E-WEB Consulting Kft.) adatkezelési tájékoztatója: milyen adatot kezel az app, a számítógépes szinkron és az előregisztráció.';
+    $desc = $home ? SLK_SEO_DESC : 'A SociaLock adatkezelési tájékoztatója: milyen adatot kezel az app, a számítógépes szinkron és az előregisztráció.';
     $e = fn($s) => esc_attr($s);
     echo "\n<!-- SociaLock SEO -->\n";
     echo '<meta name="description" content="' . $e($desc) . "\">\n";
@@ -42,17 +42,11 @@ add_action('wp_head', function () {
     echo '<meta name="twitter:image" content="' . SLK_SEO_IMG . "\">\n";
     echo '<link rel="alternate" type="text/plain" title="llms.txt" href="https://socialock.hu/llms.txt">' . "\n";
 
-    $org = [
-        '@type' => 'Organization', '@id' => 'https://socialock.hu/#org',
-        'name' => 'E-WEB Consulting Kft.', 'url' => 'https://socialock.hu/',
-        'email' => 'ewebconsultingkft@gmail.com', 'telephone' => '+36 70 331 1403',
-        'vatID' => 'HU32729672', 'taxID' => '32729672-1-09',
-        'address' => ['@type' => 'PostalAddress', 'streetAddress' => 'Egyetem sgrt. 46. 3/13', 'postalCode' => '4032', 'addressLocality' => 'Debrecen', 'addressCountry' => 'HU'],
-        'founder' => ['@type' => 'Person', 'name' => 'Etemez Erneszt'],
-    ];
+    // A cég csak kiadóként szerepel, minimálisan: az oldal az appról szól.
+    $org = ['@type' => 'Organization', '@id' => 'https://socialock.hu/#publisher', 'name' => 'E-WEB Consulting Kft.'];
     $graph = [$org, [
         '@type' => 'WebSite', '@id' => 'https://socialock.hu/#website', 'url' => 'https://socialock.hu/',
-        'name' => 'SociaLock', 'inLanguage' => 'hu-HU', 'publisher' => ['@id' => 'https://socialock.hu/#org'],
+        'name' => 'SociaLock', 'inLanguage' => 'hu-HU', 'publisher' => ['@id' => 'https://socialock.hu/#publisher'],
     ]];
     if ($home) {
         $graph[] = [
@@ -68,7 +62,7 @@ add_action('wp_head', function () {
             'applicationCategory' => 'LifestyleApplication', 'softwareVersion' => '1.12 beta',
             'inLanguage' => 'hu', 'image' => SLK_SEO_IMG, 'url' => 'https://socialock.hu/',
             'offers' => ['@type' => 'Offer', 'price' => '0', 'priceCurrency' => 'HUF', 'description' => 'Az alap tiltás ingyenes.'],
-            'publisher' => ['@id' => 'https://socialock.hu/#org'],
+            'publisher' => ['@id' => 'https://socialock.hu/#publisher'],
             'featureList' => [
                 'Napi tiltási idősáv, legfeljebb 23 óra',
                 'Bármelyik telepített alkalmazás tiltható (közösségi, e-mail, videó, játék, böngésző)',
