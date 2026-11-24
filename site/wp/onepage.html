@@ -596,11 +596,17 @@ html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
  html[data-theme="dark"] .mnav{background:rgba(17,24,39,.98);border-color:rgba(229,231,235,.12)}
  html[data-theme="dark"] .mnav a{color:#FFFFFF;border-color:rgba(229,231,235,.12)}
  html[data-theme="dark"] .mnav-btn{background:#111827!important}
- .theme-switch{display:none!important}
- html.menu-open .theme-switch{display:flex!important;position:fixed!important;top:19px!important;right:72px!important;left:auto!important;bottom:auto!important;z-index:1003}
+ .theme-switch{display:flex!important;position:fixed!important;top:18px!important;right:68px!important;left:auto!important;bottom:auto!important;z-index:1003;width:40px!important;height:40px!important;padding:0!important;border-radius:50%!important;border:2px solid #2D65F8!important;background:#FFFFFF!important;justify-content:center;align-items:center;box-shadow:0 8px 20px rgba(45,101,248,.18)}
+ html[data-theme="dark"] .theme-switch{background:#111827!important}
+ .theme-switch .ts-moon{display:none!important}
+ html[data-theme="dark"] .theme-switch .ts-sun{display:none!important}
+ html[data-theme="dark"] .theme-switch .ts-moon{display:flex!important}
+ .theme-switch .ts-sun svg{fill:#2D65F8!important;stroke:#2D65F8!important}
+ html[data-theme="dark"] .theme-switch .ts-moon svg{fill:#FFFFFF!important}
  .top .nav{display:none!important}
 }
 .hero .eyebrow b,.hero .eyebrow i{flex-shrink:0}
+@media(max-width:400px){.brand .slk-logo{width:72px!important;height:72px!important}.brand .brand-img{width:150px!important}}
 </style>
 <header class="top">
   <div class="wrap">
