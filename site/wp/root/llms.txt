@@ -1,0 +1,31 @@
+# SociaLock
+
+> A SociaLock egy androidos alkalmazás, amely a felhasználó által megadott napi idősávban (legfeljebb 23 óra) letiltja a kiválasztott appokat – közösségi és e-mail appokat, de bármely más telepített alkalmazást is. Egy ingyenes Windows-modullal a számítógép böngészőjében is tiltja a megadott oldalakat ugyanabban az idősávban. Fejlesztő: E-WEB Consulting Kft. (Debrecen). Állapot: BETA, a Google Play-megjelenés előkészítés alatt.
+
+## Mire való
+- Megakadályozza, hogy rossz pillanatban vagy rossz állapotban megírt üzenetek elmenjenek (például késő este, pár pohár után).
+- Csökkenti a képernyőidőt: bármely időrabló app (videó, streaming, játék, böngésző) felvehető a tiltólistára.
+- Szülők a gyerek telefonján beállíthatják a tiltási idősávot és az appokat.
+
+## Hogyan működik
+1. Megadod a napi tiltási idősávot (pl. este 10-től reggel 7-ig, legfeljebb 23 óra).
+2. Kiválasztod a tiltandó appokat.
+3. Az idősávban a tiltott app helyett a SociaLock blokkoló képernyője jelenik meg. Tiltás közben a beállítások csak szigoríthatók; az idősáv nem rövidíthető, a tiltás nem kapcsolható ki.
+
+## Fő tények
+- Platform: Android 8.0 vagy újabb. iPhone-változat jelenleg nincs.
+- Ár: az alap tiltás ingyenes.
+- Fiók és regisztráció nem kell. A számítógépes szinkronhoz az app névtelen azonosítót használ; a szinkron kikapcsolásakor az adat a szerverről is törlődik.
+- Adatvédelem: az app nem olvassa az üzeneteket és a képernyő tartalmát; csak azt figyeli, melyik app kerül előtérbe.
+- Kisegítő lehetőség engedélyt kér: ebből tudja, melyik alkalmazás van előtérben.
+- Eltávolítás elleni védelem: eszközkezelő funkció.
+- Számítógép: ingyenes Windows-modul (Windows 10/11), 8 karakteres, 10 percig érvényes, egyszer használható párosítókóddal.
+- Feloldás: ebben a változatban a tiltás az idősávban nem oldható fel, ki kell várni.
+
+## Oldalak
+- [Főoldal](https://socialock.hu/): bemutató, funkciók, GYIK, előregisztráció
+- [Adatvédelmi tájékoztató](https://socialock.hu/?page_id=12)
+
+## Kapcsolat
+- E-WEB Consulting Kft., 4032 Debrecen, Egyetem sgrt. 46. 3/13
+- E-mail: ewebconsultingkft@gmail.com
