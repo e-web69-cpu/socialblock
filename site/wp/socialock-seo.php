@@ -71,7 +71,7 @@ add_action('wp_head', function () {
         ];
         $faq = [
             ['Milyen telefonon működik?', 'Androidon, a 8-as verziótól. iPhone-ra jelenleg nincs változat.'],
-            ['Miért kéri a Kisegítő lehetőség engedélyét?', 'Ebből látja az app, hogy éppen melyik alkalmazást nyitod meg. Ha az tiltott, a SociaLock a saját képernyőjét mutatja helyette. Mást nem néz: nem olvassa el az üzeneteidet, nem látja, mit írsz, és nem küld el semmit.'],
+            ['Miért kell a Kisegítő lehetőségeknél bekapcsolni a SociaLockot?', 'Ebből látja az app, hogy éppen melyik alkalmazást nyitod meg. Ha az tiltott, a SociaLock a saját képernyőjét mutatja helyette. Mást nem néz: nem olvassa el az üzeneteidet, nem látja, mit írsz, és nem küld el semmit.'],
             ['Fel lehet oldani a tiltást, ha nagyon kell?', 'Ebben a változatban nem: az idősávban a tiltás tart, ki kell várni. Ezért érdemes reális idősávot választani. Az idősávon kívül bármit módosíthatsz.'],
             ['Mi történik az üzenetekkel, amiket közben kapok?', 'Semmi különös: megérkeznek, csak a tiltás alatt nem nyithatod meg az appot. A tiltás vége után minden ott vár.'],
             ['Kell hozzá fiók vagy regisztráció?', 'Nem. A számítógépes szinkronhoz az app egy névtelen azonosítót hoz létre; ehhez sem név, sem e-mail, sem telefonszám nem kell. A szinkron bármikor kikapcsolható, ilyenkor a szerverről is törlődik.'],
