@@ -566,6 +566,27 @@ html .top.is-scrolled,html[data-theme="light"] .top.is-scrolled{background:rgba(
 .helper .helper-steps{max-width:760px;margin:48px auto 0}
 .helper .helper-note{max-width:760px;margin:28px auto 0;color:#374151;font-size:15px;text-align:center}
 html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
+/* Mobil tömörítés: a kártyák és lépések leírása lenyitható (accordion) */
+@media(max-width:560px){
+ section.pain,section.uses,section.how,section.show,section.feats,section.sync,section.helper,section.prereg,section.faq,section.final{padding-top:48px!important;padding-bottom:48px!important}
+ section.video{display:none!important}
+ .pain-grid,.uses-grid,.feat-grid,.steps{gap:10px!important;margin-top:24px!important}
+ .card{padding:14px 16px!important;border-radius:16px!important}
+ .card .ico{width:34px!important;height:34px!important;margin:0 12px 0 0!important;float:left}
+ .card .ico svg{width:18px;height:18px}
+ .card h3{margin:0!important;min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-size:17px!important}
+ .card h3::after,.sync-steps li b::after{content:"";flex:none;width:9px;height:9px;border-right:2px solid #2D65F8;border-bottom:2px solid #2D65F8;transform:rotate(45deg);margin:0 4px 4px 0;transition:transform .2s}
+ .card.open h3::after,.sync-steps li.open b::after{transform:rotate(-135deg);margin-bottom:-4px}
+ .card p,.card ul,.sync-steps li span{display:none!important}
+ .card.open p,.card.open ul{display:block!important;clear:both;margin-top:10px!important}
+ .sync-steps{gap:10px!important}
+ .sync-steps li{padding-left:52px!important;min-height:40px}
+ .sync-steps li::before{width:38px!important;height:38px!important;font-size:16px!important}
+ .sync-steps li b{display:flex!important;align-items:center;justify-content:space-between;gap:10px;min-height:38px;cursor:pointer;font-size:17px!important;margin:0!important}
+ .sync-steps li.open span{display:block!important;margin-top:6px}
+ .step .card{padding-top:14px!important}
+ .show .phone{max-width:200px}
+}
 </style>
 <header class="top">
   <div class="wrap">
@@ -871,3 +892,4 @@ requestAnimationFrame(frame);
 <script>(function(){var t=document.querySelector('.top');if(!t)return;function u(){t.classList.toggle('is-scrolled',window.scrollY>40);}addEventListener('scroll',u,{passive:true});u();})();</script>
 <script>(function(){function fit(){document.querySelectorAll('.gp-soon').forEach(function(a){var b=a.nextElementSibling;if(!b)return;a.style.letterSpacing='0px';a.style.display='block';a.style.whiteSpace='nowrap';a.style.fontSize='15px';var r=document.createRange();r.selectNodeContents(b);var wb=r.getBoundingClientRect().width;r.selectNodeContents(a);var wa=r.getBoundingClientRect().width;if(wa>0){a.style.setProperty('font-size',(15*wb/wa).toFixed(2)+'px','important');}});}
 fit();if(document.fonts){document.fonts.ready.then(fit);document.fonts.addEventListener('loadingdone',fit);}window.addEventListener('load',fit);window.addEventListener('resize',fit);setTimeout(fit,600);setTimeout(fit,1800);})();</script>
+<script>(function(){var mq=window.matchMedia?matchMedia('(max-width:560px)'):null;document.addEventListener('click',function(e){if(!mq)return;if(!mq.matches)return;var h=e.target.closest('.card h3, .sync-steps li b');if(!h)return;var box=h.closest('.card, .sync-steps li');if(box)box.classList.toggle('open');});})();</script>
