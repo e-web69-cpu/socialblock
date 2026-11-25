@@ -634,6 +634,10 @@ html[data-theme="dark"] .helper .helper-note{color:#E5E7EB}
 }
 html[data-theme="dark"] .pr-row input::placeholder,.pr-row input::placeholder{color:rgba(255,255,255,.6)}
 html[data-theme="light"] .pr-row input::placeholder{color:#6B7280}
+
+/* WP admin-sáv (bejelentkezve) ne takarja a menüt és a témaváltót */
+@media(max-width:782px){body.admin-bar .mnav-btn,body.admin-bar .theme-switch{margin-top:46px}}
+@media(min-width:783px) and (max-width:1000px){body.admin-bar .mnav-btn,body.admin-bar .theme-switch{margin-top:32px}}
 </style>
 <header class="top">
   <div class="wrap">
