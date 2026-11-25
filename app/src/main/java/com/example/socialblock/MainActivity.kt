@@ -36,6 +36,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // v1.12.2: összeomlás rögzítése – a következő indításkor kiírjuk, hogy javítható legyen.
+        val crashPrefs = getSharedPreferences("socialock_crash", MODE_PRIVATE)
+        val prevHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            try { crashPrefs.edit().putString("last", android.util.Log.getStackTraceString(e).take(3000)).commit() } catch (_: Throwable) {}
+            prevHandler?.uncaughtException(t, e)
+        }
+        crashPrefs.getString("last", null)?.let { trace ->
+            crashPrefs.edit().remove("last").apply()
+            android.app.AlertDialog.Builder(this).setTitle("Hibajelentés (küldd el a fejlesztőnek)")
+                .setMessage(trace).setPositiveButton("OK", null).show()
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         EdgeToEdge.apply(this)

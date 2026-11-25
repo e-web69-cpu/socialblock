@@ -178,7 +178,7 @@ object InfoMenu {
         val syncDialog = AlertDialog.Builder(activity)
             .setTitle(R.string.sync_dialog_title)
             .setView(android.widget.ScrollView(activity).apply { addView(box) })
-            .setPositiveButton(R.string.sync_save) { _, _ ->
+            .setPositiveButton(R.string.sync_save) { _, _ -> try {
                 val k = input.text.toString().trim()
                 SyncManager.setConsent(activity, consent.isChecked)
                 when {
@@ -190,7 +190,9 @@ object InfoMenu {
                     }
                     else -> SyncManager.syncIfNeeded(activity)
                 }
-            }
+            } catch (e: Throwable) {
+                android.widget.Toast.makeText(activity, "Hiba: " + e.javaClass.simpleName + " " + (e.message ?: ""), android.widget.Toast.LENGTH_LONG).show()
+            } }
             .setNeutralButton(R.string.sync_clear) { _, _ ->
                 SyncManager.deleteAccountAsync(activity) { ok ->
                     android.widget.Toast.makeText(activity, if (ok) R.string.sync_deleted else R.string.sync_delete_failed, android.widget.Toast.LENGTH_LONG).show()
